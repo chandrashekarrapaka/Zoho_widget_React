@@ -1,0 +1,10 @@
+{
+  "service": "CREATOR",
+  "cspDomains": {
+    "connect-src": [
+      "wss://*.zohopublic.com",
+      "https://*.zoho.com.au",
+      "https://*.zohopublic.com"
+    ]
+  }
+}
