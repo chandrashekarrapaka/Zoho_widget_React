@@ -1,5 +1,4 @@
 
-
 export async function Plants() {
     const username = encodeURIComponent('rapaka.chandrashekar@gmail.com');
     const password = encodeURIComponent('chanduR00002@');
@@ -21,7 +20,7 @@ export async function Plants() {
   
       const loginData = await loginResponse.json();
       accessToken = loginData.data.accessToken;
-       console.log(loginData);
+       //console.log(loginData);
   
       const plantsResponse = await fetch('https://api-idap.infinite-uptime.com/api/3.0/idap-api/plants', {
         method: 'GET',

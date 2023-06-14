@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import Container from './Components/Container';
 import { Plants } from './Services/Json';
+import { LoadScript } from 'react-load-script';
+
 
 function App() {
   const [options, setOptions] = useState([]);
-  const [plantID,setPlantID]=useState();
-  const boxes={
-    
+  const [plantID, setPlantID] = useState();
+  const boxes = {};
+  
+  function handleSelectChange(e) {
+    setPlantID(e.target.value);
   }
-    
-    function handleSelectChange(e){
-      setPlantID(e.target.value);
-    }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,19 +29,17 @@ function App() {
     fetchData();
   }, []);
 
-// (async () => {
-//   if (!params) {
-//     await ZOHO.CREATOR.init();
-//     setWidgetStatus((old) => ({ ...old, status: 'initialized' }));
-//     setParams(await ZOHO.CREATOR.UTIL.getQueryParams());
-//   }
-// })();
+  
+
   return (
     <div>
-  <Header options={options} handleSelectChange={handleSelectChange}/>
-  <Container boxes={boxes}/>
-  </div>
-
+      {/* <LoadScript
+        url="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"
+        onLoad={handleScriptLoad}
+      /> */}
+      <Header options={options} handleSelectChange={handleSelectChange} />
+      <Container boxes={boxes} />
+    </div>
   );
 }
 
