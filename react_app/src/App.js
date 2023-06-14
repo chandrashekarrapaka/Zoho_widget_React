@@ -1,27 +1,33 @@
+import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
-import './App.css';
 import Container from './Components/Container';
 import { Plants } from './Services/Json';
-import { useState ,  useEffect } from 'react';
-        
-function App() {
-  const options=[
-    "Select...","A","B","C","D"
-];
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await Plants(); 
-      console.log("ub"+response);
-      
-    } catch (error) {
-      console.error(error);
-    
-    }
-  };
 
-  fetchData(); 
-}, []);
+function App() {
+  const [options, setOptions] = useState([]);
+  const [plantID,setPlantID]=useState();
+  const boxes={
+    
+  }
+    
+    function handleSelectChange(e){
+      setPlantID(e.target.value);
+    }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Plants();
+        const plantNames = response.map((ele) => ele.plantName);
+        setOptions(plantNames);
+        console.log(options);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 // (async () => {
 //   if (!params) {
@@ -32,8 +38,8 @@ useEffect(() => {
 // })();
   return (
     <div>
-  <Header options={options} />
-  <Container/>
+  <Header options={options} handleSelectChange={handleSelectChange}/>
+  <Container boxes={boxes}/>
   </div>
 
   );

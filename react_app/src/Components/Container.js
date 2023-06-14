@@ -12,7 +12,7 @@ function Container(props){
                 <h4>Coal Mill</h4>
         <div className="container">
             {
-                itirations.map((item,index)=>(<Box/>  ))
+                itirations.map((item,index)=>(<Box/> ))
             }  
         </div>
         </div>
