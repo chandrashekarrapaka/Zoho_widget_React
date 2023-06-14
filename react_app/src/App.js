@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import Header from './Components/Header';
 import './App.css';
-
+import Container from './Components/Container';
+import { Plants } from './Services/Json';
+import { useState ,  useEffect } from 'react';
+        
 function App() {
+  const options=[
+    "Select...","A","B","C","D"
+];
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await Plants(); 
+      console.log("ub"+response);
+      
+    } catch (error) {
+      console.error(error);
+    
+    }
+  };
+
+  fetchData(); 
+}, []);
+
+// (async () => {
+//   if (!params) {
+//     await ZOHO.CREATOR.init();
+//     setWidgetStatus((old) => ({ ...old, status: 'initialized' }));
+//     setParams(await ZOHO.CREATOR.UTIL.getQueryParams());
+//   }
+// })();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+  <Header options={options} />
+  <Container/>
+  </div>
+
   );
 }
 
