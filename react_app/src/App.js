@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Components/Header';
-import Container from './Components/Container';
+import Header from './Components/Header/Header';
+import Container from './Components/Containers/Container';
 import { Plants } from './Services/Json';
-import { LoadScript } from 'react-load-script';
+
 
 
 function App() {
@@ -33,10 +33,6 @@ function App() {
 
   return (
     <div>
-      {/* <LoadScript
-        url="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"
-        onLoad={handleScriptLoad}
-      /> */}
       <Header options={options} handleSelectChange={handleSelectChange} />
       <Container boxes={boxes} />
     </div>

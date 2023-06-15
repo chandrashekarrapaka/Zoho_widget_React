@@ -1,0 +1,8 @@
+.kpis{
+    background-color:rgb(250, 243, 243);
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+}

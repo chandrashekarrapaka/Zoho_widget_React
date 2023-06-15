@@ -1,5 +1,5 @@
 import React from "react";  
-import MiniBox from "./MiniBox";
+import MiniBox from "../MiniBox";
 import './Box.css'
 function Box(){
     return(
