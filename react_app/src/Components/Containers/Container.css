@@ -5,33 +5,72 @@
 .container {
   width: 80%;
     padding: 10px;
-    border: 5px solid gray;
+    border: 2px solid gray;
     margin: 2px;
     height: 400px;
     display: flex;
+    border-radius :5px;
+    overflow: auto;
     /* flex-wrap: wrap; */
     /* align-content: flex-start; */
   }
+  .seccon{
+    padding: 0;
+  }
   .AA{
-    width:100%;
+    width:120%;
     /* padding: 10px; */
-    border: 5px solid gray;
-    margin: 2px;
-    height: 180px;
+    border: 2px solid gray;
+    /* margin: 2px; */
+    height: 205px;
+    border-radius :5px;
     /* display: flex; */
     /* flex-wrap: wrap; */
-    align-content: center;
+    /* align-content: center; */
   }
   .MFI{
-    width: 100%;
+    width: 120%;
     /* padding: 10px; */
-    border: 5px solid gray;
+    border: 2px solid gray;
+    border-radius :5px;
     margin: 2px;
-    height: 180px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+    height: 210px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* align-content: center; */
       /* Rest of your CSS */
   align-self: flex-end; /* Add this property to align the "MFI" div at the bottom */
 
+  }
+
+  .footer2{
+    .indicator1{
+      /*vertical-align: middle;
+        text-align:center;
+       left:5%;
+        position:relative;
+        display:table-cell;*/
+        
+        width: fit-content;
+        margin: auto;
+      }
+    .circle1 {
+      margin-left: 10px;
+      display:inline-block;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      font-size: 15px;
+      color: #fff;
+      line-height: 45px;
+      text-align: center;
+      vertical-align:middle;
+      position: relative;
+    } 
+    .author1 {
+      line-height: 40%;
+      display:inline-block;
+      vertical-align:middle;
+      position: relative;
+    }
   }

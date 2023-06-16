@@ -1,0 +1,9 @@
+.MG{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* border: 2px solid red; */
+    background-color: beige;
+    height: fit-content;
+  }
+  

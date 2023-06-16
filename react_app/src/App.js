@@ -8,33 +8,36 @@ import { Plants } from './Services/Json';
 function App() {
   const [options, setOptions] = useState([]);
   const [plantID, setPlantID] = useState();
+  const [plantDetails, setPlantDetails] = useState({});
+
   const boxes = {};
   
   function handleSelectChange(e) {
     setPlantID(e.target.value);
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await Plants();
-        const plantNames = response.map((ele) => ele.plantName);
-        setOptions(plantNames);
-        console.log(options);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await Plants();
+  //       setPlantDetails(response);
+  //       // const plantNames = response.map((ele) => ele.plantName);
+  //       // setOptions(plantNames);
+  //       // console.log("options"+options);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   
 
   return (
     <div>
       <Header options={options} handleSelectChange={handleSelectChange} />
-      <Container boxes={boxes} />
+      <Container plantDetails={plantDetails} boxes={boxes} />
     </div>
   );
 }

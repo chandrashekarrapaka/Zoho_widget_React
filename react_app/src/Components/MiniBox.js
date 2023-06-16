@@ -1,7 +1,7 @@
 import React from "react";
 import './MiniBox.css'
 import TinySignal from "./TinySignal";
-function MiniBox() {
+function MiniBox(prop) {
     return (
         <div>
         <div className="MiniBox1">
@@ -11,7 +11,7 @@ function MiniBox() {
         <TinySignal/>
        </div>
        <div className="MiniBox3">
-        HS 7S
+        HS {prop.hs}
        <div className="icon">&#x1F6C8;</div>
        </div>
        </div>

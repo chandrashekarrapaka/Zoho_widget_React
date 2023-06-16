@@ -1,10 +1,11 @@
 import React from "react";  
 import MiniBox from "../MiniBox";
 import './Box.css'
-function Box(){
+function Box(prop){
+    //console.log(prop);
     return(
         <div className="box">
-           <MiniBox/>
+           <MiniBox hs={prop.name}/>
         </div>
     )
 }
