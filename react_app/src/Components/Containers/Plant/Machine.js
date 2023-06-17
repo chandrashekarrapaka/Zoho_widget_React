@@ -13,7 +13,7 @@ function Machine(prop) {
                         <div className="signals" >
                         <Monitor monitor={ele.monitors} />
                         <h4>HS {ele.healthScore}</h4>
-                        <p>&#128712;</p>
+                        <div>&#128712;</div>
                         </div>
                         </div>
                     </>

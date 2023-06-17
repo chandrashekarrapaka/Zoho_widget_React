@@ -1,6 +1,8 @@
 .MonitorWrapper{
   max-height: 100px;
-    overflow: auto;
+  height: 100px;
+  overflow: auto;
+  padding: 0px 2px;
 }
 
 .boxzz {
