@@ -4521,7 +4521,7 @@ useEffect(() => {
     const interval = setInterval(() => {
       const totalPages = Math.ceil(plantData.machineGroups.length / itemsPerPage);
       setCurrentPage((prevPage) => (prevPage % totalPages) + 1);
-    }, 5000);
+    }, 50000000);
 
     return () => clearInterval(interval);
   }, [itemsPerPage, plantData.machineGroups.length]);
@@ -4536,7 +4536,6 @@ useEffect(() => {
 console.log("ct"+currentItems);
   return (
     <div>
-       {plantData.name}
       <div className="wholeContainer">
        
         <div className="container">

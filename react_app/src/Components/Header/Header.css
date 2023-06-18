@@ -4,5 +4,8 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    padding: 5px;
+    /*padding: 5px;*/
+}
+.PlantName{
+    max-width: 200px;
 }

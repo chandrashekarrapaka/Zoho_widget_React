@@ -4,7 +4,7 @@
 }
 .container {
   width: 80%;
-    padding: 10px;
+    /*padding: 10px;*/
     border: 2px solid gray;
     margin: 2px;
     height: 400px;
@@ -22,7 +22,7 @@
     /* padding: 10px; */
     border: 2px solid gray;
     /* margin: 2px; */
-    height: 205px;
+    height: 200px;
     border-radius :5px;
     /* display: flex; */
     /* flex-wrap: wrap; */
@@ -34,7 +34,7 @@
     border: 2px solid gray;
     border-radius :5px;
     margin: 2px;
-    height: 210px;
+    height: 200px;
     /* display: flex; */
     /* flex-wrap: wrap; */
     /* align-content: center; */

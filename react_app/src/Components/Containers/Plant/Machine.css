@@ -1,11 +1,27 @@
-.machine {
-    background-color: lightgray;
+.machines {
+    /*background-color: lightgray;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
-    display: flex; /* Display machines horizontally */
-    flex-direction: row; /* Stack machine content vertically */
+    display: flex; 
+    flex-direction: row; */
     border: 2px solid black;
-    
+}
+.machine{
+  display: inline-block;
+  max-width: 200px;
+  width: 200px;
+  background: white;
+  border: solid 1px lightgray;
+    margin: 1px;
+  }
+
+  .machines h4{
+    margin: 5px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 69ch;
+    padding: 0px 5px;
   }
