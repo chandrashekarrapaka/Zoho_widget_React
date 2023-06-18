@@ -4,16 +4,18 @@ import './Machine.css'
 function Machine(prop) {
     console.log(prop.machine);
     return (
-        <div className="machine">
+        <div className="machines">
             {prop.machine.map(function (ele) {
                 return (
                     <>
+                     <div className="machines">
                         <div style={{border:"2px solid yellow",borderRadius:"10px",margin:"5px",padding:"5px"}}>
                         <h4 style={{ color: "black" }}>{ele.name}</h4>
                         <div className="signals" >
                         <Monitor monitor={ele.monitors} />
                         <h4>HS {ele.healthScore}</h4>
                         <p>&#128712;</p>
+                        </div>
                         </div>
                         </div>
                     </>
