@@ -14,7 +14,7 @@ function Header(props) {
     
     return (
         <div className="kpis">
-            <div className="PlantName">Vikram Cement Works Khor</div>
+            {/* <div className="PlantName"></div> */}
         {/* 5kpi boxes with plant data */}
        {Object.keys(kipobj).map(function(ele){
         return <KPI data={kipobj[ele]}/>

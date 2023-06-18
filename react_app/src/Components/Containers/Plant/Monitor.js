@@ -17,6 +17,7 @@ function Monitor(prop){
             }
             
         </div>
+        </div>
     )
 }
 export default Monitor;

@@ -13,8 +13,7 @@
   }
   
 	
-	.device_kpi
-	{
+	.device_kpi{
 		font-size: 25px;
 		color: #296eab;
 		text-align: center;
@@ -28,7 +27,7 @@
         padding: 10px;
         width: 100%;
 
-
+  }
 .device_kpi
 {
   font-size: 25px;
