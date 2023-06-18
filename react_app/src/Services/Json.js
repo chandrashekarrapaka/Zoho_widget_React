@@ -91,8 +91,8 @@ export async function Plants() {
        });
   
        return plantsData.data;
-      console.log("newMachines"+JSON.stringify(newMachines));
-      return newMachines;
+      // console.log("newMachines"+JSON.stringify(newMachines));
+      // return newMachines;
 
     } catch (error) {
       console.error(error);
