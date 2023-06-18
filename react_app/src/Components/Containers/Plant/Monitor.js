@@ -15,7 +15,7 @@ function Monitor(prop){
 
                 })
             }
-            </div>
+            
         </div>
     )
 }
