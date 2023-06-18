@@ -1,36 +1,36 @@
 .device_title {
-    font-size: 14px;
-    background: gray;
-    color: white;
-    height: 60px; /* Adjust the height as needed */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0 0 10px 10px; /* Adjust the border radius as needed */
-    width: 100%;
-    padding: 10px;
+  font-size: 14px;
+  background: gray;
+  color: white;
+  height: 60px; /* Adjust the height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 10px 10px; /* Adjust the border radius as needed */
+  width: 100%;
+  padding: 10px;
 
-  }
-  
-	
-	.device_kpi
-	{
-		font-size: 25px;
-		color: #296eab;
-		height: 50%;
-		min-height: 60px;
-		text-align: center;
-        background: white;
-        color: hsl(0, 100%, 2%);
-        height: 60px; /* Adjust the height as needed */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius:  10px 10px 0 0; /* Adjust the border radius as needed */
-        padding: 10px;
-        width: 100%;
+}
 
+
+.device_kpi
+{
+  font-size: 25px;
+  color: #296eab;
+  height: 50%;
+  min-height: 60px;
+  text-align: center;
+      background: white;
+      color: hsl(0, 100%, 2%);
+      height: 60px; /* Adjust the height as needed */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius:  10px 10px 0 0; /* Adjust the border radius as needed */
+      padding: 10px;
+      width: 100%;
+
+      
         
-          
-          
-	}
+        
+}

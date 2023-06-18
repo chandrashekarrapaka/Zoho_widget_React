@@ -1,11 +1,11 @@
 .machine {
-    background-color: lightgray;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
-    display: flex; /* Display machines horizontally */
-    flex-direction: row; /* Stack machine content vertically */
-    border: 2px solid black;
-    
-  }
+  background-color: lightgray;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* Display machines horizontally */
+  flex-direction: row; /* Stack machine content vertically */
+  border: 2px solid black;
+  
+}
