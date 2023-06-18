@@ -82,9 +82,18 @@ export async function Plants() {
       });
       //console.log("check"+ headers);
       const plantsData = await plantsResponse.json();
+      const newMachines=[];
        console.log("plantsdata",  plantsData);
+       plantsData.data.machineGroups.forEach(element => {
+        element.machines.forEach(ele=>{
+          newMachines.push(ele);
+        })
+       });
   
-      return plantsData.data;
+       return plantsData.data;
+      console.log("newMachines"+JSON.stringify(newMachines));
+      return newMachines;
+
     } catch (error) {
       console.error(error);
       throw error;

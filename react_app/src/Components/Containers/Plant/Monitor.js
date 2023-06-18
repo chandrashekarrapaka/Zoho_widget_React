@@ -2,10 +2,10 @@ import React from "react";
 import './Monitor.css'
 function Monitor(prop){
    // const boxzz=prop.monitor;
-    console.log("monitors"+JSON.stringify(prop));
+    console.log("monitors"+prop.monitor[1]);
     return(
         <div>
-            <div className="MonitorWrapper">
+            <div>
             {
                 Object(prop.monitor).map(function(ele){
                    return(
@@ -15,8 +15,7 @@ function Monitor(prop){
 
                 })
             }
-            
-        </div>
+            </div>
         </div>
     )
 }

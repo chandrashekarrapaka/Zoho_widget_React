@@ -2,22 +2,21 @@ import React from "react";
 import Monitor from "./Monitor";
 import './Machine.css'
 function Machine(prop) {
-    console.log("length"+JSON.stringify(prop.machine[0]));
+    console.log(prop.machine);
     return (
-        <div className="machines">
+        <div className="machine">
             {prop.machine.map(function (ele) {
                 return (
-                   
-                        <div className="machine">
+                    <>
+                        <div style={{border:"2px solid yellow",borderRadius:"10px",margin:"5px",padding:"5px"}}>
                         <h4 style={{ color: "black" }}>{ele.name}</h4>
                         <div className="signals" >
                         <Monitor monitor={ele.monitors} />
                         <h4>HS {ele.healthScore}</h4>
-                        <div>&#128712;</div>
+                        <p>&#128712;</p>
                         </div>
                         </div>
-                       
-                   
+                    </>
                 )
             }
 

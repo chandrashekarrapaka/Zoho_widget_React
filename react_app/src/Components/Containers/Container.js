@@ -9,7 +9,7 @@ import { Plants } from "../../Services/Json";
 
 function Container(prop) {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 2;
     // console.log(prop.plantDetails);
     // Dummy data for testing
 
@@ -4499,19 +4499,6 @@ function Container(prop) {
             }
         ]
     }
-    const newMachines=[];
-    const modifieddata=()=>{
-        plantsData.machineGroups.map((ele)=>{
-            ele.machines.forEach(elem => {
-                elem['MG']=ele.name;
-                newMachines.push(elem); 
-            });
-           
-        })
-    }
-     modifieddata();
-    console.log("newArray"+JSON.stringify(newMachines[0]));
-    console.log("lengthnewarrat"+newMachines.length)
     const [timeIn, setTimeIn] = useState(5000);
     const [plantData, setPlantsData] = useState(plantsData);
     //console.log("timeIn1" + timeIn);
@@ -4536,7 +4523,7 @@ function Container(prop) {
        if(timeIn===5000)setTimeIn(1000000)
        else(setTimeIn(5000))
         
-        // console.log("timeIn" + timeIn);
+        console.log("timeIn" + timeIn);
     }
 
 //    const handleCheck= useEffect(handleCheck, timeIn);
@@ -4544,12 +4531,12 @@ function Container(prop) {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            const totalPages = Math.ceil(newMachines.length / itemsPerPage);
+            const totalPages = Math.ceil(plantData.machineGroups.length / itemsPerPage);
             setCurrentPage((prevPage) => (prevPage % totalPages) + 1);
         }, timeIn);
 
         return () => clearInterval(interval);
-    }, [itemsPerPage, newMachines.length,timeIn]);
+    }, [itemsPerPage, plantData.machineGroups.length,timeIn]);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -4558,9 +4545,7 @@ function Container(prop) {
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // const currentItems = newMachines.slice(indexOfFirstItem, indexOfLastItem);
-     const currentItems = newMachines.slice(indexOfFirstItem, indexOfLastItem);
-
+    const currentItems = plantData.machineGroups.slice(indexOfFirstItem, indexOfLastItem);
     console.log("ct" + currentItems);
     return (
         <div>
@@ -4584,7 +4569,7 @@ function Container(prop) {
                 <div className="Pagination">
                     <div >
                     <Pagination
-                        items={newMachines}
+                        items={plantData.machineGroups}
                         currentPage={currentPage}
                         itemsPerPage={itemsPerPage}
                         onPageChange={handlePageChange}/>
