@@ -1,34 +1,36 @@
+.MonitorWrapper{
+  max-height: 100px;
+  height: 100px;
+  overflow: auto;
+  padding: 0px 2px;
+}
 
 .boxzz {
-  /* flex-basis: calc(10% - 400px); */
-  
+    /* flex-basis: calc(10% - 400px); */
+    
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    margin: 1.5px;
+    background-color: rgb(53, 188, 53);
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    /*display: inline-flex; 
+    justify-content: space-between;*/
+    align-items: center;
+    font-size: 15px;
+    color: #333;
+}
+/* .monitor {
   background-color: gray;
   color: white;
   padding: 5px;
   margin: 5px;
   display: inline-block;
   border-radius: 5px;
-  height: 17px;
-  width: 15px;
-  margin: 1.5px;
-  background-color: rgb(53, 188, 53);
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: inline-flex; 
-  justify-content: space-between;
-  align-items: center;
-  font-size: 6px;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  padding: 7px;
-}
-/* .monitor {
-background-color: gray;
-color: white;
-padding: 5px;
-margin: 5px;
-display: inline-block;
-border-radius: 5px;
 } */

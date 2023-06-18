@@ -1,4 +1,7 @@
 .plant {
    display: flex;
-   /* color: Red; */
+   flex-direction: row;
+   flex-basis: content;
+   flex-wrap: wrap; /* Added property */
+ align-content: flex-start;
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import MG from "./MG";
 import './Plant.css';
+import Machine from "./Machine";
 function Plant(prop){
    const plantData = {
         "id": 1846,
@@ -4489,10 +4490,15 @@ function Plant(prop){
         ]
     }
     return(
+        // <div className="plant">
+        //    {/* <div className="pname"> {plantData.name}</div> */}
+        //     <MG mg={prop.currentItems}/>
+        // </div>
         <div className="plant">
-           {/* <div className="pname"> {plantData.name}</div> */}
-            <MG mg={prop.currentItems}/>
-        </div>
+        {/* <div className="pname"> {plantData.name}</div> */}
+         <Machine machine={prop.currentItems}/>
+     </div>
+    
     )
 }
 export default Plant;

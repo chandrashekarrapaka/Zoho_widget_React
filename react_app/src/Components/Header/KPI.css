@@ -2,7 +2,7 @@
   font-size: 14px;
   background: gray;
   color: white;
-  height: 60px; /* Adjust the height as needed */
+  height: 30px; /* Adjust the height as needed */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,12 +17,10 @@
 {
   font-size: 25px;
   color: #296eab;
-  height: 50%;
-  min-height: 60px;
   text-align: center;
       background: white;
       color: hsl(0, 100%, 2%);
-      height: 60px; /* Adjust the height as needed */
+      height: 30px; /* Adjust the height as needed */
       display: flex;
       align-items: center;
       justify-content: center;
