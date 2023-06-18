@@ -4536,7 +4536,6 @@ useEffect(() => {
 console.log("ct"+currentItems);
   return (
     <div>
-       {plantData.name}
       <div className="wholeContainer">
        
         <div className="container">
