@@ -9,29 +9,15 @@ function Machine(prop) {
 
   useEffect(() => {
     // Function to fetch API data
-    const fetchData = () => {
-      // Replace this with your actual API call
-      // Here, we simulate a delay and set dummy data
-      try {
-        setTimeout(() => {
-            const dummyData = [
-              { id: 1, name: "Dummy Data 1" },
-              { id: 2, name: "Dummy Data 2" },
-              { id: 3, name: "Dummy Data 3" },
-            ];
-            setApiData(dummyData);
-          }, 1000); // Simulating API delay of 1 second
-        //     const response = await Velocity();
-        //     setApiData(response);
-        //     // const plantNames = response.map((ele) => ele.plantName);
-        //     // setOptions(plantNames);
-        //      console.log("velocity"+response);
-      }
-      catch(error){
-        console.log(error);
-      }
-      
-    };
+    const fetchData = async () => {
+        try {
+          const response = await Velocity();
+          
+        //   setApiData(response);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     // Fetch API data initially
     fetchData();
@@ -42,25 +28,21 @@ function Machine(prop) {
     // Clean up the interval when the component is unmounted
     return () => clearInterval(interval);
   }, []);
-// //  try {
-//     const response = await Velocity();
-//     setApiData(response);
-//     // const plantNames = response.map((ele) => ele.plantName);
-//     // setOptions(plantNames);
-//      console.log("velocity"+response);
-  const handleInfoClick = async(idz) => {
-    const response =await Velocity();
-           // setApiData(response);
-            // const plantNames = response.map((ele) => ele.plantName);
-            // setOptions(plantNames);
-             //console.log("velocity"+response.machineGroups[0].id);
-             const check=(value)=>{
-                console.log("needy"+value.id,idz)
-                if(value.id==idz)console.log("need"+value,idz)
-            }//value.id==idz;
-           const  valueneeded= response.machineGroups.filter(check);
-           console.log("needed"+valueneeded);
-    console.log("machine"+idz)
+
+  const getVelocity=async(id)=>{
+    
+    const response = await Velocity();
+    console.log("velocityid"+id);
+    response.filter((ele)=>ele.id==id).map((ele)=>{
+        console.log("neededid"+JSON.stringify(ele));
+         setApiData(ele);
+    });
+  }
+  const handleInfoClick = async(id) => {
+   const getVelocit=await getVelocity(id);
+
+   
+    console.log("machineid"+id)
     setShowPopup(true);
     
   };
@@ -97,12 +79,17 @@ function Machine(prop) {
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
-            <h2>API Data</h2>
-            <ul>
-              {apiData.map((data) => (
-                <li key={data.id}>{data.name}</li>
+            <h2>{apiData.name}</h2>
+            <li ><u>{`Name  velocityX  velocityY   velocityZ  temperature healthScore trend`}</u></li>
+            <ul style={{backgroundColor:"gray",height:"70px",overflow:"auto"}}>
+            
+              {apiData.monitors.map((data) => (
+                <li key={data.id}>{`${data.name}  ${data.velocityX}  ${data.velocityY}   ${data.velocityZ}  ${data.temperature}  ${data.healthScore} ${data.trend}`}</li>
               ))}
             </ul>
+            <div>{`Observation :${apiData.observation} \n
+            Diagnostic :${apiData.diagnostic} \n
+            Recommendation :${apiData.recommendation}\n`}</div>
             <button className="close-btn" onClick={closePopup}>Close</button>
           </div>
         </div>

@@ -46,12 +46,16 @@ export async function Velocity() {
         
         const velocityData = await plantsResponse.json();
         
-         console.log("velocityData",  velocityData);
-
-    
-         return velocityData;
-        // console.log("newMachines"+JSON.stringify(newMachines));
-        // return newMachines;
+         
+        const machinesArray=[];
+        velocityData.machineGroups.map((elemg)=>{
+            elemg.machines.map(elem=>{
+                machinesArray.push(elem) 
+            })
+        })
+        console.log("velocityData",  machinesArray);
+         return machinesArray;
+        // 
   
       } catch (error) {
         console.error(error);
