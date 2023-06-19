@@ -4520,7 +4520,7 @@ function Container(prop) {
     }, []);
     //
     const handleCheck = () => {
-       if(timeIn===5000)setTimeIn(1000000)
+       if(timeIn===5000)setTimeIn(10000000)
        else(setTimeIn(5000))
         
         console.log("timeIn" + timeIn);
