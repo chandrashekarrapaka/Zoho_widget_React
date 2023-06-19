@@ -26,3 +26,22 @@
     max-width: 69ch;
     padding: 0px 5px;
   }
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+  }
+  .info-icon {
+    cursor: pointer;
+  }
+  
+  .info-icon:hover {
+    cursor: pointer;
+  }
