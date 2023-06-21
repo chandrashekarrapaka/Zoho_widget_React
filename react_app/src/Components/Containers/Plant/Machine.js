@@ -56,14 +56,7 @@ function Machine(prop) {
       {prop.machine.map(function (ele) {
         return (
           <div className="machine" key={ele.id}>
-            <div
-              style={{
-                border: "2px solid yellow",
-                borderRadius: "10px",
-                margin: "5px",
-                padding: "5px"
-              }}
-            >
+            <div >
               <h4 style={{ color: "black" }}>{ele.name}</h4>
               <div className="signals">
                 <Monitor monitor={ele.monitors} />
