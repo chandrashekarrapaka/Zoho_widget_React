@@ -19,6 +19,7 @@ function Container() {
       try {
         const response = await Plants();
         if (response.length > 0) {
+           console.log(response.length);
           setPlantsData(response);
         }
       } catch (error) {
@@ -29,38 +30,72 @@ function Container() {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   const totalPages = plantsData[currentPlantIndex]?.machineGroups.length || 0;
+  //   let timeout;
+
+  //   if (currentPage === totalPages && currentPage !== 1) {
+  //     timeout = setTimeout(() => {
+  //       setCurrentPlantIndex((prevIndex) => (prevIndex + 1) % plantsData.length);
+  //       setCurrentPage(1);
+  //     }, timeIn);
+  //   } else if (currentPage === totalPages && currentPlantIndex === plantsData.length - 1) {
+  //     timeout = setTimeout(() => {
+  //       setCurrentPage(1);
+  //     }, timeIn);
+  //   } else {
+  //     timeout = setTimeout(() => {
+  //       setCurrentPage((prevPage) => {
+  //         if (prevPage === totalPages) {
+  //           return 1;
+  //         } else {
+  //           return prevPage + 1;
+  //         }
+  //       });
+  //     }, timeIn);
+  //   }
+  //   console.log(currentPage, currentPlantIndex, plantsData, timeIn);
+  //   return () => clearTimeout(timeout);
+  // }, [currentPage, currentPlantIndex, plantsData, timeIn]);
+ 
+  
   useEffect(() => {
-    const totalPages = plantsData[currentPlantIndex]?.machineGroups.length || 0;
     let timeout;
   
-    if (currentPage === totalPages && currentPage !== 1) {
-      timeout = setTimeout(() => {
-        setCurrentPlantIndex((prevIndex) => (prevIndex + 1) % plantsData.length);
-        setCurrentPage(1);
-      }, timeIn);
-    } else if (currentPage === totalPages && currentPlantIndex === plantsData.length - 1) {
-      timeout = setTimeout(() => {
-        setCurrentPage(1);
-      }, timeIn);
-    } else {
-      timeout = setTimeout(() => {
-        setCurrentPage((prevPage) => {
-          if (prevPage === totalPages) {
-            return 1;
-          } else {
-            return prevPage + 1;
-          }
-        });
-      }, timeIn);
+    if (plantsData.length > 0) {
+      const currentPlant = plantsData[currentPlantIndex];
+      const totalPages = Math.ceil(currentPlant?.machineGroups.length / itemsPerPage);
+  
+      if (currentPage === totalPages + 1) {
+        if (currentPlantIndex === plantsData.length - 1) {
+          // Reached the last plant, reset to the first page and first plant
+          timeout = setTimeout(() => {
+            setCurrentPage(1);
+            setCurrentPlantIndex(0);
+          }, timeIn);
+        } else {
+          // Move to the next plant
+          timeout = setTimeout(() => {
+            setCurrentPage(1);
+            setCurrentPlantIndex((prevIndex) => prevIndex + 1);
+          }, timeIn);
+        }
+      } else {
+        timeout = setTimeout(() => {
+          setCurrentPage((prevPage) => prevPage + 1);
+        }, timeIn);
+      }
     }
   
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, timeIn]);
   
+  
+  
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-  
+
     if (pageNumber === Math.ceil(plantsData[currentPlantIndex].machineGroups.length / itemsPerPage)) {
       setCurrentPlantIndex((prevIndex) => (prevIndex + 1) % plantsData.length);
     }
@@ -81,7 +116,7 @@ function Container() {
 
   return (
     <div>
-      {currentPlant && (
+      {currentPlant ? (
         <div>
           <div className="PlantName">{currentPlant.name}</div>
           <div className="wholeContainer">
@@ -116,36 +151,28 @@ function Container() {
           </div>
           <div className="footer2">
             <div className="indicator1">
-              <div
-                className="circle1"
-                style={{ background: "rgb(100, 221, 23)" }}
-              ></div>
+              <div className="circle1" style={{ background: "rgb(100, 221, 23)" }}></div>
               <div className="author1">
                 <p>Health Score &gt; 80%</p>
               </div>
-              <div
-                className="circle1"
-                style={{ background: "rgb(255, 193, 7)" }}
-              ></div>
+              <div className="circle1" style={{ background: "rgb(255, 193, 7)" }}></div>
               <div className="author1">
                 <p>Health Score &gt; 50% &lt; 80%</p>
               </div>
-              <div
-                className="circle1"
-                style={{ background: "rgb(255, 87, 34)" }}
-              ></div>
+              <div className="circle1" style={{ background: "rgb(255, 87, 34)" }}></div>
               <div className="author1">
                 <p>Health Score &lt; 50%</p>
               </div>
-              <div
-                className="circle1"
-                style={{ border: "solid 1px black" }}
-              ></div>
+              <div className="circle1" style={{ border: "solid 1px black" }}></div>
               <div className="author1">
                 <p>Health Score Not Available</p>
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div>
+          <p>Login again</p>
         </div>
       )}
     </div>
