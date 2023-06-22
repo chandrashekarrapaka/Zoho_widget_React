@@ -14,8 +14,8 @@ function MG(prop){
             {
                 prop.mg.map(function(ele){
                     return( 
-                        <div style={{textAlign:"center"}}>
-                        {ele.name}
+                        <div className="machinesWapper" style={{textAlign:"center"}}>
+                        <h4>{ele.name}</h4>
                     <Machine machine={ele.machines}/>
                       </div>
                     )

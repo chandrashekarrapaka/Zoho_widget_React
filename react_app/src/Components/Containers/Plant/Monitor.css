@@ -1,31 +1,17 @@
 .MonitorWrapper{
-  max-height: 100px;
-  height: 100px;
+  max-height: 80px;
+  height: 80px;
   overflow: auto;
-  padding: 0px 2px;
+  padding: 2px;
 }
 
-.boxzz {
-    /* flex-basis: calc(10% - 400px); */
-    
-    background-color: gray;
-    color: white;
-    padding: 5px;
-    margin: 5px;
-    display: inline-block;
-    border-radius: 5px;
-    height: 30px;
-    width: 30px;
-    margin: 1.5px;
-    background-color: rgb(53, 188, 53);
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-    /*display: inline-flex; 
-    justify-content: space-between;*/
-    align-items: center;
-    font-size: 15px;
-    color: #333;
+.boxzz{
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-color:rgb(100, 221, 23);
 }
+
 /* .monitor {
   background-color: gray;
   color: white;

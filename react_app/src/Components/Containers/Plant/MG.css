@@ -2,7 +2,21 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  /* border: 2px solid red; */
-  background-color: beige;
+  /* border: 2px solid red; 
+  background-color: beige;*/
   height: fit-content;
+}
+.machinesWapper{
+  border: solid 1px gray;
+}
+
+.machinesWapper>h4{
+  margin: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+    padding: 5px;
+    font-weight: lighter;
+  
 }

@@ -4549,7 +4549,7 @@ function Container(prop) {
     console.log("ct" + currentItems);
     return (
         <div>
-            {plantData.name}
+            <div className="PlantName"> {plantData.name}</div>
             <div className="wholeContainer">
 
                 <div className="container">
@@ -4567,14 +4567,16 @@ function Container(prop) {
             </div>
             <div className="footer1">
                 <div className="Pagination">
-                    <div >
+                <div className="Footer1-item"> Zoom in/out </div>
+                    
+                    <div className="Footer1-item">
                     <Pagination
                         items={plantData.machineGroups}
                         currentPage={currentPage}
                         itemsPerPage={itemsPerPage}
                         onPageChange={handlePageChange}/>
                     </div>
-                    <div style={{"textAlign":"center"}} >
+                    <div className="Footer1-item" style={{"textAlign":"center"}} >
                     <input onClick={handleCheck} type="checkbox"/><label>Stop AutoPagination</label>
                     </div>
                 </div>

@@ -4,18 +4,16 @@ function Monitor(prop){
    // const boxzz=prop.monitor;
     console.log("monitors"+prop.monitor[1]);
     return(
-        <div>
-            <div>
+        <div className="MonitorWrapper">
             {
                 Object(prop.monitor).map(function(ele){
                    return(
                      
-                     <div className="boxzz">{ele.healthScore}</div>
+                     <div className="boxzz"></div>
                    )
 
                 })
             }
-            </div>
         </div>
     )
 }

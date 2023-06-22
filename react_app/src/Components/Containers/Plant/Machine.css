@@ -6,7 +6,6 @@
     box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
     display: flex; 
     flex-direction: row; */
-    border: 2px solid black;
 }
 .machine{
   display: inline-block;
@@ -19,12 +18,13 @@
   }
 
   .machines h4{
-    margin: 5px 0px;
+    margin: 0px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 69ch;
-    padding: 0px 5px;
+    padding: 5px;
+    font-weight: initial;
   }
   .popup {
     position: fixed;
@@ -37,6 +37,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 999;
+    text-align: left;
   }
   .info-icon {
     cursor: pointer;

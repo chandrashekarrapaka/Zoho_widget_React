@@ -5,7 +5,7 @@
 .container {
   width: 80%;
     /*padding: 10px;*/
-    border: 2px solid gray;
+    /*border: 2px solid gray;*/
     margin: 2px;
     height: 400px;
     display: flex;
@@ -41,6 +41,9 @@
       /* Rest of your CSS */
   align-self: flex-end; /* Add this property to align the "MFI" div at the bottom */
 
+  }
+  .Footer1-item{
+    display: inline-block;
   }
 
   .footer2{
