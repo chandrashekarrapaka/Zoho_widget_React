@@ -4508,7 +4508,8 @@ function Container(prop) {
             try {
                 const response = await Plants();
                 console.log("datapassedtocontainer"+response);
-                setPlantsData(response);
+                if(response.length>0)setPlantsData(response[1]);
+                
                 // const plantNames = response.map((ele) => ele.plantName);
                 // setOptions(plantNames);
                 // console.log("options"+options);

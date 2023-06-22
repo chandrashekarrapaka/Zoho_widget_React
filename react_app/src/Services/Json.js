@@ -78,7 +78,7 @@ export async function Plants() {
       const orgidAll=queryParams.PlantId.split(",");
     let plantsData;
     let plantsResponse
-    plantsResponse=await orgidAll.map(async(orgid)=>{
+    plantsResponse=await Promise.all(orgidAll.map(async(orgid)=>{
        plantsResponse = await fetch(`https://api-idap.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
         method: 'GET',
         headers: {
@@ -90,13 +90,16 @@ export async function Plants() {
       
       console.log("plantsdata",  plantsData);
       arrayOfPlants.push(plantsData.data);
-    })
+    }));
       //console.log("check"+ headers);
       
        
     
       
-    console.log( Object(arrayOfPlants).keys())
+      arrayOfPlants.map((ele)=>{
+        console.log("arrayOfPlants",ele);
+      })
+      console.log("arrayOfPlantslength",arrayOfPlants.length);
        return arrayOfPlants;
       // console.log("newMachines"+JSON.stringify(newMachines));
       // return newMachines;
