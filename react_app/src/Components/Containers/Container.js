@@ -4507,6 +4507,7 @@ function Container(prop) {
         const fetchData = async () => {
             try {
                 const response = await Plants();
+                console.log("datapassedtocontainer"+response);
                 setPlantsData(response);
                 // const plantNames = response.map((ele) => ele.plantName);
                 // setOptions(plantNames);
