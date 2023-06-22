@@ -77,19 +77,21 @@ function Machine(prop) {
         <div className="popup">
           <div className="popup-content">
             <h2>{apiData.name}</h2>
+            <div className="tableWrapper">
             <table>
-            <tr><th>Name</th><th>velocityX</th><th>velocityY</th><th>velocityZ</th><th>temperature</th><th>healthScore</th><th>trend</th>
+            <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
             </tr>
               {apiData.monitors.map((data) => (
                 <tr key={data.id}>
-                  <td>${data.name}</td><td>${data.velocityX}</td><td>${data.velocityY}</td><td>${data.velocityZ}</td><td>${data.temperature}</td><td>${data.healthScore}</td><td>${data.trend}</td></tr>
+                  <td>{data.name}</td><td>{data.velocityX}</td><td>{data.velocityY}</td><td>{data.velocityZ}</td><td>{data.temperature}</td><td>{data.healthScore}%</td><td>{data.trend}</td></tr>
               ))}
             </table>
-            <ul>
-              <li>Observation :${apiData.observation}</li>
-              <li>Diagnostic :${apiData.diagnostic}</li>
-              <li>Recommendation :${apiData.recommendation}</li>
-            </ul>
+            </div>
+            <center><a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable" target="_blank" rel="noopener noreferrer">For Detailed Analysis Click Here!</a></center>
+            <b>Observation</b> :{apiData.observation}<br></br><br></br>
+            <b>Diagnostic</b> :{apiData.diagnostic}<br></br><br></br>
+            <b>Recommendation</b> :{apiData.recommendation}<br></br><br></br>
+            
             <button className="close-btn" onClick={closePopup}>Close</button>
           </div>
         </div>
