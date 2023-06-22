@@ -7,6 +7,10 @@ function Machine(prop) {
   const [showPopup, setShowPopup] = useState(false); // State variable for pop-up visibility
   const [apiData, setApiData] = useState([]); // State variable for API data
 
+  //yellowColor = "rgb(255, 193, 7)";
+  // redColor = "";
+  // greenColor = "";
+
   useEffect(() => {
     // Function to fetch API data
     const fetchData = async () => {
@@ -57,7 +61,7 @@ function Machine(prop) {
         return (
           <div className="machine" key={ele.id}>
             <div >
-              <h4 style={{ color: "black" }}>{ele.name}</h4>
+              <h4 style={{ color: "black", backgroundColor:"rgb(255, 193, 7)" }}>{ele.name}</h4>
               <div className="signals">
                 <Monitor monitor={ele.monitors} />
                 <h4>HS {ele.healthScore}</h4>
@@ -73,16 +77,19 @@ function Machine(prop) {
         <div className="popup">
           <div className="popup-content">
             <h2>{apiData.name}</h2>
-            <li ><u>{`Name  velocityX  velocityY   velocityZ  temperature healthScore trend`}</u></li>
-            <ul style={{backgroundColor:"gray",height:"70px",overflow:"auto"}}>
-            
+            <table>
+            <tr><th>Name</th><th>velocityX</th><th>velocityY</th><th>velocityZ</th><th>temperature</th><th>healthScore</th><th>trend</th>
+            </tr>
               {apiData.monitors.map((data) => (
-                <li key={data.id}>{`${data.name}  ${data.velocityX}  ${data.velocityY}   ${data.velocityZ}  ${data.temperature}  ${data.healthScore} ${data.trend}`}</li>
+                <tr key={data.id}>
+                  <td>${data.name}</td><td>${data.velocityX}</td><td>${data.velocityY}</td><td>${data.velocityZ}</td><td>${data.temperature}</td><td>${data.healthScore}</td><td>${data.trend}</td></tr>
               ))}
+            </table>
+            <ul>
+              <li>Observation :${apiData.observation}</li>
+              <li>Diagnostic :${apiData.diagnostic}</li>
+              <li>Recommendation :${apiData.recommendation}</li>
             </ul>
-            <div>{`Observation :${apiData.observation} \n
-            Diagnostic :${apiData.diagnostic} \n
-            Recommendation :${apiData.recommendation}\n`}</div>
             <button className="close-btn" onClick={closePopup}>Close</button>
           </div>
         </div>

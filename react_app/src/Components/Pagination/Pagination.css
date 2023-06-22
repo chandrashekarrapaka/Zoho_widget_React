@@ -4,7 +4,9 @@
     justify-content: center;
     margin-top: 5px;
   }
-  
+  .Pagination{
+    text-align: center;
+  }
   .pagination-item {
     display: inline-block;
     margin: 0 5px;
