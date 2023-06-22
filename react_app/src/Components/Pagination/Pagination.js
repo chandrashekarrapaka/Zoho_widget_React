@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import "./Pagination.css";
 
-function Pagination({ items, currentPage, itemsPerPage, onPageChange }) {
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
+function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
   useEffect(() => {
     const interval = setInterval(() => {
       onPageChange((prevPage) => (prevPage % totalPages) + 1);
@@ -32,7 +30,11 @@ function Pagination({ items, currentPage, itemsPerPage, onPageChange }) {
     return paginationItems;
   };
 
-  return <ul className="pagination">{renderPaginationItems()}</ul>;
+  return (
+    <ul className="pagination">
+      {items.length > 0 ? renderPaginationItems() : null}
+    </ul>
+  );
 }
 
 export default Pagination;

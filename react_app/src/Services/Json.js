@@ -2,6 +2,7 @@
 export async function Plants() {
   let accessToken="";
   const arrayOfPlants=[];
+  const arrayOfMachines=[];
 //   const handleScriptLoad = async() => {
     
 //     console.log("hero")
@@ -87,20 +88,28 @@ export async function Plants() {
         },
       });
       plantsData = await plantsResponse.json();
-      
-      console.log("plantsdata",  plantsData);
+      const plantsArray=[];
+      // console.log("plantsdata",  plantsData.data.machineGroups);
+      plantsData.data.machineGroups.map((mg)=>{
+        //console.log("plantsdata", mg.machines);
+        mg.machines.map((machine)=>{
+          machine.mg=mg.name;
+          machine.plantName=plantsData.data.name;
+          plantsArray.push(machine);
+        })
+        
+      })
+      arrayOfMachines.push(plantsArray);
       arrayOfPlants.push(plantsData.data);
     }));
       //console.log("check"+ headers);
       
-       
-    
-      
       arrayOfPlants.map((ele)=>{
         console.log("arrayOfPlants",ele);
       })
-      console.log("arrayOfPlantslength",arrayOfPlants.length);
-       return arrayOfPlants;
+      console.log("arrayofMachines",arrayOfMachines);
+      
+       return arrayOfMachines;
       // console.log("newMachines"+JSON.stringify(newMachines));
       // return newMachines;
 

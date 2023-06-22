@@ -10,8 +10,8 @@ function MG(prop){
    mgarray();
     return(
         <div className="MG">
-           
-            {
+           <Machine machine={prop.mg}/>
+            {/* {
                 prop.mg.map(function(ele){
                     return( 
                         <div className="machinesWapper" style={{textAlign:"center"}}>
@@ -21,7 +21,7 @@ function MG(prop){
                     )
                 })
                 
-            }     
+            }      */}
             
         </div>
     )

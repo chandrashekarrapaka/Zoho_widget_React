@@ -6,7 +6,7 @@ import {Velocity} from '../../../Services/Velocity'
 function Machine(prop) {
   const [showPopup, setShowPopup] = useState(false); // State variable for pop-up visibility
   const [apiData, setApiData] = useState([]); // State variable for API data
-
+// console.log("machine.js"+JSON.stringify(prop))
   //yellowColor = "rgb(255, 193, 7)";
   // redColor = "";
   // greenColor = "";
@@ -36,19 +36,22 @@ function Machine(prop) {
   const getVelocity=async(id)=>{
     
     const response = await Velocity();
-    console.log("velocityid"+id);
+    // console.log("velocityid"+id);
     response.filter((ele)=>ele.id==id).map((ele)=>{
-        console.log("neededid"+JSON.stringify(ele));
+        // console.log("neededid"+JSON.stringify(ele));
          setApiData(ele);
     });
   }
-  const handleInfoClick = async(id) => {
-   const getVelocit=await getVelocity(id);
-
-   
-    console.log("machineid"+id)
-    setShowPopup(true);
-    
+  const handleInfoClick = async (id) => {
+    try {
+      const velocityData = await Velocity();
+      // console.log("velocityid" + id);
+      const selectedData = velocityData.filter((ele) => ele.id === id)[0];
+      setApiData(selectedData);
+      setShowPopup(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const closePopup = () => {
@@ -61,6 +64,7 @@ function Machine(prop) {
         return (
           <div className="machine" key={ele.id}>
             <div >
+              <div style={{ color: "black" }} >{ele.mg}</div>
               <h4 style={{ color: "black", backgroundColor:"rgb(255, 193, 7)" }}>{ele.name}</h4>
               <div className="signals">
                 <Monitor monitor={ele.monitors} />

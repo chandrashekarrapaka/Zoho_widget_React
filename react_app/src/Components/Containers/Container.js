@@ -9,7 +9,7 @@ import { Plants } from "../../Services/Json";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
   const [timeIn, setTimeIn] = useState(5000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
@@ -19,7 +19,6 @@ function Container() {
       try {
         const response = await Plants();
         if (response.length > 0) {
-           console.log(response.length);
           setPlantsData(response);
         }
       } catch (error) {
@@ -30,42 +29,13 @@ function Container() {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   const totalPages = plantsData[currentPlantIndex]?.machineGroups.length || 0;
-  //   let timeout;
-
-  //   if (currentPage === totalPages && currentPage !== 1) {
-  //     timeout = setTimeout(() => {
-  //       setCurrentPlantIndex((prevIndex) => (prevIndex + 1) % plantsData.length);
-  //       setCurrentPage(1);
-  //     }, timeIn);
-  //   } else if (currentPage === totalPages && currentPlantIndex === plantsData.length - 1) {
-  //     timeout = setTimeout(() => {
-  //       setCurrentPage(1);
-  //     }, timeIn);
-  //   } else {
-  //     timeout = setTimeout(() => {
-  //       setCurrentPage((prevPage) => {
-  //         if (prevPage === totalPages) {
-  //           return 1;
-  //         } else {
-  //           return prevPage + 1;
-  //         }
-  //       });
-  //     }, timeIn);
-  //   }
-  //   console.log(currentPage, currentPlantIndex, plantsData, timeIn);
-  //   return () => clearTimeout(timeout);
-  // }, [currentPage, currentPlantIndex, plantsData, timeIn]);
- 
-  
   useEffect(() => {
     let timeout;
-  
+
     if (plantsData.length > 0) {
       const currentPlant = plantsData[currentPlantIndex];
-      const totalPages = Math.ceil(currentPlant?.machineGroups.length / itemsPerPage);
-  
+      const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
+
       if (currentPage === totalPages + 1) {
         if (currentPlantIndex === plantsData.length - 1) {
           // Reached the last plant, reset to the first page and first plant
@@ -86,17 +56,14 @@ function Container() {
         }, timeIn);
       }
     }
-  
+
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, timeIn]);
-  
-  
-  
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
 
-    if (pageNumber === Math.ceil(plantsData[currentPlantIndex].machineGroups.length / itemsPerPage)) {
+    if (pageNumber === Math.ceil(plantsData[currentPlantIndex]?.length / itemsPerPage)) {
       setCurrentPlantIndex((prevIndex) => (prevIndex + 1) % plantsData.length);
     }
   };
@@ -107,18 +74,18 @@ function Container() {
   };
 
   const currentPlant = plantsData[currentPlantIndex];
-  const totalPages = currentPlant?.machineGroups.length || 0;
+  const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = currentPlant
-    ? currentPlant.machineGroups.slice(indexOfFirstItem, indexOfLastItem)
+    ? currentPlant.slice(indexOfFirstItem, indexOfLastItem)
     : [];
-
+// console.log("currentPlant"+JSON.stringify(currentPlant.plantName));
   return (
     <div>
       {currentPlant ? (
         <div>
-          <div className="PlantName">{currentPlant.name}</div>
+          <div className="PlantName"></div>
           <div className="wholeContainer">
             <div className="container">
               <Plant currentItems={currentItems} />
@@ -137,9 +104,9 @@ function Container() {
               <div className="Footer1-item">Zoom in/out</div>
               <div className="Footer1-item">
                 <Pagination
-                  items={currentPlant.machineGroups}
+                  items={currentItems}
                   currentPage={currentPage}
-                  itemsPerPage={itemsPerPage}
+                  totalPages={totalPages}
                   onPageChange={handlePageChange}
                 />
               </div>
@@ -171,7 +138,7 @@ function Container() {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="login-again">
           <p>Login again</p>
         </div>
       )}
