@@ -80,12 +80,12 @@ function Container() {
   const currentItems = currentPlant
     ? currentPlant.slice(indexOfFirstItem, indexOfLastItem)
     : [];
-// console.log("currentPlant"+JSON.stringify(currentPlant.plantName));
+//  console.log("currentPlant"+JSON.stringify(currentPlant[0].plantName));
   return (
     <div>
       {currentPlant ? (
         <div>
-          <div className="PlantName"></div>
+          <div className="PlantName">{currentPlant[0].plantName !== undefined ? currentPlant[0].plantName : ""}</div>
           <div className="wholeContainer">
             <div className="container">
               <Plant currentItems={currentItems} />
