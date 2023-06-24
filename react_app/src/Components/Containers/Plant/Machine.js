@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Monitor from "./Monitor";
 import './Machine.css';
-import {Velocity} from '../../../Services/Velocity'
+import { Velocity } from '../../../Services/Velocity'
 
 function Machine(prop) {
   const [showPopup, setShowPopup] = useState(false); // State variable for pop-up visibility
   const [apiData, setApiData] = useState([]); // State variable for API data
-// console.log("machine.js"+JSON.stringify(prop))
-  //yellowColor = "rgb(255, 193, 7)";
-  // redColor = "";
-  // greenColor = "";
 
   useEffect(() => {
     // Function to fetch API data
     const fetchData = async () => {
-        try {
-          const response = await Velocity();
-          
+      try {
+        const response = await Velocity();
+
         //   setApiData(response);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     // Fetch API data initially
     fetchData();
@@ -33,13 +29,13 @@ function Machine(prop) {
     return () => clearInterval(interval);
   }, []);
 
-  const getVelocity=async(id)=>{
-    
+  const getVelocity = async (id) => {
+
     const response = await Velocity();
     // console.log("velocityid"+id);
-    response.filter((ele)=>ele.id==id).map((ele)=>{
-        // console.log("neededid"+JSON.stringify(ele));
-         setApiData(ele);
+    response.filter((ele) => ele.id == id).map((ele) => {
+      // console.log("neededid"+JSON.stringify(ele));
+      setApiData(ele);
     });
   }
   const handleInfoClick = async (id) => {
@@ -61,15 +57,30 @@ function Machine(prop) {
   return (
     <div className="machines">
       {prop.machine.map(function (ele) {
+        const stylez={};
+        let minimumValue = 100;
+        ele.monitors.map((elemon) => {
+          
+        //  console.log("monitor"+elemon.healthScore)
+          if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
+          if (minimumValue > 80) stylez.backgroundColor = "green";
+          else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
+          else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+          else {
+            stylez.backgroundColor = "white";
+            stylez.border = "solid 1px";
+          }
+          // console.log("stylez"+JSON.stringify(stylez));
+        })
         return (
           <div className="machine" key={ele.id}>
             <div >
               <div style={{ color: "black" }} >{ele.mg}</div>
-              <h4 style={{ color: "black", backgroundColor:"rgb(255, 193, 7)" }}>{ele.name}</h4>
+              <h4 style={ stylez }>{ele.name}</h4>
               <div className="signals">
                 <Monitor monitor={ele.monitors} />
                 <h4>HS {ele.healthScore}</h4>
-                <div className="info-icon"  onClick={() => handleInfoClick(ele.id)}>
+                <div className="info-icon" onClick={() => handleInfoClick(ele.id)}>
                   &#x1F6C8;
                 </div>
               </div>
@@ -82,20 +93,20 @@ function Machine(prop) {
           <div className="popup-content">
             <h2>{apiData.name}</h2>
             <div className="tableWrapper">
-            <table>
-            <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
-            </tr>
-              {apiData.monitors.map((data) => (
-                <tr key={data.id}>
-                  <td>{data.name}</td><td>{data.velocityX}</td><td>{data.velocityY}</td><td>{data.velocityZ}</td><td>{data.temperature}</td><td>{data.healthScore}%</td><td>{data.trend}</td></tr>
-              ))}
-            </table>
+              <table>
+                <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
+                </tr>
+                {apiData.monitors.map((data) => (
+                  <tr key={data.id}>
+                    <td>{data.name}</td><td>{data.velocityX}</td><td>{data.velocityY}</td><td>{data.velocityZ}</td><td>{data.temperature}</td><td>{data.healthScore}%</td><td>{data.trend}</td></tr>
+                ))}
+              </table>
             </div>
             <center><a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable" target="_blank" rel="noopener noreferrer">For Detailed Analysis Click Here!</a></center>
             <b>Observation</b> :{apiData.observation}<br></br><br></br>
             <b>Diagnostic</b> :{apiData.diagnostic}<br></br><br></br>
             <b>Recommendation</b> :{apiData.recommendation}<br></br><br></br>
-            
+
             <button className="close-btn" onClick={closePopup}>Close</button>
           </div>
         </div>
