@@ -5,3 +5,13 @@
    flex-wrap: wrap; /* Added property */
  align-content: flex-start;
   }
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50vh;
+    color: gray;
+    margin: auto ;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+  }

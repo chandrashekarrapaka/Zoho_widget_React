@@ -13,6 +13,7 @@ function Container() {
   const [timeIn, setTimeIn] = useState(5000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
+  const [zoomLevel, setZoomLevel] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,10 @@ function Container() {
 
     fetchData();
   }, []);
+
+  const handleZoom = () => {
+    setZoomLevel((prevZoomLevel) => (prevZoomLevel === 0 ? 50 : 0));
+  };
 
   useEffect(() => {
     let timeout;
@@ -77,18 +82,16 @@ function Container() {
   const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = currentPlant
-    ? currentPlant.slice(indexOfFirstItem, indexOfLastItem)
-    : [];
-//  console.log("currentPlant"+JSON.stringify(currentPlant[0].plantName));
+  const currentItems = currentPlant ? currentPlant.slice(indexOfFirstItem, indexOfLastItem) : [];
+
   return (
     <div>
       {currentPlant ? (
         <div>
-          <div className="PlantName">{currentPlant[0].plantName !== undefined ? currentPlant[0].plantName : ""}</div>
+          <div className="PlantName">{currentPlant[0]?.plantName || ""}</div>
           <div className="wholeContainer">
-            <div className="container">
-              <Plant currentItems={currentItems} />
+            <div className="container"  style={{ transform: `scale(${1 + zoomLevel / 100})` }} >
+              <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex+1]!==undefined?plantsData[currentPlantIndex+1][0].plantName:plantsData[0][0].plantName} />
             </div>
             <div className="seccon">
               <div className="AA">
@@ -101,7 +104,9 @@ function Container() {
           </div>
           <div className="footer1">
             <div className="Pagination">
-              <div className="Footer1-item">Zoom in/out</div>
+              <div className="Footer1-item zoomButton" onClick={handleZoom}>
+                Zoom in/out
+              </div>
               <div className="Footer1-item">
                 <Pagination
                   items={currentItems}

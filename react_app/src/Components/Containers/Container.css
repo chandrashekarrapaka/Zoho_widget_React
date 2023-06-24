@@ -7,7 +7,7 @@
     /*padding: 10px;*/
     /*border: 2px solid gray;*/
     margin: 2px;
-    height: 400px;
+    height: 450px;
     display: flex;
     border-radius :5px;
     overflow: auto;
@@ -83,4 +83,8 @@
     font-size: 18px;
     color: red;
   }
-  
+  .zoomButton {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+  }

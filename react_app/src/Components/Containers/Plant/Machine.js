@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Monitor from "./Monitor";
 import './Machine.css';
 import { Velocity } from '../../../Services/Velocity'
+import Tablemini from "./Tablemini";
 
 function Machine(prop) {
   const [showPopup, setShowPopup] = useState(false); // State variable for pop-up visibility
   const [apiData, setApiData] = useState([]); // State variable for API data
 
+  let monitorStyle={};
   useEffect(() => {
     // Function to fetch API data
     const fetchData = async () => {
@@ -53,7 +55,7 @@ function Machine(prop) {
   const closePopup = () => {
     setShowPopup(false);
   };
-
+ 
   return (
     <div className="machines">
       {prop.machine.map(function (ele) {
@@ -96,10 +98,25 @@ function Machine(prop) {
               <table>
                 <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
                 </tr>
-                {apiData.monitors.map((data) => (
-                  <tr key={data.id}>
+                {/* {apiData.monitors.map((data) => (
+                
+                  
+                  <tr key={data.id} >
                     <td>{data.name}</td><td>{data.velocityX}</td><td>{data.velocityY}</td><td>{data.velocityZ}</td><td>{data.temperature}</td><td>{data.healthScore}%</td><td>{data.trend}</td></tr>
-                ))}
+                ))} */}
+                {apiData.monitors.map((data) => {
+                  // console.log("table call"+data.healthScore);
+                  const stylemon={};
+                  if (data.healthScore > 80)  {stylemon.backgroundColor="green"}
+                  else if(data.healthScore > 50 && data.healthScore < 80){stylemon.backgroundColor="orange"}
+                  else if(data.healthScore > 0 && data.healthScore < 50){stylemon.backgroundColor="red"}
+                  else {stylemon.backgroundColor="white";stylemon.border="solid 1px"}
+               
+                  return(
+                    <Tablemini data={data} stylz={stylemon}/>
+                  );
+  })}
+
               </table>
             </div>
             <center><a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable" target="_blank" rel="noopener noreferrer">For Detailed Analysis Click Here!</a></center>

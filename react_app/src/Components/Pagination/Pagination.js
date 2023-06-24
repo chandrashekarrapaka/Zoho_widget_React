@@ -5,7 +5,7 @@ function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
   useEffect(() => {
     const interval = setInterval(() => {
       onPageChange((prevPage) => (prevPage % totalPages) + 1);
-    }, 10000);
+    }, 10000000);
 
     return () => clearInterval(interval);
   }, [onPageChange, totalPages]);
