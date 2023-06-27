@@ -6,6 +6,7 @@ import MFI from "./MFI/MFI";
 import Pagination from "../Pagination/Pagination";
 import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
+import Header from "../Header/Header";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,6 +15,53 @@ function Container() {
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(0);
+  //screen things
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const handleFullScreen = () => {
+    if (!isFullScreen) {
+      enterFullScreen();
+    } else {
+      exitFullScreen();
+    }
+  };
+
+  const enterFullScreen = () => {
+    // const element = document.documentElement.getElementById("zppagesLive");
+     // Get the root element of the document
+    
+    //  const rootElement = document.getElementById('root');
+     const iframes = document.documentElement.querySelectorAll('.inner');
+     console.log('idiframe'+iframes);
+  const element = document.getElementById(iframes);//requestFullscreen();
+    console.log("fullscreen"+element);//documentElement
+    if (element.requestFullscreen) {
+      element.requestFullscreen(); // Standard
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen(); // Firefox
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen(); // Chrome, Safari, and Opera
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen(); // Internet Explorer/Edge
+    }
+
+    setIsFullScreen(true);
+  };
+
+  const exitFullScreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen(); // Standard
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen(); // Firefox
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen(); // Chrome, Safari, and Opera
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen(); // Internet Explorer/Edge
+    }
+
+    setIsFullScreen(false);
+  };
+  //screen things end
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,15 +131,16 @@ function Container() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = currentPlant ? currentPlant.slice(indexOfFirstItem, indexOfLastItem) : [];
-
+  //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
     <div>
       {currentPlant ? (
         <div>
-          <div className="PlantName">{currentPlant[0]?.plantName || ""}</div>
+          <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
+          <Header/>
           <div className="wholeContainer">
-            <div className="container"  style={{ transform: `scale(${1 + zoomLevel / 100})` }} >
-              <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex+1]!==undefined?plantsData[currentPlantIndex+1][0].plantName:plantsData[0][0].plantName} />
+            <div className="container" >
+              <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
             </div>
             <div className="seccon">
               <div className="AA">
@@ -107,6 +156,7 @@ function Container() {
               <div className="Footer1-item zoomButton" onClick={handleZoom}>
                 Zoom in/out
               </div>
+             
               <div className="Footer1-item">
                 <Pagination
                   items={currentItems}
@@ -141,11 +191,19 @@ function Container() {
               </div>
             </div>
           </div>
+           <div>
+                {/* <button onClick={handleFullScreen}>
+                  {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
+                </button> */}
+              </div>
         </div>
       ) : (
         <div className="login-again">
           <p>Login again</p>
+          <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Click Here</a>
+         
         </div>
+        
       )}
     </div>
   );

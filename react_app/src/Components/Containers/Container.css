@@ -88,3 +88,7 @@
     z-index: 10;
     cursor: pointer;
   }
+  .PlantName{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+  }

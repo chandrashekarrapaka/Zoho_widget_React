@@ -4,7 +4,8 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    /*padding: 5px;*/
+    padding: 5px;
+    margin: 5px;
 }
 .PlantName{
     font-size: medium;
