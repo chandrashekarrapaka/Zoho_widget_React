@@ -65,12 +65,11 @@ function Machine(prop) {
           
         //  console.log("monitor"+elemon.healthScore)
           if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
-          if (minimumValue > 80) stylez.backgroundColor = "green";
+          if (minimumValue > 80) stylez.backgroundColor = "rgb(100, 221, 23)";
           else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
-          else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
           else {
-            stylez.backgroundColor = "white";
-            stylez.border = "solid 1px";
+            stylez.backgroundColor = "rgb(255, 87, 34)";
+            
           }
           // console.log("stylez"+JSON.stringify(stylez));
         })
@@ -109,8 +108,9 @@ function Machine(prop) {
                   const stylemon={};
                   if (data.healthScore > 80)  {stylemon.backgroundColor="rgb(100, 221, 23)"}
                   else if(data.healthScore > 50 && data.healthScore < 80){stylemon.backgroundColor= "rgb(255, 193, 7)"}
-                  else {stylemon.backgroundColor="rgb(255, 87, 34)"}
-                 
+                  else if(data.healthScore > 0 && data.healthScore < 50){stylemon.backgroundColor="rgb(255, 87, 34)"}
+                  else {stylemon.backgroundColor="white";stylemon.border="solid 1px"}
+               
                   return(
                     <Tablemini data={data} stylz={stylemon}/>
                   );

@@ -16,6 +16,7 @@ function Container() {
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(0);
   //screen things
+  
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleFullScreen = () => {
@@ -31,8 +32,8 @@ function Container() {
      // Get the root element of the document
     
     //  const rootElement = document.getElementById('root');
-     const iframes = document.documentElement.querySelectorAll('.inner');
-     console.log('idiframe'+iframes);
+     const iframes = document.documentElement;
+     console.log('idiframe'+JSON.stringify(iframes));
   const element = document.getElementById(iframes);//requestFullscreen();
     console.log("fullscreen"+element);//documentElement
     if (element.requestFullscreen) {
@@ -192,9 +193,9 @@ function Container() {
             </div>
           </div>
            <div>
-                {/* <button onClick={handleFullScreen}>
+                <button onClick={handleFullScreen}>
                   {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
-                </button> */}
+                </button>
               </div>
         </div>
       ) : (
