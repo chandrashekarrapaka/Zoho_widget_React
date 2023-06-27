@@ -67,7 +67,7 @@ function Machine(prop) {
         if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
         if (minimumValue > 80) stylez.backgroundColor = "green";
         else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
-        else if (minimumValue >= 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+        else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
         // else {
         //   stylez.backgroundColor = "white";
         //   stylez.border = "solid 1px";
