@@ -95,6 +95,7 @@ export async function Plants() {
         mg.machines.map((machine)=>{
           machine.mg=mg.name;
           machine.plantName=plantsData.data.name;
+          machine.plantid=plantsData.data.id;
           plantsArray.push(machine);
         })
         

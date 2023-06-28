@@ -145,7 +145,7 @@ function Container() {
             </div>
             <div className="seccon">
               <div className="AA">
-                <AA />
+                <AA currentPlant={currentPlant}/>
               </div>
               <div className="MFI">
                 <MFI />

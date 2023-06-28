@@ -1,16 +1,81 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './AA.css';
+// import { LoginCredentialsAndQueries } from "../../../Services/LoginCredentialsAndQueries";
+import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAndQueries";
 
-function AA(){
+function AA(prop) {
+    const [accessToken, setAccessToken] = useState("");
+    const [dataDisplay,setDataDisplay]=useState();
+    let params = "";
+    const currentPlant = prop.currentPlant;
+    console.log("AA1" + currentPlant[0].plantid, accessToken);
+    
+    useEffect(() => {
+      const fetchDataz = async () => {
+        try {
+          const response = await LoginCredentialsAndQueries();
+          if (response.length > 0) {
+            console.log("responseAA", response);
+            setAccessToken(response);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
+      fetchDataz();
+    }, []);
 
-    return(
+    console.log("AA1" + currentPlant[0].plantid, accessToken);
+    let plantid = currentPlant[0].plantid;
+    useEffect(() => {
+        const fetchData = async () => {
+            let now = new Date();
+let dtTo = now.toISOString().replace(/\.\d+Z$/, "Z").replace(/:/g, "%3A");
+let dtFrom = new Date(now.getTime() - 48 * 60 * 60 * 1000)
+  .toISOString()
+  .replace(/\.\d+Z$/, "Z")
+  .replace(/:/g, "%3A");
+            
+            try {
+              const response = await fetch(
+                "https://api-idap.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts?plantIds=" + plantid + "&from=" + dtFrom +"&to=" + dtTo,
+                {
+                  method: "GET",
+                  headers: {
+                    accept: "application/json",
+                    Authorization: "Bearer " + accessToken,
+                  },
+                }
+              );
+            
+              const data = await response.json();
+              setDataDisplay(data);
+              console.log("alerts"+JSON.stringify(data));
+            } catch (error) {
+              console.error(error);
+            }
+            
+        };
+
+        fetchData();
+    }, [prop.currentPlant]);
+    
+    return (
         <div>
-        <div className="head">
-        Anomaly Alert
-        </div>
-        <div className="content">
-        list elements
-        </div>
+            <div className="head">
+                Anomaly Alert
+            </div>
+            <div className="content">
+            {dataDisplay && dataDisplay.data ? (
+        dataDisplay.data.map((ele) => <div className="aa">{` Machine Name: ${ele.machineName}
+         \nMonitor Name:${ele.monitorName} 
+         \n Anomaly Magnitude: ${ele.anomalyMagnitude} 
+         \n Alert Timestamp: ${ele.alertTimestamp}
+          \n Anomaly Detected:${ele.anomalyDetected} 
+          `}</div>)
+      ) : <div>Loading...</div>}
+            </div>
         </div>
     )
 }
