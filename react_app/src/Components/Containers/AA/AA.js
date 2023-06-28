@@ -6,7 +6,7 @@ import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAn
 function AA(prop) {
     const [accessToken, setAccessToken] = useState("");
     const [dataDisplay,setDataDisplay]=useState();
-    let params = "";
+    
     const currentPlant = prop.currentPlant;
     console.log("AA1" + currentPlant[0].plantid, accessToken);
     
@@ -26,7 +26,7 @@ function AA(prop) {
       fetchDataz();
     }, []);
 
-    console.log("AA1" + currentPlant[0].plantid, accessToken);
+    //console.log("AA1" + currentPlant[0].plantid, accessToken);
     let plantid = currentPlant[0].plantid;
     useEffect(() => {
         const fetchData = async () => {
@@ -66,16 +66,19 @@ let dtFrom = new Date(now.getTime() - 48 * 60 * 60 * 1000)
             <div className="head">
                 Anomaly Alert
             </div>
-            <div className="content">
-            {dataDisplay && dataDisplay.data ? (
-        dataDisplay.data.map((ele) => <div className="aa">{` Machine Name: ${ele.machineName}
-         \nMonitor Name:${ele.monitorName} 
-         \n Anomaly Magnitude: ${ele.anomalyMagnitude} 
-         \n Alert Timestamp: ${ele.alertTimestamp}
-          \n Anomaly Detected:${ele.anomalyDetected} 
-          `}</div>)
-      ) : <div>Loading...</div>}
-            </div>
+            <div className="content-container">
+  {dataDisplay && dataDisplay.data ? (
+    dataDisplay.data.map((ele) => (
+      <div className="content-item">
+        <div className="machine-name">Machine Name: {ele.machineName}</div>
+        <div className="monitor-name">Monitor Name: {ele.monitorName}</div>
+        <div className="anomaly-magnitude">Anomaly Magnitude: {ele.anomalyMagnitude}</div>
+        <div className="alert-timestamp">Alert Timestamp: {ele.alertTimestamp}</div>
+        <div className="anomaly-detected">Anomaly Detected: {ele.anomalyDetected}</div>
+      </div>
+    ))
+  ) : <>Loading....</>}
+</div>
         </div>
     )
 }

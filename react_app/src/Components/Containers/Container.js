@@ -148,7 +148,7 @@ function Container() {
                 <AA currentPlant={currentPlant}/>
               </div>
               <div className="MFI">
-                <MFI />
+                <MFI currentPlant={currentPlant} />
               </div>
             </div>
           </div>

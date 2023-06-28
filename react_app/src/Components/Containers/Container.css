@@ -2,46 +2,44 @@
   display: flex;
   width: 100%;
 }
+
 .container {
   width: 80%;
-    /*padding: 10px;*/
-    /*border: 2px solid gray;*/
-    margin: 2px;
-    height: 450px;
-    display: flex;
-    border-radius :5px;
-    overflow: auto;
-    /* flex-wrap: wrap; */
-    /* align-content: flex-start; */
-  }
-  .seccon{
-    padding: 0;
-  }
-  .AA{
-    width:120%;
-    /* padding: 10px; */
-    border: 2px solid gray;
-    /* margin: 2px; */
-    height: 200px;
-    border-radius :5px;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* align-content: center; */
-  }
-  .MFI{
-    width: 120%;
-    /* padding: 10px; */
-    border: 2px solid gray;
-    border-radius :5px;
-    margin: 2px;
-    height: 200px;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* align-content: center; */
-      /* Rest of your CSS */
-  align-self: flex-end; /* Add this property to align the "MFI" div at the bottom */
+  margin: 2px;
+  height: 450px;
+  display: flex;
+  border-radius: 5px;
+  overflow: auto;
+}
 
-  }
+.seccon {
+  padding: 0;
+}
+
+.AA {
+  width: 90%; /* Adjust the width as needed */
+  padding: 10px;
+  border: 2px solid gray;
+  height: 200px;
+  border-radius: 5px;
+  overflow: auto;
+  margin-right: 10px; /* Add margin to separate from MFI */
+}
+
+.MFI {
+  width: 90%; /* Adjust the width as needed */
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  margin: 2px;
+  height: 200px;
+  overflow: auto;
+  align-self: flex-end;
+}
+
+/* Rest of the CSS code */
+
+
   .Footer1-item{
     display: inline-block;
   }
@@ -92,3 +90,41 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 25px;
   }
+  .content-container {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .content-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .machine-name,
+  .monitor-name,
+  .anomaly-magnitude,
+  .alert-timestamp,
+  .anomaly-detected {
+    margin-bottom: 5px;
+  }
+  
+  .machine-name {
+    font-weight: bold;
+  }
+  
+  /* Optional: Customize scrollbar styles */
+  .content-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .content-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 3px;
+  }
+  
+  .content-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  
