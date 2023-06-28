@@ -138,7 +138,7 @@ function Container() {
       {currentPlant ? (
         <div>
           <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
-          <Header/>
+          <Header currentPlant={currentPlant}/>
           <div className="wholeContainer">
             <div className="container" >
               <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
