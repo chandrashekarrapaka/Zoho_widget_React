@@ -144,7 +144,7 @@ function Container() {
               <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
             </div>
             <div className="seccon">
-              <div className="AA">
+              <div className="AA" >
                 <AA currentPlant={currentPlant}/>
               </div>
               <div className="MFI">
