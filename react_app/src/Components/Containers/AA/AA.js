@@ -70,7 +70,7 @@ function AA(prop) {
   }, [currentPlant, accessToken]);
 
   return (
-    <div>
+    <div className="content-box">
       <div className="head">Anomaly Alert</div>
       <div className="content-container">
         {dataDisplay && dataDisplay.data ? (

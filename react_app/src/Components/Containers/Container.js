@@ -136,7 +136,7 @@ function Container() {
   return (
     <div>
       {currentPlant ? (
-        <div>
+        <div className="wrapper">
           <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
           <Header currentPlant={currentPlant}/>
           <div className="wholeContainer">
@@ -176,24 +176,24 @@ function Container() {
             <div className="indicator1">
               <div className="circle1" style={{ background: "rgb(100, 221, 23)" }}></div>
               <div className="author1">
-                <p>Health Score &gt; 80%</p>
+                <p> Health Score &gt; 80%</p>
               </div>
               <div className="circle1" style={{ background: "rgb(255, 193, 7)" }}></div>
               <div className="author1">
-                <p>Health Score &gt; 50% &lt; 80%</p>
+                <p> Health Score &gt; 50% &lt; 80%</p>
               </div>
               <div className="circle1" style={{ background: "rgb(255, 87, 34)" }}></div>
               <div className="author1">
-                <p>Health Score &lt; 50%</p>
+                <p> Health Score &lt; 50%</p>
               </div>
               <div className="circle1" style={{ border: "solid 1px black" }}></div>
               <div className="author1">
-                <p>Health Score Not Available</p>
+                <p> Health Score Not Available</p>
               </div>
             </div>
           </div>
            <div>
-                <button onClick={handleFullScreen}>
+               <button className="Hidden" onClick={handleFullScreen}>
                   {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
                 </button>
               </div>

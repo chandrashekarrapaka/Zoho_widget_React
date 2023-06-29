@@ -65,7 +65,7 @@ function Machine(prop) {
           
         //  console.log("monitor"+elemon.healthScore)
         if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
-        if (minimumValue > 80) stylez.backgroundColor = "green";
+        if (minimumValue > 80) stylez.backgroundColor = "rgb(100, 221, 23)";
         else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
         else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
         // else {
@@ -77,11 +77,11 @@ function Machine(prop) {
         return (
           <div className="machine" key={ele.id}>
             <div >
-              <div style={{ color: "black" }} >{ele.mg}</div>
+              <div className="textEllipsis" style={{ color: "black" }} >{ele.mg}</div>
               <h4 style={ stylez }>{ele.name}</h4>
               <div className="signals">
                 <Monitor monitor={ele.monitors} />
-                <h4>HS {ele.healthScore}</h4>
+                <h4>{ele.healthScore}%</h4>
                 <div className="info-icon" onClick={() => handleInfoClick(ele.id)}>
                   &#x1F6C8;
                 </div>
@@ -98,12 +98,7 @@ function Machine(prop) {
               <table>
                 <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
                 </tr>
-                {/* {apiData.monitors.map((data) => (
                 
-                  
-                  <tr key={data.id} >
-                    <td>{data.name}</td><td>{data.velocityX}</td><td>{data.velocityY}</td><td>{data.velocityZ}</td><td>{data.temperature}</td><td>{data.healthScore}%</td><td>{data.trend}</td></tr>
-                ))} */}
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
                   const stylemon={};
