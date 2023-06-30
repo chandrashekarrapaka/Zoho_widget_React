@@ -6,12 +6,13 @@ export async function LoginCredentialsAndQueries() {
          
         const loginResponse =  await window.ZOHO.CREATOR.init().then(function(data) {
           let accessTokenz="";
-        
+          let userid=window.ZOHO.CREATOR.UTIL.getQueryParams().user;
+          console.log("userid"+userid)
         
          var config = {
           appName: "infinite-control-room",
           reportName: "All_Users",
-          criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
+          criteria: "Username ==\""+userid+"\"",
           page: "1",
           pageSize: "100"
         }

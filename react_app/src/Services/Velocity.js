@@ -10,15 +10,16 @@ export async function Velocity() {
 
         const loginResponse = await window.ZOHO.CREATOR.init().then(function (data) {
             let accessTokenz = "";
-
-
-            var config = {
-                appName: "infinite-control-room",
-                reportName: "All_Users",
-                criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
-                page: "1",
-                pageSize: "100"
-            }
+            let userid=window.ZOHO.CREATOR.UTIL.getQueryParams().user;
+            console.log("userid"+userid)
+          
+           var config = {
+            appName: "infinite-control-room",
+            reportName: "All_Users",
+            criteria: "Username ==\""+userid+"\"",
+            page: "1",
+            pageSize: "100"
+          }
             const access = window.ZOHO.CREATOR.API.getAllRecords(config).then(function (response) {
                 let userData = response;
 

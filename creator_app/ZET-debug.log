@@ -502,3 +502,15 @@
 [info] [2023-06-28T20:44:44.404Z] :  ==> app\static\js\787.b701888c.chunk.js.map
 [info] [2023-06-28T20:44:44.407Z] :  ==> app\static\js\main.d7fcf280.js.map
 [info] [2023-06-28T20:44:44.409Z] : Note - File formats that can be packed are: txt, md, xml, dre, jpg, jpeg, png, gif, css, js, html, json, mp3, svg, woff, ttf, eot, webm, mp4, and woff2
+[error] [2023-06-30T07:09:11.943Z] : × Below file formats are not allowed in Sigma
+[info] [2023-06-30T07:09:11.955Z] :  ==> app\favicon.ico
+[info] [2023-06-30T07:09:11.958Z] :  ==> app\static\css\main.c208a80e.css.map
+[info] [2023-06-30T07:09:11.968Z] :  ==> app\static\js\787.b701888c.chunk.js.map
+[info] [2023-06-30T07:09:11.973Z] :  ==> app\static\js\main.0d0209a5.js.map
+[info] [2023-06-30T07:09:11.978Z] : Note - File formats that can be packed are: txt, md, xml, dre, jpg, jpeg, png, gif, css, js, html, json, mp3, svg, woff, ttf, eot, webm, mp4, and woff2
+[error] [2023-06-30T07:09:12.016Z] : × Below file formats are not allowed in Sigma
+[info] [2023-06-30T07:09:12.020Z] :  ==> app\favicon.ico
+[info] [2023-06-30T07:09:12.040Z] :  ==> app\static\css\main.c208a80e.css.map
+[info] [2023-06-30T07:09:12.050Z] :  ==> app\static\js\787.b701888c.chunk.js.map
+[info] [2023-06-30T07:09:12.053Z] :  ==> app\static\js\main.0d0209a5.js.map
+[info] [2023-06-30T07:09:12.056Z] : Note - File formats that can be packed are: txt, md, xml, dre, jpg, jpeg, png, gif, css, js, html, json, mp3, svg, woff, ttf, eot, webm, mp4, and woff2
