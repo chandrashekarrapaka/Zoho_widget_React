@@ -59,9 +59,9 @@ function MFI(prop) {
   }, [currentPlant, accessToken]);
   let i=1;
   return (
-    <div>
+    <div className="content-box">
       <div className="head">Machine with Faults</div>
-      <div className="content">
+      <div className="content-container">
         {dataDisplay ? (
           dataDisplay.map((ele) => {
             const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;

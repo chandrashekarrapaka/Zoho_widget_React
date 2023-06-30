@@ -1,22 +1,24 @@
 .machines {
-    /*background-color: lightgray;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 4px rgba(0, 0, 0, 0.1);
-    display: flex; 
-    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
-.machine{
-  display: inline-block;
-  max-width: 180px;
-  width: 180px;
+.machine {
   background: white;
-  border: solid 1px lightgray;
-    margin: 1px;
-    text-align: center;
-  }
-
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: calc(20% - 4px);
+  min-width: calc(20% - 4px);
+  border-radius: 4px;
+  margin: 2px;
+  box-sizing: border-box;
+}
+.textEllipsis{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
   .machines h4{
     margin: 0px;
     white-space: nowrap;

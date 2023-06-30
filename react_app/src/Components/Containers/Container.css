@@ -1,7 +1,9 @@
+.Hidden{
+  display: none;
+}
 .wholeContainer {
-  display: block;
-  width: 100%;
-  height: 75%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .container {
@@ -20,23 +22,20 @@
 }
 
 .AA {
-  width: 90%; /* Adjust the width as needed */
-  padding: 10px;
-  border: 2px solid gray;
-  height: 200px;
-  border-radius: 5px;
-  overflow: auto;
-  margin-right: 10px; /* Add margin to separate from MFI */
+  width: 100%;
+  height: 48%;
+  margin-bottom: 4%;
+  border-radius: 10px;
+  border: 1px solid #7878ee;
+  overflow: hidden;
 }
 
 .MFI {
-  width: 90%; /* Adjust the width as needed */
-  padding: 10px;
-  border: 2px solid gray;
-  border-radius: 5px;
-  margin: 2px;
-  height: 200px;
-  overflow: auto;
+  width: 100%;
+  height: 48%;
+  border-radius: 10px;
+  border: 1px solid #7878ee;
+  overflow: hidden;
   align-self: flex-end;
 }
 
