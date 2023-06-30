@@ -2,32 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import KPI from "./KPI";
 import { Image } from "../../Services/image";
+import { LoginCredentialsAndQueries } from "../../Services/loginCredentialsAndQueries";
 
-const initialKipobj = {
-    kpi1: {
-      title: "1",
-      value: "Total Devices Installed",
-    },
-    kpi2: { title: "2", value: "Total Machines Digitized" },
-    kpi3: { title: "3", value: "Total Faults Identified" },
-    kpi4: { title: "4", value: "Reports Closed" },
-    kpi5: { title: "5", value: "Downtime Saved (Hrs)" },
-  };
+
   
 function Header(prop) {
   const [imageUrl, setImageUrl] = useState("");
-  const [kipobj, setKipobj] = useState(initialKipobj); // Initialize with the initial kipobj value
-  let kipobjz = {
+   // Initialize with the initial kipobj value
+  //console.log("kpimachines"+prop.kpimachines)
+  const initialKipobj = {
     kpi1: {
-      title: "1",
+      title: prop.kpimonitors?prop.kpimonitors:"1",
       value: "Total Devices Installed",
     },
-    kpi2: { title: "2", value: "Total Machines Digitized" },
+    kpi2: { title: prop.kpimachines?JSON.stringify(prop.kpimachines):"2", value: "Total Machines Digitized" },
     kpi3: { title: "3", value: "Total Faults Identified" },
     kpi4: { title: "4", value: "Reports Closed" },
     kpi5: { title: "5", value: "Downtime Saved (Hrs)" },
   };
-  
+  console.log("kpimonitors"+prop.kpimonitors,initialKipobj.kpi1.title)
+  const [kipobj, setKipobj] = useState(initialKipobj);
   useEffect(() => {
     const fetchDataz = async () => {
       try {
@@ -47,95 +41,47 @@ function Header(prop) {
   useEffect(() => {
     const fetchPlantDetails = async () => {
       try {
-        const data = await window.ZOHO.CREATOR.init();
-        const plantid = prop.currentPlant[0].plantid;
-        const config = {
-          appName: "infinite-control-room",
-          reportName: "All_Plants",
-          criteria: `plantId == "${plantid}"`,
-          page: "1",
-          pageSize: "100",
-        };
+        let plantid = prop.currentPlant[0].plantid;
+        let token=await LoginCredentialsAndQueries();
+        
+         const kpidatafinal= await fetch('https://api-idap.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds='+plantid,{
+            method: 'GET',
+            headers:{
+              'Authorization':'Bearer '+ token,
+              'accept': "*/*",
+            },
 
-        const response = await window.ZOHO.CREATOR.API.getAllRecords(config);
-        const plantdetails = response.data[0];
-        const plantidCre = plantdetails.ID;
-        console.log(
-          "plantidCre" +
-            plantidCre +
-            " " +
-            plantdetails.Close_Reports +
-            " " +
-            plantdetails.Down_Time +
-            " " +
-            (Number(plantdetails.Close_Reports) +
-              Number(plantdetails.Number_of_Fault_Identifier))
-        );
-        const configz = {
-            appName: "infinite-control-room",
-            reportName: "All_Machines",
-             criteria: `Plants.contains("${plantidCre}")`,
-             //criteria: `Machine_ID == "${4260}"`,
-            page: "1",
-            pageSize: "100",
-          };
-  
-          const machine = await window.ZOHO.CREATOR.API.getAllRecords(configz);
-          const machinedetails = machine.data.length;
-          console.log("kpimachine"+machinedetails)
-        //   const plantidCre = plantdetails.ID;//Total_Device_Installed
-        const configd = {
-            appName: "infinite-control-room",
-            reportName: "Total_Device_Installed_Report",
-             criteria: `Name_of_Plant.contains("${plantidCre}")`,
-             //criteria: `Machine_ID == "${4260}"`,
-            page: "1",
-            pageSize: "200",
-          };
-  
-          const totaldevices = await window.ZOHO.CREATOR.API.getAllRecords(configd);
-          let totaldevicesinstalled = totaldevices.data.length;
-          console.log("totaldevicesinstalled"+totaldevicesinstalled)
-          if(totaldevicesinstalled==200){
-            const configd = {
-                appName: "infinite-control-room",
-                reportName: "Total_Device_Installed_Report",
-                 criteria: `Name_of_Plant.contains("${plantidCre}")`,
-                 //criteria: `Machine_ID == "${4260}"`,
-                page: "2",
-                pageSize: "200",
-              };
-      
-              const totaldevices = await window.ZOHO.CREATOR.API.getAllRecords(configd);
-               totaldevicesinstalled = 200+totaldevices.data.length;
-      
-          }
+          });
+        let  kpidata = await kpidatafinal.json();
+        console.log("downtime"+JSON.stringify(kpidata.data[0]));
+        
+        
 
         const updatedKipobj = {
           ...kipobj,
           kpi4: {
             ...kipobj.kpi4,
-            title: plantdetails.Close_Reports,
+            title: JSON.stringify(kpidata.data[0].completedCount),
           },
           kpi5: {
             ...kipobj.kpi5,
-            title: plantdetails.Down_Time,
+            title:JSON.stringify(kpidata.data[0].downtime),
+          },
+          kpi2:{
+            ...kipobj.kpi2,
+            title:
+            JSON.stringify(prop.kpimachines)
           },
           kpi3: {
             ...kipobj.kpi3,
             title:
-              Number(plantdetails.Close_Reports) +
-              Number(plantdetails.Number_of_Fault_Identifier),
+            JSON.stringify(kpidata.data[0].newCount)
           },
-          kpi2: {
-            ...kipobj.kpi2,
-            title:
-             machinedetails
-          },//totaldevicesinstalled
+         //totaldevicesinstalled
           kpi1: {
             ...kipobj.kpi1,
             title:
-            totaldevicesinstalled
+            JSON.stringify(prop.kpimonitors)
           }
         };
 

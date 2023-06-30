@@ -57,7 +57,7 @@ function MFI(prop) {
       clearInterval(interval); // Clean up the interval on component unmount
     };
   }, [currentPlant, accessToken]);
-  let i=1;
+  let i=0;
   return (
     <div className="content-box">
       <div className="head">Machine with Faults</div>
@@ -65,16 +65,17 @@ function MFI(prop) {
         {dataDisplay ? (
           dataDisplay.map((ele) => {
             const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
-           
+            if(ele.status=="NEW")i++;
+
             return (
               
               <div className="content-itemZ">
                 <div className="machine-name">
-                  {ele.status === "NEW" && ele.serviceReqMachineDetails[0].machineName ? ele.serviceReqMachineDetails[0].machineName : ''}
+                  {ele.status === "NEW" && ele.serviceReqMachineDetails[0].machineName ?i+"."+ ele.serviceReqMachineDetails[0].machineName+" "+ele.serviceReqMachineDetails[0].createdDate : ''}
                 </div>
 
                 <div className="monitor-name">
-                  {ele.status === "NEW" ? ele.serviceReqMachineDetails[0].machineServiceDetails[0].serviceName : null}
+                  {ele.status === "NEW" ?"a."+ ele.serviceReqMachineDetails[0].machineServiceDetails[0].serviceName : null}
                 </div>
                 <div className="monitor-name">
                   {ele.status === "NEW" &&(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48? ele.serviceReqMachineDetails[0].createdDate : null}
@@ -84,7 +85,7 @@ function MFI(prop) {
            
           })
         ) : (
-          <></>
+          <>No Faults observed in machines </>
         )}
       </div>
     </div>

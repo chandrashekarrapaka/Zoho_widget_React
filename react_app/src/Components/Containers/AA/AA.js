@@ -73,7 +73,7 @@ function AA(prop) {
     <div className="content-box">
       <div className="head">Anomaly Alert</div>
       <div className="content-container">
-        {dataDisplay && dataDisplay.data ? (
+        {dataDisplay && dataDisplay.data.length>0 ? (
           dataDisplay.data.map((ele) => (
             <div className="content-item">
               <div className="machine-name">Machine Name: {ele.machineName}</div>
@@ -84,7 +84,7 @@ function AA(prop) {
             </div>
           ))
         ) : (
-          <>Loading....</>
+          <>No Anomaly Alert in Last 48 Hours </>
         )}
       </div>
     </div>

@@ -7,14 +7,17 @@ import Pagination from "../Pagination/Pagination";
 import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
-
+let kpimachines;
+let kpimonitors=0;
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const [timeIn, setTimeIn] = useState(5000);
+  const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(0);
+  
+  
   //screen things
   
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -69,6 +72,7 @@ function Container() {
       try {
         const response = await Plants();
         if (response.length > 0) {
+          //kpimonitors=response.length;
           setPlantsData(response);
         }
       } catch (error) {
@@ -88,6 +92,16 @@ function Container() {
 
     if (plantsData.length > 0) {
       const currentPlant = plantsData[currentPlantIndex];
+      kpimachines=plantsData[currentPlantIndex].length;
+      //console.log("kpimachines"+kpimachines)
+      kpimonitors=0;
+      plantsData[currentPlantIndex].map((mon)=>{
+        console.log("kpimonitorsinside"+mon.monitors.length)
+        kpimonitors= kpimonitors+mon.monitors.length;
+      // return kpimonitors;
+      })
+
+      //console.log(kpimonitors);
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
 
       if (currentPage === totalPages + 1) {
@@ -123,8 +137,8 @@ function Container() {
   };
 
   const handleCheck = () => {
-    if (timeIn === 5000) setTimeIn(10000000);
-    else setTimeIn(5000);
+    if (timeIn === 30000) setTimeIn(1000000000);
+    else setTimeIn(30000);
   };
 
   const currentPlant = plantsData[currentPlantIndex];
@@ -138,7 +152,7 @@ function Container() {
       {currentPlant ? (
         <div className="wrapper">
           <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
-          <Header currentPlant={currentPlant}/>
+          <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant}/>
           <div className="wholeContainer">
             <div className="container" >
               <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
@@ -200,9 +214,9 @@ function Container() {
         </div>
       ) : (
         <div className="login-again">
-          <p>Login again</p>
-          <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Click Here</a>
-         
+          <p>For Login </p>
+          <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
+          <p>For Selecting Plants scroll down</p>
         </div>
         
       )}
