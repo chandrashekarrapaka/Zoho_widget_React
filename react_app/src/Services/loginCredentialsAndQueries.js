@@ -11,7 +11,7 @@ export async function LoginCredentialsAndQueries() {
         
          var config = {
           appName: "infinite-control-room",
-          reportName: "All_Users",
+          reportName: "My_Profile_Data",
           criteria: "Username ==\""+userid+"\"",
           page: "1",
           pageSize: "100"

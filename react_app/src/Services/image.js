@@ -10,7 +10,7 @@ export async function Image() {
         
          var config = {
           appName: "infinite-control-room",
-          reportName: "All_Users",
+          reportName: "My_Profile_Data",
           criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
           page: "1",
           pageSize: "100"
