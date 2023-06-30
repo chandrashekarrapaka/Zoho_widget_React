@@ -65,7 +65,7 @@ function MFI(prop) {
         {dataDisplay ? (
           dataDisplay.map((ele) => {
             const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
-            if (check) {
+           
             return (
               
               <div className="content-itemZ">
@@ -81,13 +81,7 @@ function MFI(prop) {
                 </div>
               </div>
             );
-            } else{
-              
-              if(i){
-                i=0;
-              return (<>No MFI within 48 hrs</>)
-              }
-            }
+           
           })
         ) : (
           <></>
