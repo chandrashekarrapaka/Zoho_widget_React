@@ -1,11 +1,17 @@
 .kpis{
-    background-color:rgb(250, 243, 243);
     height: auto;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    padding: 5px;
-    margin: 5px;
+}
+.kpiItems{
+    flex: 1 1;
+    width: 0;
+    margin: 0px 15px;
+    margin-bottom: 5px;
+}
+.kpiItems img{
+    width: 100%;
 }
 .PlantName{
     font-size: medium;

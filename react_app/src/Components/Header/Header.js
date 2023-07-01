@@ -96,7 +96,7 @@ function Header(prop) {
 
   return (
     <div className="kpis">
-      <img src={imageUrl} alt="Plant" />
+      <div className="kpiItems"><img src={imageUrl} alt="Plant" /></div>
       {/* <div className="PlantName"></div> */}
       {/* 5kpi boxes with plant data */}
       {Object.keys(kipobj).map(function (ele) {

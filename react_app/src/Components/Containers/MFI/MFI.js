@@ -74,12 +74,10 @@ function MFI(prop) {
                   {ele.status === "NEW" && ele.serviceReqMachineDetails[0].machineName ?i+"."+ ele.serviceReqMachineDetails[0].machineName+" "+ele.serviceReqMachineDetails[0].createdDate : ''}
                 </div>
 
-                <div className="monitor-name">
-                  {ele.status === "NEW" ?"a."+ ele.serviceReqMachineDetails[0].machineServiceDetails[0].serviceName : null}
-                </div>
-                <div className="monitor-name">
-                  {ele.status === "NEW" &&(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48? ele.serviceReqMachineDetails[0].createdDate : null}
-                </div>
+                <ol type="a" className="MFI-subitem">
+                  <li>{ele.status === "NEW" ?ele.serviceReqMachineDetails[0].machineServiceDetails[0].serviceName : null}</li>
+                </ol>
+                
               </div>
             );
            
