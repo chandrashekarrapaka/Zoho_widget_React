@@ -7,8 +7,8 @@
     line-height: 30px;
     justify-self: flex-start;
     text-align: center;
-    font-size: medium;
+
 }
-.MFI-subitem{
-    margin-top: 0;
+.monitor-name{
+    font-size: small;
 }

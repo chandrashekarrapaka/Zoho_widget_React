@@ -57,30 +57,39 @@ function MFI(prop) {
       clearInterval(interval); // Clean up the interval on component unmount
     };
   }, [currentPlant, accessToken]);
-  let i=0;
+  let i = 1;
+  //const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
+  // if(ele.status=="NEW")i++;
+  // 
   return (
     <div className="content-box">
       <div className="head">Machine with Faults</div>
       <div className="content-container">
         {dataDisplay ? (
           dataDisplay.map((ele) => {
-            const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
-            if(ele.status=="NEW")i++;
-
-            return (
+            {if(ele.status=="NEW")
+            return(
+            ele.serviceReqMachineDetails.map((srmd) => {
               
-              <div className="content-itemZ">
-                <div className="machine-name">
-                  {ele.status === "NEW" && ele.serviceReqMachineDetails[0].machineName ?i+"."+ ele.serviceReqMachineDetails[0].machineName+" "+ele.serviceReqMachineDetails[0].createdDate : ''}
-                </div>
-
-                <ol type="a" className="MFI-subitem">
-                  <li>{ele.status === "NEW" ?ele.serviceReqMachineDetails[0].machineServiceDetails[0].serviceName : null}</li>
-                </ol>
+              return(
+              <div className="machine-name">
                 
+                {srmd.machineName ?i+++"."+" "+ srmd.machineName + " " + srmd.createdDate : ''}
+                {srmd.machineServiceDetails.map((msd,index) => {
+                  return (
+                    <ol className="monitor-name">
+                      {String.fromCharCode(97+index)+". "+msd.serviceName}
+                    </ol>
+                  );
+
+                })}
               </div>
-            );
-           
+              
+              )
+            })
+          )
+            }
+
           })
         ) : (
           <>No Faults observed in machines </>
