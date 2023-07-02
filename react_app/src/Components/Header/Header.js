@@ -30,19 +30,23 @@ function Header(prop) {
   //console.log("kpimonitors"+prop.kpimonitors,initialKipobj.kpi1.title)
   const [kipobj, setKipobj] = useState(initialKipobj);
   const [kipobjnew,setKipobjNew]=useState(newobj)
-  useEffect(()=>{
+  
+useEffect(()=>{
+    console.log("working after"+prop.kpimachines,prop.kpimonitors);
+    
     const new12={...kipobjnew,
-    kpi1: {
-      ...kipobjnew.kpi1,
-      title: JSON.stringify(prop.kpimonitors),
-    },
-    kpi2: {
-      ...kipobjnew.kpi2,
-      title: JSON.stringify(prop.kpimachines),
+      kpi1: {
+        ...kipobjnew.kpi1,
+        title: JSON.stringify(prop.kpimonitors),
+      },
+      kpi2: {
+        ...kipobjnew.kpi2,
+        title: JSON.stringify(prop.kpimachines),
+      }
     }
-  }
-    setKipobjNew(new12)
-  },[prop.kpimachines,prop.kpimonitors])
+      setKipobjNew(new12);
+  
+},[prop.kpimachines,prop.kpimonitors]);
 
   useEffect(() => {
     const fetchDataz = async () => {

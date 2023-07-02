@@ -7,8 +7,7 @@ import Pagination from "../Pagination/Pagination";
 import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
-let kpimachines;
-let kpimonitors=0;
+
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -16,7 +15,9 @@ function Container() {
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(0);
-  
+  const [kpimachines,setKpimachines]=useState(0);
+  const [kpimonitors,setKpimonitors]=useState(0);
+
   
   //screen things
   
@@ -92,15 +93,15 @@ function Container() {
 
     if (plantsData.length > 0) {
       const currentPlant = plantsData[currentPlantIndex];
-      kpimachines=plantsData[currentPlantIndex].length;
-      //console.log("kpimachines"+kpimachines)
-      kpimonitors=0;
+      setKpimachines(plantsData[currentPlantIndex].length);
+      console.log("kpimachinesmonitors"+kpimachines)
+     let kpimonitorsnew=0;
       plantsData[currentPlantIndex].map((mon)=>{
         console.log("kpimonitorsinside"+mon.monitors.length)
-        kpimonitors= kpimonitors+mon.monitors.length;
+        kpimonitorsnew= kpimonitorsnew+mon.monitors.length;
       // return kpimonitors;
       })
-
+      setKpimonitors(kpimonitorsnew);
       //console.log(kpimonitors);
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
 
@@ -137,7 +138,7 @@ function Container() {
   };
 
   const handleCheck = () => {
-    if (timeIn === 30000) setTimeIn(1000000000);
+    if (timeIn === 30000) setTimeIn(10000000000000);
     else setTimeIn(30000);
   };
 
