@@ -1,14 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .kpis{
     height: auto;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    padding: 0 5px
 }
 .kpiItems{
-    flex: 1 1;
-    width: 0;
-    margin: 0px 15px;
+    margin: 0px 7px;
     margin-bottom: 5px;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
 }
 .kpiItems img{
     width: 100%;

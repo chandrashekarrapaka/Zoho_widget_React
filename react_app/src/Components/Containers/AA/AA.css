@@ -13,11 +13,12 @@
 }
   
   .content-item {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    padding: 0 0 5px;
     border: none;
-    padding: 0;
     font-size: small;
     line-height: 1;
+    border-bottom: thin solid #888;
   }
   
   .machine-name,
@@ -26,6 +27,11 @@
   .alert-timestamp,
   .anomaly-detected {
     margin-bottom: 5px;
+  }
+
+  .machine-name ol, .monitor-name ol{
+    margin-left: 15px;
+    line-height: 1;
   }
   
   /* Optional: Customize scrollbar styles */
