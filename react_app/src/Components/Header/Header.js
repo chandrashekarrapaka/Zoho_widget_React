@@ -11,42 +11,44 @@ function Header(prop) {
    // Initialize with the initial kipobj value
   //console.log("kpimachines"+prop.kpimachines)
   const initialKipobj = {
-    // kpi1: {
-    //   title: "",
-    //   value: "Total Devices Installed",
-    // },
-    // kpi2: { title: "", value: "Total Machines Digitized" },
-    kpi3: { title: "3", value: "Total Faults Identified" },
-    kpi4: { title: "4", value: "Reports Closed" },
-    kpi5: { title: "5", value: "Downtime Saved (Hrs)" },
-  };
-  const newobj={
-  kpi1: {
+    kpi1: {
       title: "",
       value: "Total Devices Installed",
+      class:"fa fa-wifi"
     },
-    kpi2: { title: "", value: "Total Machines Digitized" }
-  }
+    kpi2: { title: "", value: "Total Machines Digitized",class:"fa fa-desktop" },
+    kpi3: { title: "3", value: "Total Faults Identified",class:"fa fa-exclamation-triangle" },
+    kpi4: { title: "4", value: "Reports Closed",class:"fa fa-book" },
+    kpi5: { title: "5", value: "Downtime Saved (Hrs)",class:"fa fa-clock-o" },
+  };
+  
+  // const newobj={
+  // kpi1: {
+  //     title: "",
+  //     value: "Total Devices Installed",
+  //   },
+  //   kpi2: { title: "", value: "Total Machines Digitized" }
+  // }
   //console.log("kpimonitors"+prop.kpimonitors,initialKipobj.kpi1.title)
   const [kipobj, setKipobj] = useState(initialKipobj);
-  const [kipobjnew,setKipobjNew]=useState(newobj)
+ // const [kipobjnew,setKipobjNew]=useState(newobj)
   
-useEffect(()=>{
-    console.log("working after"+prop.kpimachines,prop.kpimonitors);
+// useEffect(()=>{
+//     console.log("working after"+prop.kpimachines,prop.kpimonitors);
     
-    const new12={...kipobjnew,
-      kpi1: {
-        ...kipobjnew.kpi1,
-        title: JSON.stringify(prop.kpimonitors),
-      },
-      kpi2: {
-        ...kipobjnew.kpi2,
-        title: JSON.stringify(prop.kpimachines),
-      }
-    }
-      setKipobjNew(new12);
+//     const new12={...kipobjnew,
+//       kpi1: {
+//         ...kipobjnew.kpi1,
+//         title: JSON.stringify(prop.kpimonitors),
+//       },
+//       kpi2: {
+//         ...kipobjnew.kpi2,
+//         title: JSON.stringify(prop.kpimachines),
+//       }
+//     }
+//       setKipobjNew(new12);
   
-},[prop.kpimachines,prop.kpimonitors]);
+// },[prop.kpimachines,prop.kpimonitors]);
 
   useEffect(() => {
     const fetchDataz = async () => {
@@ -93,22 +95,22 @@ useEffect(()=>{
             ...kipobj.kpi5,
             title:JSON.stringify(kpidata.data[0].downtime),
           },
-          // kpi2:{
-          //   ...kipobj.kpi2,
-          //   title:
-          //   JSON.stringify(prop.kpimachines)
-          // },
+          kpi2:{
+            ...kipobj.kpi2,
+            title:
+            JSON.stringify(prop.kpimachines)
+          },
           kpi3: {
             ...kipobj.kpi3,
             title:
             JSON.stringify(kpidata.data[0].newCount)
           },
          //totaldevicesinstalled
-          // kpi1: {
-          //   ...kipobj.kpi1,
-          //   title:
-          //   JSON.stringify(prop.kpimonitors)
-          // }
+          kpi1: {
+            ...kipobj.kpi1,
+            title:
+            JSON.stringify(prop.kpimonitors)
+          }
         };
         
        setKipobj(updatedKipobj);
@@ -125,9 +127,9 @@ useEffect(()=>{
   return (
     <div className="kpis">
      { !result&& <div className="kpiItems"><img src={imageUrl} alt={result} /></div>}
-     {Object.keys(kipobjnew).map(function (ele) {
+     {/* {Object.keys(kipobjnew).map(function (ele) {
         return <KPI data={kipobjnew[ele]} />;
-      })}
+      })} */}
       {Object.keys(kipobj).map(function (ele) {
         return <KPI data={kipobj[ele]} />;
       })}
