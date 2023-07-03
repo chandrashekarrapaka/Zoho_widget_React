@@ -120,11 +120,12 @@ useEffect(()=>{
 
     fetchPlantDetails();
   }, [prop.currentPlant,prop.kpimachines,prop.kpimonitors ]);
-
+  const result = imageUrl.includes("no image available") ||imageUrl=="";
+  console.log("rresult"+result);
   return (
     <div className="kpis">
-      <div className="kpiItems"><img src={imageUrl} alt="Plant" /></div>
-      {Object.keys(kipobjnew).map(function (ele) {
+     { !result&& <div className="kpiItems"><img src={imageUrl} alt={result} /></div>}
+     {Object.keys(kipobjnew).map(function (ele) {
         return <KPI data={kipobjnew[ele]} />;
       })}
       {Object.keys(kipobj).map(function (ele) {
