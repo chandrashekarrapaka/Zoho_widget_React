@@ -20,64 +20,22 @@ function Container() {
 
   
   //screen things
-  
-  const [isFullScreen, setIsFullScreen] = useState(false);
-
-  const handleFullScreen = () => {
-    if (!isFullScreen) {
-      enterFullScreen();
-    } else {
-      exitFullScreen();
-    }
-  };
-
-  const enterFullScreen = () => {
-    // const element = document.documentElement.getElementById("zppagesLive");
-     // Get the root element of the document
-    
-    //  const rootElement = document.getElementById('root');
-     const iframes = document.documentElement;
-     console.log('idiframe'+JSON.stringify(iframes));
-  const element = document.getElementById(iframes);//requestFullscreen();
-    console.log("fullscreen"+element);//documentElement
-    if (element.requestFullscreen) {
-      element.requestFullscreen(); // Standard
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen(); // Firefox
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen(); // Chrome, Safari, and Opera
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen(); // Internet Explorer/Edge
-    }
-
-    setIsFullScreen(true);
-  };
-
-  const exitFullScreen = () => {
-    if (document.exitFullscreen) {
-      document.exitFullscreen(); // Standard
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen(); // Firefox
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen(); // Chrome, Safari, and Opera
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen(); // Internet Explorer/Edge
-    }
-
-    setIsFullScreen(false);
-  };
-  //screen things end
+  //console.log("insidecontainer.js");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await Plants();
+        console.log("work"+JSON.stringify(response));
         if (response.length > 0) {
           //kpimonitors=response.length;
           setPlantsData(response);
+          
         }
       } catch (error) {
+        console.log("error"+error);
         console.error(error);
+
       }
     };
 
@@ -130,12 +88,25 @@ function Container() {
   }, [currentPage, currentPlantIndex, plantsData, timeIn]);
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-
-    if (pageNumber === Math.ceil(plantsData[currentPlantIndex]?.length / itemsPerPage)) {
-      setCurrentPlantIndex((prevIndex) => (prevIndex + 1) % plantsData.length);
+    const totalPages = Math.ceil(plantsData[currentPlantIndex].length / itemsPerPage);
+  
+    if (pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+  
+      if (pageNumber === totalPages && currentPlantIndex !== plantsData.length - 1) {
+        // Reached the last page of a plant, move to the next plant after the timer
+        setTimeout(() => {
+          const nextPlantIndex = currentPlantIndex + 1;
+          setCurrentPage(1);
+          setCurrentPlantIndex(nextPlantIndex);
+        }, timeIn);
+      }
     }
   };
+  
+  
+  
+  
 
   const handleCheck = () => {
     if (timeIn === 30000) setTimeIn(10000000000000);
@@ -207,17 +178,14 @@ function Container() {
               </div>
             </div>
           </div>
-           <div>
-               <button className="Hidden" onClick={handleFullScreen}>
-                  {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
-                </button>
-              </div>
         </div>
       ) : (
+        
         <div className="login-again">
-          <p>For Login </p>
+          {/* <p>For Login </p>
           <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
-          <p>For Selecting Plants scroll down</p>
+          <p>For Selecting Plants scroll down</p> */}
+          <>Loading....</>
         </div>
         
       )}

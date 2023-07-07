@@ -7,14 +7,14 @@ function MFI(prop) {
   const [dataDisplay, setDataDisplay] = useState();
 
   const currentPlant = prop.currentPlant;
-  console.log("MFI1", currentPlant[0].plantid, accessToken);
+  //console.log("MFI1", currentPlant[0].plantid, accessToken);
 
   useEffect(() => {
     const fetchDataz = async () => {
       try {
         const response = await LoginCredentialsAndQueries();
         if (response.length > 0) {
-          console.log("responseMFI", response);
+          //console.log("responseMFI", response);
           setAccessToken(response);
         }
       } catch (error) {
@@ -43,7 +43,9 @@ function MFI(prop) {
         const data = await response.json();
 
         let key = Object.keys(data.data);
+       
         setDataDisplay(data.data[key]);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }

@@ -8,47 +8,19 @@ import { LoginCredentialsAndQueries } from "../../Services/loginCredentialsAndQu
   
 function Header(prop) {
   const [imageUrl, setImageUrl] = useState("");
-   // Initialize with the initial kipobj value
-  //console.log("kpimachines"+prop.kpimachines)
   const initialKipobj = {
     kpi1: {
-      title: "",
+      title: "1",
       value: "Total Devices Installed",
       class:"fa fa-wifi"
     },
-    kpi2: { title: "", value: "Total Machines Digitized",class:"fa fa-desktop" },
+    kpi2: { title: "2", value: "Total Machines Digitized",symbol:"&#xe1b1;",class:"material-icons" },
     kpi3: { title: "3", value: "Total Faults Identified",class:"fa fa-exclamation-triangle" },
     kpi4: { title: "4", value: "Reports Closed",class:"fa fa-book" },
     kpi5: { title: "5", value: "Downtime Saved (Hrs)",class:"fa fa-clock-o" },
   };
   
-  // const newobj={
-  // kpi1: {
-  //     title: "",
-  //     value: "Total Devices Installed",
-  //   },
-  //   kpi2: { title: "", value: "Total Machines Digitized" }
-  // }
-  //console.log("kpimonitors"+prop.kpimonitors,initialKipobj.kpi1.title)
   const [kipobj, setKipobj] = useState(initialKipobj);
- // const [kipobjnew,setKipobjNew]=useState(newobj)
-  
-// useEffect(()=>{
-//     console.log("working after"+prop.kpimachines,prop.kpimonitors);
-    
-//     const new12={...kipobjnew,
-//       kpi1: {
-//         ...kipobjnew.kpi1,
-//         title: JSON.stringify(prop.kpimonitors),
-//       },
-//       kpi2: {
-//         ...kipobjnew.kpi2,
-//         title: JSON.stringify(prop.kpimachines),
-//       }
-//     }
-//       setKipobjNew(new12);
-  
-// },[prop.kpimachines,prop.kpimonitors]);
 
   useEffect(() => {
     const fetchDataz = async () => {
@@ -80,8 +52,10 @@ function Header(prop) {
             },
 
           });
+          //console.log(kpidatafinal.json());
         let  kpidata = await kpidatafinal.json();
-        console.log("downtime"+JSON.stringify(kpidata.data[0]));
+        let kpidatalength=kpidata.data.length;
+        console.log("downtime"+kpidatalength);
         
         
 

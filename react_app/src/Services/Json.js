@@ -3,38 +3,7 @@ export async function Plants() {
   let accessToken="";
   const arrayOfPlants=[];
   const arrayOfMachines=[];
-//   const handleScriptLoad = async() => {
-    
-//     console.log("hero")
-//     // await window.ZOHO.CREATOR.init().then(function(data) {
-      
-//     //  // var queryParams = window.ZOHO.CREATOR.UTIL.getQueryParams();
-//     //  const email="rapaka.chandrashekar@gmail.com";//Stage == \"Open\"
-//     //    var config = {
-//     //     appName: "infinite-control-room",
-//     //     reportName: "All_Users",
-//     //     criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
-//     //     page: "1",
-//     //     pageSize: "100"
-//     //   }
-  
-//     //   //get all records API
-//     //   window.ZOHO.CREATOR.API.getAllRecords(config).then(function (response) {
-//     //     //callback block
-//     //     let userData = response;
-        
-//     //     accessToken=JSON.stringify(userData.data[0].Access_Token);
-//     //     console.log("userData"+JSON.stringify(userData.data[0].Access_Token));
-//     //    // console.log("check"+accessToken);
-//     //    // return accessToken;
-//     //   });
-      
-      
-//     // });
-   
-   
-//   };
-//  await handleScriptLoad();
+
   
 
 
@@ -80,6 +49,7 @@ export async function Plants() {
       const orgidAll=queryParams.PlantId.split(",");
     let plantsData;
     let plantsResponse
+    try{
     plantsResponse=await Promise.all(orgidAll.map(async(orgid)=>{
        plantsResponse = await fetch(`https://api-idap.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
         method: 'GET',
@@ -88,9 +58,14 @@ export async function Plants() {
           'Authorization': 'Bearer '+accessToken,
         },
       });
+      if(plantsResponse.status=="401"){
+        //console.log("plantsdata",  plantsResponse);
+        return plantsResponse.status;
+      }
+      
       plantsData = await plantsResponse.json();
       const plantsArray=[];
-      // console.log("plantsdata",  plantsData.data.machineGroups);
+      // console.log("plantsdata",  plantsData);
       plantsData.data.machineGroups.map((mg)=>{
         //console.log("plantsdata", mg.machines);
         mg.machines.map((machine)=>{
@@ -104,14 +79,24 @@ export async function Plants() {
       arrayOfMachines.push(plantsArray);
       arrayOfPlants.push(plantsData.data);
     }));
+  }
+  catch (error) {
+    console.error("error"+JSON.stringify(error));
+    throw error;
+  }
       //console.log("check"+ headers);
       
       arrayOfPlants.map((ele)=>{
         console.log("arrayOfPlants",ele);
       })
       console.log("arrayofMachines",arrayOfMachines);
+      if(plantsResponse.status==401){
+        console.log("plantsdata",  plantsResponse);
+      arrayOfMachines.push(plantsResponse.status);
+      }
       
        return arrayOfMachines;
+      
       // console.log("newMachines"+JSON.stringify(newMachines));
       // return newMachines;
 
