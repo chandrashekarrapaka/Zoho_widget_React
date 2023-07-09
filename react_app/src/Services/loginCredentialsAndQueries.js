@@ -7,7 +7,7 @@ export async function LoginCredentialsAndQueries() {
         const loginResponse =  await window.ZOHO.CREATOR.init().then(function(data) {
           let accessTokenz="";
           let userid=window.ZOHO.CREATOR.UTIL.getQueryParams().user;
-          console.log("userid"+userid)
+          //console.log("userid"+userid)
         
          var config = {
           appName: "infinite-control-room",
@@ -20,7 +20,7 @@ export async function LoginCredentialsAndQueries() {
           let userData = response;
           
           accessTokenz=userData.data[0].Access_Token;
-          console.log("userData"+JSON.stringify(userData.data[0].Access_Token));
+          //console.log("userData"+JSON.stringify(userData.data[0].Access_Token));
          // console.log("check"+accessToken);
          // return accessToken;
         return accessTokenz;
@@ -34,8 +34,8 @@ export async function LoginCredentialsAndQueries() {
         const loginData = await loginResponse;
 
        accessToken = loginData;
-         console.log("queryParamsLOGIN"+JSON.stringify(queryParams));
-         console.log("dataused"+JSON.stringify(accessToken),queryParams)
+         //console.log("queryParamsLOGIN"+JSON.stringify(queryParams));
+         //console.log("dataused"+JSON.stringify(accessToken),queryParams)
         
         const lqp={accessToken,queryParams};
         // let orgid=queryParams.PlantId.split(",")[1];

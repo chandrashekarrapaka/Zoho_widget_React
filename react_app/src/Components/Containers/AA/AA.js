@@ -7,14 +7,14 @@ function AA(prop) {
   const [dataDisplay, setDataDisplay] = useState();
 
   const currentPlant = prop.currentPlant;
-  console.log("AA1", currentPlant[0].plantid, accessToken);
+  //console.log("AA1", currentPlant[0].plantid, accessToken);
 
   useEffect(() => {
     const fetchDataz = async () => {
       try {
         const response = await LoginCredentialsAndQueries();
         if (response.length > 0) {
-          console.log("responseAA", response);
+          //console.log("responseAA", response);
           setAccessToken(response);
         }
       } catch (error) {
@@ -54,7 +54,7 @@ function AA(prop) {
 
         const data = await response.json();
         setDataDisplay(data);
-        console.log("alerts", JSON.stringify(data));
+        //console.log("alerts", JSON.stringify(data.data.length));
       } catch (error) {
         console.error(error);
       }
@@ -68,7 +68,9 @@ function AA(prop) {
       clearInterval(interval); // Clean up the interval on component unmount
     };
   }, [currentPlant, accessToken]);
-
+ //console.log("data"+JSON.stringify(dataDisplay));
+let lengthofDisplay=dataDisplay&&dataDisplay.data.length==0;
+// console.log("checking",lengthofDisplay,dataDisplay.data.length)
   return (
     <div className="content-box">
       <div className="head">Anomaly Alert</div>
@@ -83,9 +85,8 @@ function AA(prop) {
               <div className="anomaly-detected">Anomaly Detected: {ele.anomalyDetected}</div>
             </div>
           ))
-        ) : (
-          <>No Anomaly Alert in Last 48 Hours </>
-        )}
+           ):
+           ({lengthofDisplay}?(<>No Data Available</>):(<>No Anomaly Alert in Last 48 Hours</>))}
       </div>
     </div>
   );

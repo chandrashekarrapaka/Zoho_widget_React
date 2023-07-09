@@ -17,21 +17,32 @@ function Container() {
   const [zoomLevel, setZoomLevel] = useState(0);
   const [kpimachines,setKpimachines]=useState(0);
   const [kpimonitors,setKpimonitors]=useState(0);
-
+  const [noData,setNoData]=useState('');
+  const [apicall,setApiCall]=useState(true);
   
   //screen things
   //console.log("insidecontainer.js");
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        console.log("work"+JSON.stringify(response));
-        if (response.length > 0) {
+        if(response[1]){
+        console.log("work"+response[1]);
+        if (response[0][0].length > 0) {
           //kpimonitors=response.length;
-          setPlantsData(response);
+          setPlantsData(response[0]);
           
         }
+        else{
+          //alert('No data found');
+          setNoData('No data found');
+        }
+      }
+      else{
+        setApiCall(false);
+        console.log(apicall);
+      }
       } catch (error) {
         console.log("error"+error);
         console.error(error);
@@ -179,14 +190,13 @@ function Container() {
             </div>
           </div>
         </div>
-      ) : (
+      ) : ((apicall===true)?
         
-        <div className="login-again">
-          {/* <p>For Login </p>
-          <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
-          <p>For Selecting Plants scroll down</p> */}
-          <>Loading....</>
-        </div>
+       (<div style={{textAlign:"center"}}><h1>{`APIs loading....${noData}`}</h1></div>)
+        :( <div className="login-again">
+        <p>{`For Login`}</p>
+        <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
+      </div>)
         
       )}
     </div>

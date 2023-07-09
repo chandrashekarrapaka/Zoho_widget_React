@@ -3,7 +3,7 @@ import './KPI.css';
 
 function KPI(prop){
 
-console.log(prop.data.title);
+//console.log(prop.data.title);
 return(
 	<>
     {prop.data.symbol==`&#xe1b1;`?

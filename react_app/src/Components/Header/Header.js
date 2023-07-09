@@ -10,14 +10,14 @@ function Header(prop) {
   const [imageUrl, setImageUrl] = useState("");
   const initialKipobj = {
     kpi1: {
-      title: "1",
+      title: "",
       value: "Total Devices Installed",
       class:"fa fa-wifi"
     },
-    kpi2: { title: "2", value: "Total Machines Digitized",symbol:"&#xe1b1;",class:"material-icons" },
-    kpi3: { title: "3", value: "Total Faults Identified",class:"fa fa-exclamation-triangle" },
-    kpi4: { title: "4", value: "Reports Closed",class:"fa fa-book" },
-    kpi5: { title: "5", value: "Downtime Saved (Hrs)",class:"fa fa-clock-o" },
+    kpi2: { title: "", value: "Total Machines Digitized",symbol:"&#xe1b1;",class:"material-icons" },
+    kpi3: { title: "", value: "Total Faults Identified",class:"fa fa-exclamation-triangle" },
+    kpi4: { title: "", value: "Reports Closed",class:"fa fa-book" },
+    kpi5: { title: "", value: "Downtime Saved (Hrs)",class:"fa fa-clock-o" },
   };
   
   const [kipobj, setKipobj] = useState(initialKipobj);
@@ -27,7 +27,7 @@ function Header(prop) {
       try {
         const response = await Image();
         if (response.length > 0) {
-          console.log("imageurl", response);
+          // console.log("imageurl", response);
           setImageUrl(response);
         }
       } catch (error) {
@@ -55,10 +55,10 @@ function Header(prop) {
           //console.log(kpidatafinal.json());
         let  kpidata = await kpidatafinal.json();
         let kpidatalength=kpidata.data.length;
-        console.log("downtime"+kpidatalength);
+        console.log("downtime"+JSON.stringify(kpidatalength));
         
         
-
+        if(kpidatalength!=0){
         const updatedKipobj = {
           ...kipobj,
           kpi4: {
@@ -88,6 +88,10 @@ function Header(prop) {
         };
         
        setKipobj(updatedKipobj);
+      }
+      else{
+        setKipobj(initialKipobj); 
+      }
         
       } catch (error) {
         console.error(error);
@@ -97,10 +101,12 @@ function Header(prop) {
     fetchPlantDetails();
   }, [prop.currentPlant,prop.kpimachines,prop.kpimonitors ]);
   const result = imageUrl.includes("no image available") ||imageUrl=="";
-  console.log("rresult"+result);
+  //console.log("rresult"+result);
   return (
     <div className="kpis">
-     { !result&& <div className="kpiItems"><img src={imageUrl} alt={result} /></div>}
+     <div className="kpiItems"><img src={imageUrl} alt="company" /></div>
+    
+     {/* { !result&& <div className="kpiItems"><img src={imageUrl} alt={result} /></div>} */}
      {/* {Object.keys(kipobjnew).map(function (ele) {
         return <KPI data={kipobjnew[ele]} />;
       })} */}

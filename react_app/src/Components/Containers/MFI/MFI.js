@@ -7,6 +7,7 @@ function MFI(prop) {
   const [dataDisplay, setDataDisplay] = useState();
 
   const currentPlant = prop.currentPlant;
+
   //console.log("MFI1", currentPlant[0].plantid, accessToken);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function MFI(prop) {
         let key = Object.keys(data.data);
        
         setDataDisplay(data.data[key]);
-        console.log(data);
+        //console.log("mfi"+dataDisplay);
       } catch (error) {
         console.error(error);
       }
@@ -63,6 +64,7 @@ function MFI(prop) {
   //const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
   // if(ele.status=="NEW")i++;
   // 
+  //let keylength=data
   return (
     <div className="content-box">
       <div className="head">Machine with Faults</div>
@@ -93,8 +95,8 @@ function MFI(prop) {
             }
 
           })
-        ) : (
-          <>No Faults observed in machines </>
+        ) : ({dataDisplay}?(<>No Data Available</>):(<>No Faults observed in machines </>)
+          
         )}
       </div>
     </div>

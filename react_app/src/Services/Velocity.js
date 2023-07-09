@@ -11,7 +11,7 @@ export async function Velocity() {
         const loginResponse = await window.ZOHO.CREATOR.init().then(function (data) {
             let accessTokenz = "";
             let userid=window.ZOHO.CREATOR.UTIL.getQueryParams().user;
-            console.log("userid"+userid)
+            //console.log("userid"+userid)
           
            var config = {
             appName: "infinite-control-room",
