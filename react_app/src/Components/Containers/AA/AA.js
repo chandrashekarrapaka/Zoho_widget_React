@@ -86,7 +86,7 @@ let lengthofDisplay=dataDisplay&&dataDisplay.data.length==0;
             </div>
           ))
            ):
-           ({lengthofDisplay}?(<>No Data Available</>):(<>No Anomaly Alert in Last 48 Hours</>))}
+           ({lengthofDisplay}?(<>No Anomaly Alert in Last 48 Hours</>):(<>No Anomaly Alert in Last 48 Hours</>))}
       </div>
     </div>
   );

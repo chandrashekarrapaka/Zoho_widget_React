@@ -19,7 +19,6 @@
     background: #fff;
     display: flex;
     flex-direction: column;
-    border: 1px solid gray;
 }
 .kpiItems img{
     width: 100%;
@@ -27,5 +26,4 @@
 .PlantName{
     font-size: medium;
     text-align: center;
-    margin: 10px 0 0;
 }
