@@ -27,8 +27,9 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
+        //console.log("work"+response[1]);
         if(response[1]){
-        console.log("work"+response[1]);
+        //console.log("work"+response);
         if (response[0][0].length > 0) {
           //kpimonitors=response.length;
           setPlantsData(response[0]);
@@ -51,7 +52,7 @@ function Container() {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const handleZoom = () => {
     setZoomLevel((prevZoomLevel) => (prevZoomLevel === 0 ? 50 : 0));
@@ -66,7 +67,7 @@ function Container() {
       console.log("kpimachinesmonitors"+kpimachines)
      let kpimonitorsnew=0;
       plantsData[currentPlantIndex].map((mon)=>{
-        console.log("kpimonitorsinside"+mon.monitors.length)
+        //console.log("kpimonitorsinside"+mon.monitors.length)
         kpimonitorsnew= kpimonitorsnew+mon.monitors.length;
       // return kpimonitors;
       })
@@ -132,7 +133,7 @@ function Container() {
   //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
     <div>
-      {currentPlant ? (
+      {(currentPlant&&apicall) ? (
         <div className="wrapper">
           <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
           <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant}/>
