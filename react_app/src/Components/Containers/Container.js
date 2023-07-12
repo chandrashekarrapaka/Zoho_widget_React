@@ -193,7 +193,7 @@ function Container() {
         </div>
       ) : ((apicall===true)?
         
-       (<div style={{textAlign:"center"}}><h1>{`APIs loading....${noData}`}</h1></div>)
+       (<div style={{textAlign:"center"}}><h1>{`loading....${noData}`}</h1></div>)
         :( <div className="login-again">
         <p>{`For Login`}</p>
         <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
