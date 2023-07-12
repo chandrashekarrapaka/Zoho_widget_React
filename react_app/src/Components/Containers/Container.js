@@ -184,7 +184,7 @@ function Container() {
               <div className="author1">
                 <p> Health Score &lt; 50%</p>
               </div>
-              <div className="circle1" style={{ border: "solid 1px black" }}></div>
+              <div className="circle1" style={{ border: "solid 1px black",background:"white" }}></div>
               <div className="author1">
                 <p> Health Score Not Available</p>
               </div>
