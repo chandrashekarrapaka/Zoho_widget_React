@@ -80,13 +80,13 @@ function Container() {
           timeout = setTimeout(() => {
             setCurrentPage(1);
             setCurrentPlantIndex(0);
-          }, 1000);
+          }, 0);
         } else {
           // Move to the next plant
           timeout = setTimeout(() => {
             setCurrentPage(1);
             setCurrentPlantIndex((prevIndex) => prevIndex + 1);
-          }, 1000);
+          }, 0);
         }
       } else {
         timeout = setTimeout(() => {

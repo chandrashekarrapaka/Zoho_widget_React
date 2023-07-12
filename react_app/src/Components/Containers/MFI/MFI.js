@@ -92,6 +92,10 @@ function MFI(prop) {
               )
             })
           )
+          else
+          return(
+            <>No Faults observed in machines </>
+          )
             }
 
           })

@@ -77,7 +77,7 @@ function Header(prop) {
           kpi3: {
             ...kipobj.kpi3,
             title:
-            JSON.stringify(kpidata.data[0].newCount)
+            JSON.stringify(kpidata.data[0].newCount+kpidata.data[0].completedCount)
           },
          //totaldevicesinstalled
           kpi1: {
@@ -90,6 +90,8 @@ function Header(prop) {
        setKipobj(updatedKipobj);
       }
       else{
+        initialKipobj.kpi2.title=JSON.stringify(prop.kpimachines);
+        initialKipobj.kpi1.title=JSON.stringify(prop.kpimonitors)
         setKipobj(initialKipobj); 
       }
         
