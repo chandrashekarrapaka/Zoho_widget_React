@@ -72,6 +72,7 @@ function MFI(prop) {
         {dataDisplay ? (
           dataDisplay.map((ele) => {
             {if(ele.status=="NEW")
+            // there should be an flag within this IF, if there is something displays
             return(
             ele.serviceReqMachineDetails.map((srmd) => {
               
@@ -99,7 +100,7 @@ function MFI(prop) {
             }
 
           })
-        ) : ({dataDisplay}?(<>No Data Available</>):(<>No Faults observed in machines </>)
+        ) : ({dataDisplay}?(<>{dataDisplay}No Faults observed in machines</>):(<>No Faults observed in machines</>)
           
         )}
       </div>
