@@ -5,6 +5,8 @@ import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAn
 function MFI(prop) {
   const [accessToken, setAccessToken] = useState("");
   const [dataDisplay, setDataDisplay] = useState();
+  const [nocomments, setNoComments] = useState(true);
+  
 
   const currentPlant = prop.currentPlant;
 
@@ -45,8 +47,13 @@ function MFI(prop) {
 
         let key = Object.keys(data.data);
        
-        setDataDisplay(data.data[key]);
-        //console.log("mfi"+dataDisplay);
+
+        const dataWithNewStatus = data.data[key].filter((ele) => ele.status === "NEW");
+        setDataDisplay(dataWithNewStatus);
+        setNoComments(dataWithNewStatus.length === 0);
+        console.log("mfi"+dataDisplay);
+      
+     
       } catch (error) {
         console.error(error);
       }
@@ -69,7 +76,7 @@ function MFI(prop) {
     <div className="content-box">
       <div className="head">Machine with Faults</div>
       <div className="content-container">
-        {dataDisplay ? (
+        {dataDisplay&&dataDisplay.length>0 ? (
           dataDisplay.map((ele) => {
             {if(ele.status=="NEW")
             // there should be an flag within this IF, if there is something displays
@@ -96,9 +103,8 @@ function MFI(prop) {
             }
 
           })
-        ) : ({dataDisplay}?(<>{dataDisplay}No Faults observed in machines</>):(<>No Faults observed in machines</>)
-          
-        )}
+        ) : <>{nocomments ? "No Faults observed in machines" : ""}</>}
+        
       </div>
     </div>
   );

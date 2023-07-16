@@ -101,7 +101,7 @@ function Machine(prop) {
                 
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
-                  const stylemon={"width":"100%"};
+                  const stylemon={"width":"auto"};
                   if (data.healthScore > 80)  {stylemon.backgroundColor="rgb(100, 221, 23)"}
                   else if(data.healthScore > 50 && data.healthScore < 80){stylemon.backgroundColor= "rgb(255, 193, 7)"}
                   else if(data.healthScore > 0 && data.healthScore < 50){stylemon.backgroundColor="rgb(255, 87, 34)"}

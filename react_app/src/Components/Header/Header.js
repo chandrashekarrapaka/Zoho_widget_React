@@ -106,9 +106,9 @@ function Header(prop) {
   //console.log("rresult"+result);
   return (
     <div className="kpis">
-     <div className="kpiItems"><img src={imageUrl} alt="company" /></div>
+     {/* <div className="kpiItems"><img src={imageUrl} alt="company" /></div> */}
     
-     {/* { !result&& <div className="kpiItems"><img src={imageUrl} alt={result} /></div>} */}
+     { !result&& <div className="kpiItems"><img src={imageUrl} alt={result} /></div>}
      {/* {Object.keys(kipobjnew).map(function (ele) {
         return <KPI data={kipobjnew[ele]} />;
       })} */}

@@ -6,12 +6,12 @@ export async function Image() {
          
         const loginResponse =  await window.ZOHO.CREATOR.init().then(function(data) {
           let accessTokenz="";
-        
+          let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
         
          var config = {
           appName: "infinite-control-room",
           reportName: "My_Profile_Data",
-          criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
+          criteria: "Username == \"" + userid + "\"",
           page: "1",
           pageSize: "100"
         }

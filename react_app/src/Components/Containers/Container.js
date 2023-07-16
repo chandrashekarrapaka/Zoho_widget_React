@@ -54,8 +54,18 @@ function Container() {
     fetchData();
   }, [currentPage]);
 
-  const handleZoom = () => {
-    setZoomLevel((prevZoomLevel) => (prevZoomLevel === 0 ? 50 : 0));
+  const handleZoom = (ele) => {
+    console.log("start");
+    console.log(document);
+    document.body.requestFullscreen();
+    // document.getElementById("widgets_1").requestFullscreen();
+    // window.addEventListener("load", (event) => {
+    //   // log.textContent += "load\n";
+    //   console.log("zoomclicked"+event);
+    //   document.getElementsByClassName("widget_Frame_homePage")[0].requestFullscreen();
+    // });
+    // // document.getElementsByClassName("widget_Frame_homePage")[0].requestFullscreen();
+    // setZoomLevel((prevZoomLevel) => (prevZoomLevel === 0 ? 50 : 0));
   };
 
   useEffect(() => {
@@ -138,7 +148,7 @@ function Container() {
           <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
           <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant}/>
           <div className="wholeContainer">
-            <div className="container" >
+            <div className="container" id="smartViewContainer" >
               <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
             </div>
             <div className="seccon">
@@ -152,7 +162,7 @@ function Container() {
           </div>
           <div className="footer1">
             <div className="Pagination">
-              <div className="Footer1-item zoomButton" onClick={handleZoom}>
+              <div className="Footer1-item zoomButton" onClick={(e)=>{handleZoom(e)}}>
                 Zoom in/out
               </div>
              
@@ -195,7 +205,7 @@ function Container() {
         
        (<div style={{textAlign:"center"}}><h1>{`loading....${noData}`}</h1></div>)
         :( <div className="login-again">
-        <p>{`For Login`}</p>
+        <p>{`Invalid Token, Please Login here`}</p>
         <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
       </div>)
         

@@ -39,7 +39,7 @@ export async function Plants() {
     const orgidAll = queryParams.PlantId.split(",");
 
     const fetchPlantsData = async () => {
-      console.log("functioncalled"+new Date().getMinutes);
+      //console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
           const plantsResponse = await fetch(`https://api-idap.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
@@ -91,7 +91,7 @@ export async function Plants() {
   }
 }
 
-// Example usage
+
 Plants()
   .then(([machines, status]) => {
     console.log("Machines:", machines);
