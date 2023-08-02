@@ -37,6 +37,7 @@ function App() {
   return (
     <div className='App'>
       {/* <Header options={options} handleSelectChange={handleSelectChange} /> */}
+      
       <Container plantDetails={plantDetails} boxes={boxes} />
     </div>
   );

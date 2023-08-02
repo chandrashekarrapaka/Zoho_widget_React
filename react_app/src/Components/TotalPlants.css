@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.kpis{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 5px
+}
+.kpiItems{
+    margin: 0px 7px;
+    margin-bottom: 5px;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.kpiItems img{
+    width: 100%;
+}
+.PlantName{
+    font-size: medium;
+    text-align: center;
+}

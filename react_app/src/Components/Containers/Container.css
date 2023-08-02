@@ -56,14 +56,8 @@
     display: inline-block;
   }
 
-  .footer2{
+  
     .indicator1{
-      /*vertical-align: middle;
-        text-align:center;
-       left:5%;
-        position:relative;
-        display:table-cell;*/
-        
         width: fit-content;
         margin: auto;
       }
@@ -86,7 +80,7 @@
       vertical-align:middle;
       position: relative;
     }
-  }
+  
   .login-again {
     margin-top: 20px;
     text-align: center;

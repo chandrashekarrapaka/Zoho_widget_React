@@ -7,6 +7,7 @@ import Pagination from "../Pagination/Pagination";
 import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
+import TotalPlants from "../TotalPlants";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +28,7 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        //console.log("work"+response[1]);
+        //console.log("work"+JSON.stringify(response[0]));
         if(response[1]){
         //console.log("work"+response);
         if (response[0][0].length > 0) {
@@ -143,8 +144,11 @@ function Container() {
   //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
     <div>
+     
       {(currentPlant&&apicall) ? (
+        
         <div className="wrapper">
+           <TotalPlants plantsData={plantsData}/>
           <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
           <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant}/>
           <div className="wholeContainer">
@@ -162,8 +166,8 @@ function Container() {
           </div>
           <div className="footer1">
             <div className="Pagination">
-              <div className="Footer1-item zoomButton" onClick={(e)=>{handleZoom(e)}}>
-                Zoom in/out
+              <div className="Footer1-item zoomButton" onClick={(e)=>{console.log("Toggle")}}>
+               
               </div>
              
               <div className="Footer1-item">
