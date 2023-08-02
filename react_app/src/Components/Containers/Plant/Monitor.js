@@ -9,12 +9,11 @@ function Monitor(prop) {
             {
                 Object(prop.monitor).map(function (ele) {
                     const style = {};
-                    if (ele.healthScore > 80);
-                    else if (ele.healthScore > 50 && ele.healthScore < 80) style.backgroundColor = "rgb(255, 193, 7)";
-                    else if (ele.healthScore > 0 && ele.healthScore < 50) style.backgroundColor = "rgb(255, 87, 34)";
+                    if (ele.status == 1 ||ele.status==2)style.backgroundColor = "#64DD17";
+                    else if (ele.status==3) style.backgroundColor = "#FFC107";
+                    else if (ele.status ==4) style.backgroundColor = "#FF5722";
                     else {
-                        style.backgroundColor = "white";
-                        style.border = "solid 1px";
+                        style.backgroundColor = "#9E9E9E";
                     }
                     
                     return (

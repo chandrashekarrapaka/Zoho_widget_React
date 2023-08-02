@@ -60,19 +60,17 @@ function Machine(prop) {
     <div className="machines">
       {prop.machine.map(function (ele) {
         const stylez={};
-        let minimumValue = 100;
-        ele.monitors.map((elemon) => {
+        let minimumValue = 5;
+        ele.monitors.map((data) => {
           
         //  console.log("monitor"+elemon.healthScore)
-        if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
-        if (minimumValue > 80) stylez.backgroundColor = "rgb(100, 221, 23)";
-        else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
-        else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
-        // else {
-        //   stylez.backgroundColor = "white";
-        //   stylez.border = "solid 1px";
-        // }
-          // console.log("stylez"+JSON.stringify(stylez));
+        if(data.status<minimumValue)minimumValue=data.status;
+        if (data.status == 1 ||data.status==2)stylez.backgroundColor = "#64DD17";
+        else if (data.status==3) stylez.backgroundColor = "#FFC107";
+                  else if (data.status ==4) stylez.backgroundColor = "#FF5722";
+                  else {
+                    stylez.backgroundColor = "#9E9E9E";
+                  }
         })
         return (
           <div className="machine" key={ele.id}>
@@ -102,10 +100,13 @@ function Machine(prop) {
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
                   const stylemon={"width":"auto"};
-                  if (data.healthScore > 80)  {stylemon.backgroundColor="rgb(100, 221, 23)"}
-                  else if(data.healthScore > 50 && data.healthScore < 80){stylemon.backgroundColor= "rgb(255, 193, 7)"}
-                  else if(data.healthScore > 0 && data.healthScore < 50){stylemon.backgroundColor="rgb(255, 87, 34)"}
-                  else {stylemon.backgroundColor="white";stylemon.border="solid 1px"}
+                  if (data.status == 1 ||data.status==2)stylemon.backgroundColor = "#64DD17";
+                  else if (data.status==3) stylemon.backgroundColor = "#FFC107";
+                  else if (data.status ==4) stylemon.backgroundColor = "#FF5722";
+                  else {
+                    stylemon.backgroundColor = "#9E9E9E";
+                  }
+                  
                
                   return(
                     <Tablemini data={data} stylz={stylemon}/>

@@ -28,7 +28,7 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        //console.log("work"+JSON.stringify(response[0]));
+        // console.log("work"+JSON.stringify(response[0][0]));
         if(response[1]){
         //console.log("work"+response);
         if (response[0][0].length > 0) {
