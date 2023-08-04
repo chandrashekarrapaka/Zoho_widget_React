@@ -1,21 +1,43 @@
 import React, { useState,useEffect } from "react";
-import { Plants } from "../Services/Json";
 import KPI from "./Header/KPI";
 import { LoginCredentialsAndQueries } from "../Services/loginCredentialsAndQueries";
+import { Image } from "../Services/image";
+
+import icon1 from '../assets/imgs/about-icon-1.png';
+import icon2 from '../assets/imgs/about-icon-2.png';
+import icon3 from '../assets/imgs/about-icon-3.png';
+import icon4 from '../assets/imgs/about-icon-4.png';
+import icon5 from '../assets/imgs/about-icon-5.png';
 
 
 function TotalPlants(prop){
+  const [imageUrl, setImageUrl] = useState("");
     const initialKipobj = {
         kpi1: {
           title: "",
           value: "Total Devices Installed",
-          class:"fa fa-wifi"
+         src:icon1
         },
-        kpi2: { title: "", value: "Total Machines Digitized",symbol:"&#xe1b1;",class:"material-icons" },
-        kpi3: { title: "", value: "Total Faults Identified",class:"fa fa-exclamation-triangle" },
-        kpi4: { title: "", value: "Reports Closed",class:"fa fa-book" },
-        kpi5: { title: "", value: "Downtime Saved (Hrs)",class:"fa fa-clock-o" },
+        kpi2: { title: "", value: "Total Machines Digitized", src:icon2},
+        kpi3: { title: "", value: "Total Faults Identified", src:icon3 },
+        kpi4: { title: "", value: "Reports Closed", src:icon4},
+        kpi5: { title: "", value: "Downtime Saved (Hrs)" , src:icon5},
       };
+      useEffect(() => {
+        const fetchDataz = async () => {
+          try {
+            const response = await Image();
+            if (response.length > 0) {
+              // console.log("imageurl", response);
+              setImageUrl(response);
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        fetchDataz();
+      }, []);
       let kpimonitorsnew=0;
       let kpimachinesnew=0;
       prop.plantsData.forEach(element => {
@@ -101,10 +123,13 @@ function TotalPlants(prop){
         fetchPlantDetails();
       }, [prop]);    
 
-
+      const result = imageUrl.includes("no image available") ||imageUrl=="";
     return(
-        <div className="kpis">
-           
+        <div className="row">
+          <div className="col-lg-2 col-sm-4 mb-3">
+         
+          { !result&& <div className="brand-logo text-center"><img src={imageUrl} alt="Brand Logo" className="img-fluid"/></div>} 
+          </div> 
       {Object.keys(kipobj).map(function (ele) {
         return <KPI data={kipobj[ele]} />;
       })}

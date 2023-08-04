@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Box from "./Box";
 import "./Container.css";
 import AA from "./AA/AA";
 import MFI from "./MFI/MFI";
@@ -147,64 +146,104 @@ function Container() {
      
       {(currentPlant&&apicall) ? (
         
-        <div className="wrapper">
+        <section className="dashboard-sec">
+          <div className="container-fluid">
+            <div className="header">
            <TotalPlants plantsData={plantsData}/>
-          <div  className="PlantName">{currentPlant[0]?.plantName || ""}</div>
-          <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant}/>
-          <div className="wholeContainer">
+           </div>
+         
+          <div className="main-content">
+            <div className="row">
+              <div className="col-lg-9">
+                <div className="left-main">
+             <div  className="title-section d-flex mb-3 align-items-center justify-content-between py-2 px-3 bg-white br-10">
+             <p className="mb-0 fs-4 fw-600"> {currentPlant[0]?.plantName || ""}</p>
+             <p className="mb-0 text-gray"> Coming Next: <strong>Won</strong></p>
+              </div>
             <div className="container" id="smartViewContainer" >
+          <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant}/>
+
               <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
             </div>
-            <div className="seccon">
-              <div className="AA" >
-                <AA currentPlant={currentPlant}/>
-              </div>
-              <div className="MFI">
-                <MFI currentPlant={currentPlant} />
-              </div>
-            </div>
-          </div>
-          <div className="footer1">
-            <div className="Pagination">
-              <div className="Footer1-item zoomButton" onClick={(e)=>{console.log("Toggle")}}>
-               
-              </div>
-             
-              <div className="Footer1-item">
+            <div className="health-score-sec">
+                        <div className="row">
+                            <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
+                                <div className="health-score-box py-2 px-3">
+                                    <div className="score-box green"></div>
+                                    <p className="text-dark fs-12 mb-0 fw-bold">Health Score &gt; 80%</p>
+								</div>
+							</div>
+							
+							 <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
+                                <div className="health-score-box py-2 px-3">
+                                    <div className="score-box yellow"></div>
+                                    <p className="text-dark fs-12 mb-0 fw-bold">Health Score &gt; 50% &lt; 80%
+                                    </p>
+								</div>
+							</div>
+							
+							 <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
+                                <div className="health-score-box py-2 px-3">
+                                    <div className="score-box red"></div>
+                                    <p className="text-dark fs-12 mb-0 fw-bold">Health Score	&lt; 50%
+                                    </p>
+								</div>
+							</div>
+							
+							 <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
+                                <div className="health-score-box py-2 px-3">
+                                    <div className="score-box outline"></div>
+                                    <p className="text-dark fs-12 mb-0 fw-bold">Health Score Not Available
+                                    </p>
+								</div>
+							</div>
+						</div>
+					</div>
+          <div className="pagination-sec">
+            <div className="row">
+            <div class="pagination-section">							
+									<div class="pagination-inner-sec">
+              <ul className="pagination-block">
                 <Pagination
                   items={currentItems}
                   currentPage={currentPage}
                   totalPages={totalPages}
                   onPageChange={handlePageChange}
                 />
-              </div>
-              <div className="Footer1-item" style={{ textAlign: "center" }}>
+              </ul>
+              <div className="stop-auto-pagination" >
+                <form>
                 <input onClick={handleCheck} type="checkbox" />
-                <label>Stop AutoPagination</label>
+                 Stop Auto Pagination
+                </form>
+                
               </div>
+              
+            </div>
+            </div>
             </div>
           </div>
-          <div className="footer2">
-            <div className="indicator1">
-              <div className="circle1" style={{ background: "rgb(100, 221, 23)" }}></div>
-              <div className="author1">
-                <p> Health Score &gt; 80%</p>
+          </div>
+          </div>
+          <div className="col-lg-3">
+              <div className="right-main">
+                <div className="row">
+              <div className="col-lg-12 col-md-4 col-sm-6 mb-3" >
+                <AA currentPlant={currentPlant}/>
               </div>
-              <div className="circle1" style={{ background: "rgb(255, 193, 7)" }}></div>
-              <div className="author1">
-                <p> Health Score &gt; 50% &lt; 80%</p>
-              </div>
-              <div className="circle1" style={{ background: "rgb(255, 87, 34)" }}></div>
-              <div className="author1">
-                <p> Health Score &lt; 50%</p>
-              </div>
-              <div className="circle1" style={{ border: "solid 1px black",background:"white" }}></div>
-              <div className="author1">
-                <p> Health Score Not Available</p>
+              <div className="col-lg-12 col-md-4 col-sm-6 mb-3">
+                <MFI currentPlant={currentPlant} />
               </div>
             </div>
+            </div>
+            </div>
           </div>
-        </div>
+          </div>
+         
+          
+        
+          </div> 
+           </section>
       ) : ((apicall===true)?
         
        (<div style={{textAlign:"center"}}><h1>{`loading....${noData}`}</h1></div>)

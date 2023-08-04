@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./AA.css";
 import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAndQueries";
 
 function AA(prop) {
@@ -38,11 +37,11 @@ function AA(prop) {
       try {
         const response = await fetch(
           "https://api-idap.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts?plantIds=" +
-            plantid +
-            "&from=" +
-            dtFrom +
-            "&to=" +
-            dtTo,
+          plantid +
+          "&from=" +
+          dtFrom +
+          "&to=" +
+          dtTo,
           {
             method: "GET",
             headers: {
@@ -68,25 +67,29 @@ function AA(prop) {
       clearInterval(interval); // Clean up the interval on component unmount
     };
   }, [currentPlant, accessToken]);
- //console.log("data"+JSON.stringify(dataDisplay));
-let lengthofDisplay=dataDisplay&&dataDisplay.data.length==0;
-// console.log("checking",lengthofDisplay,dataDisplay.data.length)
+  //console.log("data"+JSON.stringify(dataDisplay));
+  let lengthofDisplay = dataDisplay && dataDisplay.data.length == 0;
+  // console.log("checking",lengthofDisplay,dataDisplay.data.length)
   return (
-    <div className="content-box">
-      <div className="head">Anomaly Alert</div>
-      <div className="content-container">
-        {dataDisplay && dataDisplay.data.length>0 ? (
+    <div className="anomaly-alert">
+      <p className="heading">Anomaly Alert</p>
+      <div className="data-box">
+      <div class="data mb-2">
+        {dataDisplay && dataDisplay.data.length > 0 ? (
           dataDisplay.data.map((ele) => (
-            <div className="content-item">
-              <div className="machine-name">Machine Name: {ele.machineName}</div>
-              <div className="monitor-name">Monitor Name: {ele.monitorName}</div>
+            <div className="content-itemz">
+              <div className="fs-14 mb-0 text-dark">Machine Name: 
+             <span className="fw-bold"> {ele.machineName}</span>
+              </div>
+              <div className="data-badge mb-0">Monitor Name: {ele.monitorName}</div>
               <div className="anomaly-magnitude">Anomaly Magnitude: {ele.anomalyMagnitude}</div>
               <div className="alert-timestamp">Alert Timestamp: {ele.alertTimestamp}</div>
               <div className="anomaly-detected">Anomaly Detected: {ele.anomalyDetected}</div>
             </div>
           ))
-           ):
-           ({lengthofDisplay}?(<>No Anomaly Alert in Last 48 Hours</>):(<>No Anomaly Alert in Last 48 Hours</>))}
+        ) :
+          ({ lengthofDisplay } ? (<>No Anomaly Alert in Last 48 Hours</>) : (<>No Anomaly Alert in Last 48 Hours</>))}
+      </div>
       </div>
     </div>
   );

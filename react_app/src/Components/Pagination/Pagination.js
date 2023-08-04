@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Pagination.css";
+
 
 function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
   useEffect(() => {
@@ -22,10 +22,12 @@ function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
       paginationItems.push(
         <li
           key={i}
-          className={`pagination-item ${i === currentPage ? "active" : ""}`}
+          className={`page-item ${i === currentPage ? "active" : ""}`}
           onClick={() => handleClick(i)}
         >
+          
           {i}
+         
         </li>
       );
     }

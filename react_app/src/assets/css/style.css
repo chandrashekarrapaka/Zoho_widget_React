@@ -1,0 +1,277 @@
+:root {
+    --primary-clr: #01ADFF;
+    --secondary-clr: #67DC1C;
+}
+
+body {
+    background: #EEF3F9;
+    font-family: 'Urbanist', sans-serif;
+	height: 100vh;
+}
+
+/* ------- Common Classes ------- */
+
+.fs-9 {
+    font-size: 9px;
+}
+
+.fs-10 {
+    font-size: 10px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-8 {
+    font-size: 8px;
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.br-10 {
+    border-radius: 10px;
+}
+
+.text-gray {
+    color: #868686;
+}
+
+.text-dark {
+    color: #1E1E1E;
+}
+
+/* ------------------------------ */
+
+.dashboard-sec {
+    padding: 20px 10px;
+}
+
+.dashboard-sec .brand-logo {
+    background: #fff;
+    border-radius: 10px;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.dashboard-sec .about-brand-box {
+    background: var(--primary-clr);
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100%;
+
+}
+
+.dashboard-sec .about-brand-box .right-content-box {
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-sec .main-content .boxes-section .about-brand-box {
+    background-color: #fff;
+    color: #fff;
+}
+
+.dashboard-sec .main-content .boxes-section .about-brand-box .right-content-box {
+    background: var(--primary-clr);
+}
+
+.dashboard-sec .main-content .right-main .anomaly-alert .heading {
+    background: var(--primary-clr);
+    padding: 5px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0;
+    border-radius: 9px 9px 0 0;
+	font-size: 18px;
+}
+
+.dashboard-sec .main-content .right-main .anomaly-alert .data-box {
+    background-color: #fff;
+    padding: 5px 5px 40px 5px;
+    border-radius: 0 0 9px 9px;
+}
+
+.dashboard-sec .main-content .right-main .anomaly-alert .data {
+    background: #F2F2F2;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.dashboard-sec .main-content .right-main .anomaly-alert .data .data-badge {
+    background-color: #fff;
+    color: var(--primary-clr);
+    font-size: 13px;
+    padding: 2px 5px;
+    font-weight: 700;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box {
+    background-color: #fff;border-radius: 10px;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .heading {
+    background-color: #1E1E1E;
+    padding: 3px;
+    border-radius: 11px 11px 0 0;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 145px;
+    gap: 3px;
+    margin: 0 auto;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box {
+    width: 15px;
+    height: 15px;
+    border-radius: 1px;
+    background: var(--secondary-clr);
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box.orange {
+    background: #F65F26;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box.yellow {
+    background: #FCBF10;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box.outline {
+    border: 1px solid #202020;
+    background: #FFF;
+}
+
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer {
+    background-color: var(--secondary-clr);
+    padding-left: 12px;
+    border-radius:  0 0 11px 11px;
+}
+
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer .i-icon img{
+    width: 24px;
+    border-radius: 0 0 11px 0;
+}
+
+
+
+
+.health-score-sec {
+    padding: 0 3%;
+}
+.health-score-box {
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+	align-items: center;
+    gap: 7px;
+}
+.health-score-box .score-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 1px;
+    background: var(--secondary-clr);
+}
+.health-score-box .score-box.yellow {
+    background: #FCBF10;
+}
+.health-score-box .score-box.red {
+    background: #F65F26;
+}
+.health-score-box .score-box.outline {
+   border: 1px solid #202020;
+    background: #FFF;
+}
+
+.pagination-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.pagination-inner-sec {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+	justify-content: center;
+    gap: 25px;
+}
+.pagination-block {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+.pagination-block .page-item.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.pagination-block .page-item {
+    background-color: #fff;
+    height: 35px;
+    width: 36px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+.stop-auto-pagination {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 7px 14px;
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    align-items: center;
+}
+
+.right-main .data-box {
+    height: 33vh;
+    overflow-y: scroll;
+}
+
+
+/* --------- Resiponsive Style --------- */
+
+@media (max-width: 991px) {
+    .dashboard-sec .brand-logo, .dashboard-sec .about-brand-box {
+        padding: 10px 18px;
+    }
+}
+
+@media (max-width: 576px) {.title-section {
+    flex-direction: column;
+}}

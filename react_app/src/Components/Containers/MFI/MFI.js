@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './MFI.css';
+
 import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAndQueries";
 
 function MFI(prop) {
@@ -73,9 +73,10 @@ function MFI(prop) {
   // 
   //let keylength=data
   return (
-    <div className="content-box">
-      <div className="head">Machine with Faults</div>
-      <div className="content-container">
+    <div className="anomaly-alert">
+      <p className="heading">Machine with Faults</p>
+      <div className="data-box">
+      <div class="data mb-2">
         {dataDisplay&&dataDisplay.length>0 ? (
           dataDisplay.map((ele) => {
             {if(ele.status=="NEW")
@@ -84,12 +85,12 @@ function MFI(prop) {
             ele.serviceReqMachineDetails.map((srmd) => {
               
               return(
-              <div className="machine-name">
+              <div className="fs-14 mb-0 text-dark">
                 
-                {srmd.machineName ?i+++"."+" "+ srmd.machineName + " " + srmd.createdDate : ''}
+              <span className="fw-bold">  {srmd.machineName ?i+++"."+" "+ srmd.machineName + " " + srmd.createdDate : ''}</span>
                 {srmd.machineServiceDetails.map((msd,index) => {
                   return (
-                    <ol className="monitor-name">
+                    <ol className="data-badge mb-0">
                       {String.fromCharCode(97+index)+". "+msd.serviceName}
                     </ol>
                   );
@@ -105,6 +106,7 @@ function MFI(prop) {
           })
         ) : <>{nocomments ? "No Faults observed in machines" : ""}</>}
         
+      </div>
       </div>
     </div>
   );
