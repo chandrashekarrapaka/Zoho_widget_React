@@ -9,11 +9,11 @@ return(
 	<div class="col-lg-2 col-sm-4 mb-3">
 	<div class="about-brand-box">
 		<div class="left-content">
-			<p class="mb-0 fs-14 text-white">
-				{prop.data.title}
+			<p class="mb-0 fs-13 text-white">
+			{prop.data.value}
 			</p>
 			<p class="mb-0 text-white fs-4 fw-800">
-			{prop.data.value}
+			{prop.data.title}
 			</p>
 		</div>
 		<div class="right-content-box">
