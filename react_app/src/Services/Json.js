@@ -42,7 +42,7 @@ export async function Plants() {
       //console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
-          const plantsResponse = await fetch(`https://api-idap.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
+          const plantsResponse = await fetch(`https://api.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',

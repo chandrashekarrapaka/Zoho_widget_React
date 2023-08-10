@@ -55,7 +55,7 @@ function TotalPlants(prop){
             let token=await LoginCredentialsAndQueries();
             const requests = prop.plantsData.map(plant =>
             //  let newplantid = plant[0].plantid;
-        fetch('https://api-idap.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds=' + plant[0].plantid, {
+        fetch('https://api.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds=' + plant[0].plantid, {
           method: 'GET',
           headers: {
             'Authorization': 'Bearer ' + token,
