@@ -64,13 +64,13 @@ function Machine(prop) {
         ele.monitors.map((data) => {
           
         //  console.log("monitor"+elemon.healthScore)
-        if(data.status<minimumValue)minimumValue=data.status;
-        if (data.status == 1 ||data.status==2)stylez.backgroundColor = "#64DD17";
-        else if (data.status==3) stylez.backgroundColor = "#FFC107";
-                  else if (data.status ==4) stylez.backgroundColor = "#FF5722";
-                  else {
-                    stylez.backgroundColor = "#9E9E9E";
-                  }
+        if (data.healthScore > 80);
+                    else if (data.healthScore > 50 && data.healthScore < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
+                    else if (data.healthScore > 0 && data.healthScore < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+                    else {
+                      stylez.backgroundColor = "white";
+                      stylez.border = "solid 1px";
+                    }
         })
         return (
           <div className="machine" key={ele.id}>
@@ -100,11 +100,12 @@ function Machine(prop) {
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
                   const stylemon={"width":"auto"};
-                  if (data.status == 1 ||data.status==2)stylemon.backgroundColor = "#64DD17";
-                  else if (data.status==3) stylemon.backgroundColor = "#FFC107";
-                  else if (data.status ==4) stylemon.backgroundColor = "#FF5722";
+                  if (data.healthScore > 80);
+                  else if (data.healthScore > 50 && data.healthScore < 80) stylemon.backgroundColor = "rgb(255, 193, 7)";
+                  else if (data.healthScore > 0 && data.healthScore < 50) stylemon.backgroundColor = "rgb(255, 87, 34)";
                   else {
-                    stylemon.backgroundColor = "#9E9E9E";
+                    stylemon.backgroundColor = "white";
+                    stylemon.border = "solid 1px";
                   }
                   
                
