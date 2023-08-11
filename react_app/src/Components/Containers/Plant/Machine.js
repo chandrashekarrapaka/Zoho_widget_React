@@ -72,7 +72,7 @@ function Machine(prop) {
         if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
         if (minimumValue > 80) stylez.backgroundColor = "rgb(100, 221, 23)";
         else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
-        else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+        else if (minimumValue >= 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
         // else {
         //   stylez.backgroundColor = "white";
         //   stylez.border = "solid 1px";
@@ -128,7 +128,7 @@ function Machine(prop) {
               <h4 className="modal-title" id="exampleModalLabel"><center>{apiData.name}</center></h4>
             </div>
             <div className="modal-body">
-            <div className="table-responsive custom-content-table">
+            <div className="table-responsive custom-content-table" style={{height:"300px"}}>
   <table className="table">
     <thead>
       <tr>
