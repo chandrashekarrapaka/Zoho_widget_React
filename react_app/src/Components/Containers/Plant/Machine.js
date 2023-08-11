@@ -67,18 +67,24 @@ function Machine(prop) {
                 <div className="row">
       {prop.machine.map(function (ele) {
         const stylez = {};
+        let grayshade=[];
         let minimumValue = 0;
         ele.monitors.map((data) => {
-            //console.log("statusvalue"+data.status,minimumValue)
+           // console.log("statusvalue"+data.status,minimumValue)
+          grayshade.push(data.status);
           if (data.status >= minimumValue) minimumValue = data.status;
           if (minimumValue == 1 || minimumValue == 2) stylez.backgroundColor = "#64DD17";
           else if (minimumValue == 3) stylez.backgroundColor = "#FFC107";
           else if (minimumValue == 4) stylez.backgroundColor = "#FF5722";
-          else if (minimumValue == 5){
-           
-            stylez.backgroundColor = "#9E9E9E";
-          }
+          // else if (minimumValue == 5 && (grayshade%5)==0){
+          //  console.log("grayshade"+grayshade);
+          //   stylez.backgroundColor = "#9E9E9E";
+          // }
+         
         })
+        const allEqual = arr => arr.every(val => val === 5);
+        const result=allEqual(grayshade);
+        if(result)stylez.backgroundColor = "#9E9E9E";
         return (
          
 
