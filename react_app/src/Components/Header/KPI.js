@@ -6,7 +6,7 @@ function KPI(prop){
 
 //console.log(prop.data.title);
 return(
-	<div class="col-lg-2 col-sm-4 mb-3">
+	<div class="col-lg-2 col-sm-4 mb-2">
 	<div class="about-brand-box">
 		<div class="left-content">
 			<p class="mb-0 fs-13 text-white">

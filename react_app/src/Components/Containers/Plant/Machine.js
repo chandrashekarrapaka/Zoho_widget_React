@@ -62,7 +62,9 @@ function Machine(prop) {
 
   return (
 
-    <div className="machines">
+    <div className="cement-mill-sec">
+    <div className="cement-mill-wrapper">
+      <div className="row">
       {prop.machine.map(function (ele) {
         const stylez = {};
         let minimumValue = 100;
@@ -82,9 +84,7 @@ function Machine(prop) {
         return (
          
 
-            <div className="cement-mill-sec">
-              <div className="cement-mill-wrapper">
-                <div className="row">
+            
 
                   <div className="col-lg mb-3 col-md-4 col-sm-6" >
                     <div className="cement-mill-box " style={{"padding":"2px"}}>
@@ -114,9 +114,7 @@ function Machine(prop) {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                
           
         );
       })}
@@ -191,6 +189,9 @@ function Machine(prop) {
 </div>
       )}
     </div>
+    </div>
+              </div>
+           
   );
 }
 
