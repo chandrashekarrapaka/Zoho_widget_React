@@ -95,7 +95,7 @@ function Machine(prop) {
                         <div className="box-wrapper pb-3">
                           <Monitor monitor={ele.monitors} />
                         </div>
-                        <div className="box-footer d-flex justify-content-between">
+                        <div className="box-footer d-flex justify-content-between" style={stylez} onClick={() => handleInfoClick(ele.id)}>
                           <div className="d-flex align-items-center">
                             <div className="icon mb-0">
                               <img src={icon1} alt="Secure Icon" className="img-fluid" />
