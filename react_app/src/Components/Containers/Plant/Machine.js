@@ -68,25 +68,32 @@ function Machine(prop) {
       {prop.machine.map(function (ele) {
         const stylez = {};
         let minimumValue = 100;
+        let grayshade=0;
         ele.monitors.map((elemon) => {
-          
-        //  console.log("monitor"+elemon.healthScore)
+          grayshade=elemon.healthScore+grayshade;
+          //console.log("monitor"+elemon.healthScore)0,0,0,87,0,79
+        if(elemon.healthScore!=0){
         if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
         if (minimumValue > 80) stylez.backgroundColor = "rgb(100, 221, 23)";
         else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
-        else if (minimumValue >= 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+        else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+        }
         // else {
         //   stylez.backgroundColor = "white";
         //   stylez.border = "solid 1px";
         // }
           // console.log("stylez"+JSON.stringify(stylez));
         })
+        if(grayshade==0){
+          stylez.backgroundColor = "gray";
+          //  stylez.border = "solid 1px";
+        }
         return (
          
 
             
 
-                  <div className="col-lg mb-3 col-md-4 col-sm-6" >
+                  <div className="col-lg col-20 mb-2" >
                     <div className="cement-mill-box " style={{"padding":"2px"}}>
                       <p className="heading text-white mb-0 fw-bold fs-14 text-center">
                       {ele.mg}
