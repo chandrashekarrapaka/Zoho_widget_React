@@ -265,6 +265,78 @@ justify-content: center;
   overflow-y: scroll;
 }
 
+.roll-press .modal-dialog { 
+  width: 50%; 
+  max-width: 100%!important;
+}
+.roll-press .modal-footer {
+  justify-content: space-between;
+  border: none;
+}
+.roll-press .modal-header {
+  justify-content: center;
+  border: none;
+  padding-bottom: 0;
+}
+.roll-press .modal-title {
+  text-transform: uppercase;
+  font-weight: 600;
+text-align: center;
+}
+.modal-bottom-content p {
+  line-height: 18px;
+  font-size: 14px;
+}
+
+
+.custom-content-table .table {
+  vertical-align: middle;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+.custom-content-table .table>thead {
+  vertical-align: middle;
+  border: none;
+}
+.custom-content-table .table>thead tr th {
+  background-color: var(--primary-clr);
+  line-height: 17px;
+  color: #fff;
+  font-weight: 500;
+}
+.custom-content-table .table>thead tr th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.custom-content-table .table>thead tr th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.custom-content-table .table>tbody tr td {
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.custom-content-table .table>tbody tr th {
+  background-color: #ffc10a;
+  border-radius: 10px;
+  line-height: 18px;
+}
+.custom-content-table .table>tbody tr th.red {
+  background-color: #ff5821;
+}
+.click-here-btn {
+  background-color: var(--primary-clr);
+  color: #fff;
+}
+.click-here-btn:hover {
+  background-color:var(--secondary-clr);
+color: #fff;
+}
+.col-20 {
+  flex: 0 0 auto;
+  width: 20%;
+}
 
 /* --------- Resiponsive Style --------- */
 
@@ -272,10 +344,14 @@ justify-content: center;
   .dashboard-sec .brand-logo, .dashboard-sec .about-brand-box {
       padding: 10px 18px;
   }
+.roll-press .modal-dialog {
+  width: 97%; 
+}
 }
 
 @media (max-width: 576px) {.title-section {
   flex-direction: column;
-}}
+}
 
+}
 

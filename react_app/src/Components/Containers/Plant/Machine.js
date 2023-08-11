@@ -117,42 +117,80 @@ function Machine(prop) {
           
         );
       })}
-      {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h2>{apiData.name}</h2>
-            <div className="tableWrapper">
-              <table>
-                <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
-                </tr>
-
+       {showPopup && (
+        <div className="popup"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title" id="exampleModalLabel"><center>{apiData.name}</center></h4>
+            </div>
+            <div className="modal-body">
+            <div className="table-responsive custom-content-table">
+  <table className="table">
+    <thead>
+      <tr>
+        <th scope="col">Monitor<br/>Name</th>
+        <th scope="col">Axial</th>
+        <th scope="col">Vertical</th>
+        <th scope="col">Horizontal</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Health<br/>Score</th>
+        <th scope="col">Vibration<br/>Trend</th>
+      </tr>
+    </thead>
+    <tbody>
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
-                  const stylemon = { "width": "auto" };
+                  const stylemon = { "width": "auto",scope:"row" };
+                  
+                  
                   if (data.status == 1 || data.status == 2) stylemon.backgroundColor = "#64DD17";
                   else if (data.status == 3) stylemon.backgroundColor = "#FFC107";
                   else if (data.status == 4) stylemon.backgroundColor = "#FF5722";
                   else {
                     stylemon.backgroundColor = "#9E9E9E";
                   }
-
+               
 
                   return (
                     <Tablemini data={data} stylz={stylemon} />
                   );
                 })}
 
-              </table>
+</tbody>
+  </table>
+</div>
+	    
+	   
+	   <div className="modal-bottom-content">
+           
+            {/* <center>For Detailed Analysis Click Here!</a></center> */}
+            <p><strong>Observation</strong>: {apiData.observation}</p>
+            <p><strong>Diagnostic</strong>: {apiData.diagnostic}</p>
+            <p><strong>Recommendation</strong>: {apiData.recommendation}</p>
             </div>
-            <center><a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable" target="_blank" rel="noopener noreferrer">For Detailed Analysis Click Here!</a></center>
-            <b>Observation</b> :{apiData.observation}<br></br><br></br>
-            <b>Diagnostic</b> :{apiData.diagnostic}<br></br><br></br>
-            <b>Recommendation</b> :{apiData.recommendation}<br></br><br></br>
-
-            <button className="close-btn" onClick={closePopup}>Close</button>
-          </div>
-        </div>
+            </div>
+            <div className="modal-footer" style={{display:"flex",justifyContent:"space-between"}}>
+        <button type="button" className="btn btn-sm btn-secondary fw-bold shadow"  onClick={closePopup}>Close</button>
+       <button
+  type="button"
+  className="btn btn-sm click-here-btn fw-bold shadow"
+  onClick={() =>
+    window.open(
+      "https://idap.infinite-uptime.com/#/dashboard/MonitoringTable",
+      "_blank"
+    )
+  }
+>
+  For Detailed Analysis Click Here!
+</button>
+      </div>
+            
+      </div>
+  </div>
+</div>
       )}
+     
     </div>
   );
 }
