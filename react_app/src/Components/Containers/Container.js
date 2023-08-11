@@ -19,6 +19,7 @@ function Container() {
   const [kpimonitors, setKpimonitors] = useState(0);
   const [noData, setNoData] = useState('');
   const [apicall, setApiCall] = useState(true);
+  const [autoPagination, setAutoPagination] = useState(true); 
 
   //screen things
   //console.log("insidecontainer.js");
@@ -71,7 +72,7 @@ function Container() {
   useEffect(() => {
     let timeout;
 
-    if (plantsData.length > 0) {
+    if (autoPagination && plantsData.length > 0) {
       const currentPlant = plantsData[currentPlantIndex];
       setKpimachines(plantsData[currentPlantIndex].length);
       console.log("kpimachinesmonitors" + kpimachines)
@@ -107,7 +108,7 @@ function Container() {
     }
 
     return () => clearTimeout(timeout);
-  }, [currentPage, currentPlantIndex, plantsData, timeIn]);
+  }, [currentPage, currentPlantIndex, plantsData, timeIn,autoPagination]);
 
   const handlePageChange = (pageNumber) => {
     const totalPages = Math.ceil(plantsData[currentPlantIndex].length / itemsPerPage);
@@ -131,9 +132,8 @@ function Container() {
 
 
   const handleCheck = () => {
-    if (timeIn === 30000) setTimeIn(10000000000000);
-    else setTimeIn(30000);
-  };
+    setAutoPagination((prevState) => !prevState); // Toggle the value of autoPagination
+  }
 
   const currentPlant = plantsData[currentPlantIndex];
   const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
