@@ -126,7 +126,7 @@ function TotalPlants(prop){
       const result = imageUrl.includes("no image available") ||imageUrl=="";
     return(
         <div className="row">
-          <div className="col-lg-2 col-sm-4 mb-3">
+          <div className="col-lg-2 col-sm-4 mb-2">
          
           { !result&& <div className="brand-logo text-center"><img src={imageUrl} alt="Brand Logo" className="img-fluid"/></div>} 
           </div> 

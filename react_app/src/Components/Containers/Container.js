@@ -10,7 +10,7 @@ import TotalPlants from "../TotalPlants";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
   const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
@@ -156,7 +156,7 @@ function Container() {
               <div className="row">
                 <div className="col-lg-9">
                   <div className="left-main">
-                    <div className="title-section d-flex mb-3 align-items-center justify-content-between py-2 px-3 bg-white br-10">
+                    <div className="title-section d-flex mb-2 align-items-center justify-content-between py-2 px-3 bg-white br-10">
                       <p className="mb-0 fs-4 fw-600"> {currentPlant[0]?.plantName || ""}</p>
                       <p className="mb-0 text-gray"> Coming Next: <strong>{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
                     </div>

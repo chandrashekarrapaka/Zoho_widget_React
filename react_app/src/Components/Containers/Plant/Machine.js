@@ -61,7 +61,10 @@ function Machine(prop) {
 
   return (
 
-    <div className="machines">
+    
+       <div className="cement-mill-sec">
+              <div className="cement-mill-wrapper">
+                <div className="row">
       {prop.machine.map(function (ele) {
         const stylez = {};
         let minimumValue = 0;
@@ -79,11 +82,9 @@ function Machine(prop) {
         return (
          
 
-            <div className="cement-mill-sec">
-              <div className="cement-mill-wrapper">
-                <div className="row">
+           
 
-                  <div className="col-lg mb-3 col-md-4 col-sm-6" >
+                  <div className="col-lg col-20 mb-2" >
                     <div className="cement-mill-box " style={{"padding":"2px"}}>
                       <p className="heading text-white mb-0 fw-bold fs-14 text-center">
                       {ele.mg}
@@ -111,9 +112,7 @@ function Machine(prop) {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                
           
         );
       })}
@@ -125,7 +124,7 @@ function Machine(prop) {
               <h4 className="modal-title" id="exampleModalLabel"><center>{apiData.name}</center></h4>
             </div>
             <div className="modal-body">
-            <div className="table-responsive custom-content-table">
+            <div className="table-responsive custom-content-table" style={{height:"300px"}}>
   <table className="table">
     <thead>
       <tr>
@@ -192,6 +191,9 @@ function Machine(prop) {
       )}
      
     </div>
+    </div>
+              </div>
+            
   );
 }
 
