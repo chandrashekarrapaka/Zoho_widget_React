@@ -64,15 +64,15 @@ function Machine(prop) {
     <div className="machines">
       {prop.machine.map(function (ele) {
         const stylez = {};
-        let minimumValue = 5;
+        let minimumValue = 0;
         ele.monitors.map((data) => {
-
-          //  console.log("monitor"+elemon.healthScore)
-          if (data.status < minimumValue) minimumValue = data.status;
-          if (data.status == 1 || data.status == 2) stylez.backgroundColor = "#64DD17";
-          else if (data.status == 3) stylez.backgroundColor = "#FFC107";
-          else if (data.status == 4) stylez.backgroundColor = "#FF5722";
-          else {
+            //console.log("statusvalue"+data.status,minimumValue)
+          if (data.status >= minimumValue) minimumValue = data.status;
+          if (minimumValue == 1 || minimumValue == 2) stylez.backgroundColor = "#64DD17";
+          else if (minimumValue == 3) stylez.backgroundColor = "#FFC107";
+          else if (minimumValue == 4) stylez.backgroundColor = "#FF5722";
+          else if (minimumValue == 5){
+           
             stylez.backgroundColor = "#9E9E9E";
           }
         })
