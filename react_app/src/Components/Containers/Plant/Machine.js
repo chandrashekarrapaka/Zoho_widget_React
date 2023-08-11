@@ -50,6 +50,7 @@ function Machine(prop) {
       const selectedData = velocityData.filter((ele) => ele.id === id)[0];
       setApiData(selectedData);
       setShowPopup(true);
+      console.log(true);
     } catch (error) {
       console.log(error);
     }
@@ -64,17 +65,19 @@ function Machine(prop) {
     <div className="machines">
       {prop.machine.map(function (ele) {
         const stylez = {};
-        let minimumValue = 5;
-        ele.monitors.map((data) => {
-
-          //  console.log("monitor"+elemon.healthScore)
-          if (data.status < minimumValue) minimumValue = data.status;
-          if (data.status == 1 || data.status == 2) stylez.backgroundColor = "#64DD17";
-          else if (data.status == 3) stylez.backgroundColor = "#FFC107";
-          else if (data.status == 4) stylez.backgroundColor = "#FF5722";
-          else {
-            stylez.backgroundColor = "#9E9E9E";
-          }
+        let minimumValue = 100;
+        ele.monitors.map((elemon) => {
+          
+        //  console.log("monitor"+elemon.healthScore)
+        if(elemon.healthScore<minimumValue)minimumValue=elemon.healthScore;
+        if (minimumValue > 80) stylez.backgroundColor = "rgb(100, 221, 23)";
+        else if (minimumValue > 50 && minimumValue < 80) stylez.backgroundColor = "rgb(255, 193, 7)";
+        else if (minimumValue > 0 && minimumValue < 50) stylez.backgroundColor = "rgb(255, 87, 34)";
+        // else {
+        //   stylez.backgroundColor = "white";
+        //   stylez.border = "solid 1px";
+        // }
+          // console.log("stylez"+JSON.stringify(stylez));
         })
         return (
          
@@ -95,12 +98,12 @@ function Machine(prop) {
                         <div className="box-wrapper pb-3">
                           <Monitor monitor={ele.monitors} />
                         </div>
-                        <div className="box-footer d-flex justify-content-between">
+                        <div className="box-footer d-flex justify-content-between" onClick={() => handleInfoClick(ele.id)}>
                           <div className="d-flex align-items-center">
                             <div className="icon mb-0">
                               <img src={icon1} alt="Secure Icon" className="img-fluid" />
                             </div>
-                            <p className="fs-14 mt-1 text-black fw-bold mb-0">
+                            <p className="fs-14 mt-1 text-black fw-bold mb-0" >
                               {ele.healthScore}%
                             </p>
                           </div>
@@ -118,40 +121,74 @@ function Machine(prop) {
         );
       })}
       {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h2>{apiData.name}</h2>
-            <div className="tableWrapper">
-              <table>
-                <tr><th>Monitor Name</th><th>Axi</th><th>Ver</th><th>Hor</th><th>tem</th><th>HS</th><th>Vibration Trend</th>
-                </tr>
-
+        <div className="popup"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title" id="exampleModalLabel"><center>{apiData.name}</center></h4>
+            </div>
+            <div className="modal-body">
+            <div className="table-responsive custom-content-table">
+  <table className="table">
+    <thead>
+      <tr>
+        <th scope="col">Monitor<br/>Name</th>
+        <th scope="col">Axial</th>
+        <th scope="col">Vertical</th>
+        <th scope="col">Horizontal</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Health<br/>Score</th>
+        <th scope="col">Vibration<br/>Trend</th>
+      </tr>
+    </thead>
+    <tbody>
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
-                  const stylemon = { "width": "auto" };
-                  if (data.status == 1 || data.status == 2) stylemon.backgroundColor = "#64DD17";
-                  else if (data.status == 3) stylemon.backgroundColor = "#FFC107";
-                  else if (data.status == 4) stylemon.backgroundColor = "#FF5722";
-                  else {
-                    stylemon.backgroundColor = "#9E9E9E";
-                  }
-
+                  const stylemon = { "width": "auto",scope:"row" };
+                  
+                  if (data.healthScore > 80)  {stylemon.backgroundColor="rgb(100, 221, 23)"}
+                  else if(data.healthScore > 50 && data.healthScore < 80){stylemon.backgroundColor= "rgb(255, 193, 7)"}
+                  else if(data.healthScore > 0 && data.healthScore < 50){stylemon.backgroundColor="rgb(255, 87, 34)"}
+                  else {stylemon.backgroundColor="white";stylemon.border="solid 1px"}
+               
 
                   return (
                     <Tablemini data={data} stylz={stylemon} />
                   );
                 })}
 
-              </table>
+</tbody>
+  </table>
+</div>
+	    
+	   
+	   <div className="modal-bottom-content">
+           
+            {/* <center>For Detailed Analysis Click Here!</a></center> */}
+            <p><strong>Observation</strong>: {apiData.observation}</p>
+            <p><strong>Diagnostic</strong>: {apiData.diagnostic}</p>
+            <p><strong>Recommendation</strong>: {apiData.recommendation}</p>
             </div>
-            <center><a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable" target="_blank" rel="noopener noreferrer">For Detailed Analysis Click Here!</a></center>
-            <b>Observation</b> :{apiData.observation}<br></br><br></br>
-            <b>Diagnostic</b> :{apiData.diagnostic}<br></br><br></br>
-            <b>Recommendation</b> :{apiData.recommendation}<br></br><br></br>
-
-            <button className="close-btn" onClick={closePopup}>Close</button>
-          </div>
-        </div>
+            </div>
+            <div className="modal-footer" style={{display:"flex",justifyContent:"space-between"}}>
+        <button type="button" className="btn btn-sm btn-secondary fw-bold shadow"  onClick={closePopup}>Close</button>
+       <button
+  type="button"
+  className="btn btn-sm click-here-btn fw-bold shadow"
+  onClick={() =>
+    window.open(
+      "https://idap.infinite-uptime.com/#/dashboard/MonitoringTable",
+      "_blank"
+    )
+  }
+>
+  For Detailed Analysis Click Here!
+</button>
+      </div>
+            
+      </div>
+  </div>
+</div>
       )}
     </div>
   );

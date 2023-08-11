@@ -87,7 +87,7 @@ function MFI(prop) {
               return(
               <div className="fs-14 mb-0 text-dark">
                 
-              <span className="fw-bold">  {srmd.machineName ?i+++"."+" "+ srmd.machineName + " " + srmd.createdDate : ''}</span>
+              <span className="fw-bold">  {srmd.machineName ?i+++"."+" "+ srmd.machineName + " " + srmd.createdDateWithPlantTimezone : ''}</span>
                 {srmd.machineServiceDetails.map((msd,index) => {
                   return (
                     <ol className="data-badge mb-0">
