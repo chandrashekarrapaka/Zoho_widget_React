@@ -46,7 +46,7 @@ function Header(prop) {
           //console.log(kpidatafinal.json());
         let  kpidata = await kpidatafinal.json();
         let kpidatalength=kpidata.data.length;
-        console.log("downtime"+JSON.stringify(kpidatalength));
+        //console.log("downtime"+JSON.stringify(kpidatalength));
         
         
         if(kpidatalength!=0){

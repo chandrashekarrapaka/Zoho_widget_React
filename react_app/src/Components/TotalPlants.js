@@ -41,9 +41,11 @@ function TotalPlants(prop){
       let kpimonitorsnew=0;
       let kpimachinesnew=0;
       prop.plantsData.forEach(element => {
+       // console.log(element.length);
         kpimachinesnew=kpimachinesnew+ element.length;
         element.forEach(ele=>{
             kpimonitorsnew= kpimonitorsnew+ele.monitors.length;
+           // console.log( ele.monitors.length);
         })
         
       });
@@ -70,16 +72,25 @@ function TotalPlants(prop){
       let newcompletedCount='';
       let newdowntime='';
       let newnewCount='';
+      
       if(kpidataList){
         kpidataList.map(kpi=>{
-            if(kpi.data){
-                //console.log(typeof newcompletedCount);
+          //console.log(kpi);
+            if(kpi.data.length>0){
+                console.log(newcompletedCount);
            newcompletedCount=Number(newcompletedCount)+ kpi.data[0].completedCount;
            //console.log(kpi.data[0].completedCount);
            newdowntime=Number(newdowntime)+kpi.data[0].downtime;
            newnewCount=Number(newnewCount)+kpi.data[0].newCount+kpi.data[0].completedCount;
            //console.log(newcompletedCount);
-       } })
+       } 
+       else{
+        newcompletedCount=Number(newcompletedCount)+ 0;
+        //console.log(kpi.data[0].completedCount);
+        newdowntime=Number(newdowntime)+0;
+        newnewCount=Number(newnewCount)+0;
+       }
+      })
        const updatedKipobj = {
         ...kipobj,
         kpi4: {
@@ -110,9 +121,24 @@ function TotalPlants(prop){
       setKipobj(updatedKipobj);
       }
           else{
-            initialKipobj.kpi2.title=JSON.stringify(kpimachinesnew);
-            initialKipobj.kpi1.title=JSON.stringify(kpimonitorsnew)
-            setKipobj(initialKipobj); 
+
+            const updatedKipobj = {
+        ...kipobj,
+        
+        kpi2:{
+          ...kipobj.kpi2,
+          title:
+          JSON.stringify(kpimachinesnew)
+        },
+       
+       //totaldevicesinstalled
+        kpi1: {
+          ...kipobj.kpi1,
+          title:
+          JSON.stringify(kpimonitorsnew)
+        }
+      };
+      setKipobj(updatedKipobj); 
           }
             
           } catch (error) {

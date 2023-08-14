@@ -51,7 +51,7 @@ function MFI(prop) {
         const dataWithNewStatus = data.data[key].filter((ele) => ele.status === "NEW");
         setDataDisplay(dataWithNewStatus);
         setNoComments(dataWithNewStatus.length === 0);
-        console.log("mfi"+dataDisplay);
+       // console.log("mfi"+dataDisplay);
       
      
       } catch (error) {

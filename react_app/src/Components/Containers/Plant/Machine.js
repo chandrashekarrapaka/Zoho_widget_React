@@ -82,9 +82,12 @@ function Machine(prop) {
           // }
          
         })
-        const allEqual = arr => arr.every(val => val === 5);
+        const allEqual = arr => arr.every(val => {
+          return val === 5 ||val == undefined
+        });
         const result=allEqual(grayshade);
         if(result)stylez.backgroundColor = "#9E9E9E";
+       // console.log(grayshade,result);
         return (
          
 

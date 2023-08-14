@@ -39,7 +39,7 @@ export async function Plants() {
     const orgidAll = queryParams.PlantId.split(",");
 
     const fetchPlantsData = async () => {
-      //console.log("functioncalled"+new Date().getMinutes);
+      ////console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
           const plantsResponse = await fetch(`https://api.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
@@ -54,7 +54,7 @@ export async function Plants() {
             apicallstatus = false;
             // Stop further API calls
             clearInterval(intervalId);
-            console.log("apicallstatus: " + apicallstatus);
+            //console.log("apicallstatus: " + apicallstatus);
             return [[]],apicallstatus;
           }
           
@@ -86,7 +86,7 @@ export async function Plants() {
     return [arrayOfMachines, apicallstatus];
 
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     throw error;
   }
 }
@@ -94,9 +94,9 @@ export async function Plants() {
 
 Plants()
   .then(([machines, status]) => {
-    console.log("Machines:", machines);
-    console.log("API Call Status:", status);
+    //console.log("Machines:", machines);
+    //console.log("API Call Status:", status);
   })
   .catch((error) => {
-    console.log("Error:", error);
+    //console.log("Error:", error);
   });
