@@ -72,14 +72,20 @@ function TotalPlants(prop){
       let newnewCount='';
       if(kpidataList){
         kpidataList.map(kpi=>{
-            if(kpi.data){
-                //console.log(typeof newcompletedCount);
-           newcompletedCount=Number(newcompletedCount)+ kpi.data[0].completedCount;
-           //console.log(kpi.data[0].completedCount);
-           newdowntime=Number(newdowntime)+kpi.data[0].downtime;
-           newnewCount=Number(newnewCount)+kpi.data[0].newCount+kpi.data[0].completedCount;
-           //console.log(newcompletedCount);
-       } })
+        if(kpi.data.length>0){
+            console.log(newcompletedCount);
+       newcompletedCount=Number(newcompletedCount)+ kpi.data[0].completedCount;
+       //console.log(kpi.data[0].completedCount);
+       newdowntime=Number(newdowntime)+kpi.data[0].downtime;
+       newnewCount=Number(newnewCount)+kpi.data[0].newCount+kpi.data[0].completedCount;
+       //console.log(newcompletedCount);
+   } 
+   else{
+    newcompletedCount=Number(newcompletedCount)+ 0;
+    //console.log(kpi.data[0].completedCount);
+    newdowntime=Number(newdowntime)+0;
+    newnewCount=Number(newnewCount)+0;
+   } })
        const updatedKipobj = {
         ...kipobj,
         kpi4: {
