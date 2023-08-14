@@ -33,7 +33,7 @@ export async function Image() {
        accessToken = loginData;
          
         // const lqp={accessToken,queryParams};
-       console.log("imageURL"+accessToken)
+       //console.log("imageURL"+accessToken)
         return accessToken;
       } catch (error) {
         console.error(error);

@@ -50,7 +50,7 @@ function Machine(prop) {
       const selectedData = velocityData.filter((ele) => ele.id === id)[0];
       setApiData(selectedData);
       setShowPopup(true);
-      console.log(true);
+     // console.log(true);
     } catch (error) {
       console.log(error);
     }
@@ -85,8 +85,8 @@ function Machine(prop) {
           // console.log("stylez"+JSON.stringify(stylez));
         })
         if(grayshade==0){
-          stylez.backgroundColor = "gray";
-          //  stylez.border = "solid 1px";
+          stylez.backgroundColor = "white";
+          stylez.border = "solid 1px";
         }
         return (
          

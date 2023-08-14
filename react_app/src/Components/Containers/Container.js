@@ -22,15 +22,15 @@ function Container() {
   const [autoPagination, setAutoPagination] = useState(true); 
 
   //screen things
-  //console.log("insidecontainer.js");
+  ////console.log("insidecontainer.js");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        // console.log("work"+JSON.stringify(response[0][0]));
+        // //console.log("work"+JSON.stringify(response[0][0]));
         if (response[1]) {
-          //console.log("work"+response);
+          ////console.log("work"+response);
           if (response[0][0].length > 0) {
             //kpimonitors=response.length;
             setPlantsData(response[0]);
@@ -43,10 +43,10 @@ function Container() {
         }
         else {
           setApiCall(false);
-          console.log(apicall);
+          //console.log(apicall);
         }
       } catch (error) {
-        console.log("error" + error);
+        //console.log("error" + error);
         console.error(error);
 
       }
@@ -56,13 +56,13 @@ function Container() {
   }, [currentPage]);
 
   const handleZoom = (ele) => {
-    console.log("start");
-    console.log(document);
+    //console.log("start");
+    //console.log(document);
     document.body.requestFullscreen();
     // document.getElementById("widgets_1").requestFullscreen();
     // window.addEventListener("load", (event) => {
     //   // log.textContent += "load\n";
-    //   console.log("zoomclicked"+event);
+    //   //console.log("zoomclicked"+event);
     //   document.getElementsByClassName("widget_Frame_homePage")[0].requestFullscreen();
     // });
     // // document.getElementsByClassName("widget_Frame_homePage")[0].requestFullscreen();
@@ -75,15 +75,15 @@ function Container() {
     if (autoPagination && plantsData.length > 0) {
       const currentPlant = plantsData[currentPlantIndex];
       setKpimachines(plantsData[currentPlantIndex].length);
-      console.log("kpimachinesmonitors" + kpimachines)
+      //console.log("kpimachinesmonitors" + kpimachines)
       let kpimonitorsnew = 0;
       plantsData[currentPlantIndex].map((mon) => {
-        //console.log("kpimonitorsinside"+mon.monitors.length)
+        ////console.log("kpimonitorsinside"+mon.monitors.length)
         kpimonitorsnew = kpimonitorsnew + mon.monitors.length;
         // return kpimonitors;
       })
       setKpimonitors(kpimonitorsnew);
-      //console.log(kpimonitors);
+      ////console.log(kpimonitors);
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
 
       if (currentPage === totalPages + 1) {
@@ -216,7 +216,7 @@ function Container() {
 
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
-                            <div className="score-box  text-bg-secondary"></div>
+                            <div className="score-box" style={{backgroundColor:"white",border:"solid 1px"}}></div>
                             <p className="text-dark fs-12 mb-0 fw-bold " >Health Score Not Available
                             </p>
                           </div>
