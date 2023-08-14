@@ -82,7 +82,10 @@ function Header(prop) {
       }
       else{
         initialKipobj.kpi2.title=JSON.stringify(prop.kpimachines);
-        initialKipobj.kpi1.title=JSON.stringify(prop.kpimonitors)
+        initialKipobj.kpi1.title=JSON.stringify(prop.kpimonitors);
+        initialKipobj.kpi3.title='-';
+        initialKipobj.kpi4.title='-';
+        initialKipobj.kpi5.title='-';
         setKipobj(initialKipobj); 
       }
         
