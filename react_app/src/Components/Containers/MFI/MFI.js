@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAndQueries";
 
 function MFI(prop) {
   const [accessToken, setAccessToken] = useState("");
-  const [dataDisplay, setDataDisplay] = useState();
+  const [dataDisplay, setDataDisplay] = useState([]);
   const [nocomments, setNoComments] = useState(true);
   
 
@@ -26,10 +25,11 @@ function MFI(prop) {
     };
 
     fetchDataz();
-  }, []);
+  }, [currentPlant]);
 
   let plantid = currentPlant[0].plantid;
   useEffect(() => {
+    setDataDisplay([]);
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -66,7 +66,7 @@ function MFI(prop) {
     return () => {
       clearInterval(interval); // Clean up the interval on component unmount
     };
-  }, [currentPlant, accessToken]);
+  }, [currentPlant, accessToken, plantid ]);
   let i = 1;
   //const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
   // if(ele.status=="NEW")i++;
@@ -74,41 +74,34 @@ function MFI(prop) {
   //let keylength=data
   return (
     <div className="anomaly-alert">
-      <p className="heading">Machine with Faults</p>
-      <div className="data-box">
-      <div class="data mb-2">
-        {dataDisplay&&dataDisplay.length>0 ? (
+    <p className="heading">Machine with Faults</p>
+    <div className="data-box">
+      <div className="data mb-2">
+        {dataDisplay && dataDisplay.length > 0 ? (
           dataDisplay.map((ele) => {
-            {if(ele.status=="NEW")
-            // there should be an flag within this IF, if there is something displays
-            return(
-            ele.serviceReqMachineDetails.map((srmd) => {
-              
-              return(
-              <div className="fs-14 mb-0 text-dark">
-                
-              <span className="fw-bold">  {srmd.machineName ?i+++"."+" "+ srmd.machineName + " " + srmd.createdDateWithPlantTimezone : ''}</span>
-                {srmd.machineServiceDetails.map((msd,index) => {
-                  return (
-                    <ol className="data-badge mb-0">
-                      {String.fromCharCode(97+index)+". "+msd.serviceName}
-                    </ol>
-                  );
-
-                })}
-              </div>
-              
-              )
-            })
-          )
+            if (ele.status === "NEW") {
+              return (
+                ele.serviceReqMachineDetails.map((srmd) => (
+                  <div className="fs-14 mb-0 text-dark">
+                    <span className="fw-bold">
+                      {srmd.machineName ? i++ + ". " + srmd.machineName + " " + srmd.createdDateWithPlantTimezone : ''}
+                    </span>
+                    {srmd.machineServiceDetails.map((msd, index) => (
+                      <ol className="data-badge mb-0" key={index}>
+                        {String.fromCharCode(97 + index) + ". " + msd.serviceName}
+                      </ol>
+                    ))}
+                  </div>
+                ))
+              );
             }
-
           })
-        ) : <>{nocomments ? "No Faults observed in machines" : ""}</>}
-        
-      </div>
+        ) : (
+          <div className="fs-14 mb-0 text-dark">No Faults observed in machines</div>
+        )}
       </div>
     </div>
+  </div>
   );
 }
 
