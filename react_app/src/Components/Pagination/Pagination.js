@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 
-
 function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
   useEffect(() => {
-    const interval = setInterval(() => {
-      onPageChange((prevPage) => (prevPage % totalPages) + 1);
-    }, 10000); // Adjust the interval time according to your requirement
-
+    let interval;
+  
+    if (totalPages > 1) {
+      interval = setInterval(() => {
+        onPageChange((prevPage) => (prevPage % totalPages) + 1);
+      }, 30000); 
+    }
+  
     return () => clearInterval(interval);
   }, [onPageChange, totalPages]);
-
   const handleClick = (pageNumber) => {
     if (pageNumber !== currentPage) {
       onPageChange(pageNumber);
@@ -25,9 +27,7 @@ function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
           className={`page-item ${i === currentPage ? "active" : ""}`}
           onClick={() => handleClick(i)}
         >
-          
           {i}
-         
         </li>
       );
     }
