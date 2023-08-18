@@ -47,7 +47,7 @@ function Container() {
         }
       } catch (error) {
         //console.log("error" + error);
-        //console.error(error);
+        console.error(error);
 
       }
     };
@@ -55,46 +55,28 @@ function Container() {
     fetchData();
   }, [currentPage]);
 
-  const handleZoom = (ele) => {
-    //console.log("start");
-    //console.log(document);
-    document.body.requestFullscreen();
-    // document.getElementById("widgets_1").requestFullscreen();
-    // window.addEventListener("load", (event) => {
-    //   // log.textContent += "load\n";
-    //   //console.log("zoomclicked"+event);
-    //   document.getElementsByClassName("widget_Frame_homePage")[0].requestFullscreen();
-    // });
-    // // document.getElementsByClassName("widget_Frame_homePage")[0].requestFullscreen();
-    // setZoomLevel((prevZoomLevel) => (prevZoomLevel === 0 ? 50 : 0));
-  };
-
   useEffect(() => {
     let timeout;
 
     if (autoPagination && plantsData.length > 0) {
       const currentPlant = plantsData[currentPlantIndex];
       setKpimachines(plantsData[currentPlantIndex].length);
-      //console.log("kpimachinesmonitors" + kpimachines)
+
       let kpimonitorsnew = 0;
-      plantsData[currentPlantIndex].map((mon) => {
-        ////console.log("kpimonitorsinside"+mon.monitors.length)
-        kpimonitorsnew = kpimonitorsnew + mon.monitors.length;
-        // return kpimonitors;
-      })
+      plantsData[currentPlantIndex].forEach((mon) => {
+        kpimonitorsnew += mon.monitors.length;
+      });
       setKpimonitors(kpimonitorsnew);
-      ////console.log(kpimonitors);
+
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
 
       if (currentPage === totalPages + 1) {
         if (currentPlantIndex === plantsData.length - 1) {
-          // Reached the last plant, reset to the first page and first plant
           timeout = setTimeout(() => {
             setCurrentPage(1);
             setCurrentPlantIndex(0);
           }, 0);
         } else {
-          // Move to the next plant
           timeout = setTimeout(() => {
             setCurrentPage(1);
             setCurrentPlantIndex((prevIndex) => prevIndex + 1);
@@ -108,7 +90,7 @@ function Container() {
     }
 
     return () => clearTimeout(timeout);
-  }, [currentPage, currentPlantIndex, plantsData, timeIn,autoPagination]);
+  }, [currentPage, currentPlantIndex, plantsData, autoPagination]);
 
   const handlePageChange = (pageNumber) => {
     const totalPages = Math.ceil(plantsData[currentPlantIndex].length / itemsPerPage);
@@ -117,7 +99,6 @@ function Container() {
       setCurrentPage(pageNumber);
 
       if (pageNumber === totalPages && currentPlantIndex !== plantsData.length - 1) {
-        // Reached the last page of a plant, move to the next plant after the timer
         setTimeout(() => {
           const nextPlantIndex = currentPlantIndex + 1;
           setCurrentPage(1);
@@ -127,12 +108,8 @@ function Container() {
     }
   };
 
-
-
-
-
   const handleCheck = () => {
-    setAutoPagination((prevState) => !prevState); // Toggle the value of autoPagination
+    setAutoPagination((prevState) => !prevState);
   }
 
   const currentPlant = plantsData[currentPlantIndex];
@@ -140,6 +117,7 @@ function Container() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = currentPlant ? currentPlant.slice(indexOfFirstItem, indexOfLastItem) : [];
+
   //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
     <div>
@@ -194,14 +172,14 @@ function Container() {
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box green"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold">Normal</p>
+                            <p className="text-dark fs-12 mb-0 fw-bold">Health Score &gt; 80%</p>
                           </div>
                         </div>
 
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box yellow"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold">Caution
+                            <p className="text-dark fs-12 mb-0 fw-bold">Health Score &gt; 50% &lt; 80%
                             </p>
                           </div>
                         </div>
@@ -209,15 +187,15 @@ function Container() {
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box red"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold">Warning
+                            <p className="text-dark fs-12 mb-0 fw-bold">Health Score &lt; 50%
                             </p>
                           </div>
                         </div>
 
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
-                            <div className="score-box  text-bg-secondary"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold " >Disconnected
+                            <div className="score-box" style={{backgroundColor:"white",border:"solid 1px"}}></div>
+                            <p className="text-dark fs-12 mb-0 fw-bold " >Health Score Not Available
                             </p>
                           </div>
                         </div>
