@@ -72,6 +72,7 @@ function Machine(prop) {
         ele.monitors.map((data) => {
            // console.log("statusvalue"+data.status,minimumValue)
           grayshade.push(data.status);
+          if(data.status!=5){
           if (data.status >= minimumValue) minimumValue = data.status;
           if (minimumValue == 1 || minimumValue == 2) stylez.backgroundColor = "#64DD17";
           else if (minimumValue == 3) stylez.backgroundColor = "#FFC107";
@@ -80,7 +81,7 @@ function Machine(prop) {
           //  console.log("grayshade"+grayshade);
           //   stylez.backgroundColor = "#9E9E9E";
           // }
-         
+          } 
         })
         const allEqual = arr => arr.every(val => {
           return val === 5 ||val == undefined
