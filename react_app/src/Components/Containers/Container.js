@@ -28,7 +28,9 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        // //console.log("work"+JSON.stringify(response[0][0]));
+       // console.log("work"+JSON.stringify(response[0][0]));
+        console.log("work");
+
         if (response[1]) {
           ////console.log("work"+response);
           if (response[0][0].length > 0) {
@@ -53,7 +55,7 @@ function Container() {
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [timeIn]);
 
   useEffect(() => {
     let timeout;
@@ -69,8 +71,11 @@ function Container() {
       setKpimonitors(kpimonitorsnew);
 
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
-
-      if (currentPage === totalPages + 1) {
+      console.log("Current Plant Index:", currentPlantIndex);
+      console.log("Current Page:", currentPage);
+      console.log("Total Pages:", totalPages);
+  
+      if (currentPage > totalPages ) {
         if (currentPlantIndex === plantsData.length - 1) {
           timeout = setTimeout(() => {
             setCurrentPage(1);

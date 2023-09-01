@@ -7,7 +7,7 @@ function Pagination({ items = [], currentPage, totalPages, onPageChange }) {
     if (totalPages > 1) {
       interval = setInterval(() => {
         onPageChange((prevPage) => (prevPage % totalPages) + 1);
-      }, 30000); 
+      }, 15000); 
     }
   
     return () => clearInterval(interval);

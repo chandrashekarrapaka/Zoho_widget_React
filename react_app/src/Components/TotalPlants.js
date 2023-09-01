@@ -66,14 +66,14 @@ function TotalPlants(prop){
       );
       const responses = await Promise.all(requests);
       const kpidataList = await Promise.all(responses.map((response) => response.json()));
-      console.log(kpidataList);
+      //console.log(kpidataList);
       let newcompletedCount='';
       let newdowntime='';
       let newnewCount='';
       if(kpidataList){
         kpidataList.map(kpi=>{
         if(kpi.data.length>0){
-            console.log(newcompletedCount);
+           // console.log(newcompletedCount);
        newcompletedCount=Number(newcompletedCount)+ kpi.data[0].completedCount;
        //console.log(kpi.data[0].completedCount);
        newdowntime=Number(newdowntime)+kpi.data[0].downtime;
