@@ -53,7 +53,7 @@ export async function Plants() {
           if (plantsResponse.status === 401) {
             apicallstatus = false;
             // Stop further API calls
-            clearInterval(intervalId);
+           // clearInterval(intervalId);
             //console.log("apicallstatus: " + apicallstatus);
             return [[]],apicallstatus;
           }
@@ -81,7 +81,7 @@ export async function Plants() {
     await fetchPlantsData();
 
     
-    intervalId = setInterval(fetchPlantsData, 30000);
+    //intervalId = setInterval(fetchPlantsData, 30000);
 
     return [arrayOfMachines, apicallstatus];
 

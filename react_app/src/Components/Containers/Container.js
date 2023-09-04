@@ -53,7 +53,7 @@ function Container() {
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [timeIn]);
 
   useEffect(() => {
     let timeout;
@@ -70,7 +70,7 @@ function Container() {
 
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
 
-      if (currentPage === totalPages + 1) {
+      if (currentPage > totalPages ) {
         if (currentPlantIndex === plantsData.length - 1) {
           timeout = setTimeout(() => {
             setCurrentPage(1);
