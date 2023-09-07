@@ -20,6 +20,7 @@ function Container() {
   const [noData, setNoData] = useState('');
   const [apicall, setApiCall] = useState(true);
   const [autoPagination, setAutoPagination] = useState(true); 
+  const [PlantSelection,setPlantSelection]=useState(false);
 
   //screen things
   ////console.log("insidecontainer.js");
@@ -58,7 +59,7 @@ function Container() {
   useEffect(() => {
     let timeout;
 
-    if (autoPagination && plantsData.length > 0) {
+    if (autoPagination && plantsData.length > 0&&PlantSelection==false) {
       const currentPlant = plantsData[currentPlantIndex];
       setKpimachines(plantsData[currentPlantIndex].length);
 
@@ -88,10 +89,27 @@ function Container() {
         }, timeIn);
       }
     }
+    
 
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, autoPagination]);
 
+  const handleNextPlant = () => {
+    const nextPage = currentPage + 1;
+  
+    
+      
+      // If we're at the end of the current plant, switch to the next plant
+      const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
+      if(nextPlantIndex>plantsData.length-1){
+      setCurrentPlantIndex(nextPlantIndex);
+      setCurrentPage(1);
+      }else{
+        setCurrentPlantIndex(nextPlantIndex);
+        setCurrentPage(1);
+      } // Reset currentPage for the new plant
+    
+  };
   const handlePageChange = (pageNumber) => {
     const totalPages = Math.ceil(plantsData[currentPlantIndex].length / itemsPerPage);
 
@@ -111,13 +129,14 @@ function Container() {
   const handleCheck = () => {
     setAutoPagination((prevState) => !prevState);
   }
-
+ 
+ 
   const currentPlant = plantsData[currentPlantIndex];
   const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = currentPlant ? currentPlant.slice(indexOfFirstItem, indexOfLastItem) : [];
-
+  
   //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
     <div>
@@ -136,7 +155,7 @@ function Container() {
                   <div className="left-main">
                     <div className="title-section d-flex mb-2 align-items-center justify-content-between py-2 px-3 bg-white br-10">
                       <p className="mb-0 fs-4 fw-600"> {currentPlant[0]?.plantName || ""}</p>
-                      <p className="mb-0 text-gray"> Coming Next: <strong>{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
+                      <p className="mb-0 text-gray" onClick={(e)=>{handleNextPlant(currentPlantIndex)}}> Coming Next: <strong className="text-primary" style={{ cursor: "pointer" }} >{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
                     </div>
 
                     <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant} />
