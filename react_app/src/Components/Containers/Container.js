@@ -112,7 +112,14 @@ function Container() {
         setCurrentPlantIndex(nextPlantIndex);
         setCurrentPage(1);
       } // Reset currentPage for the new plant
-    
+      const currentPlant = plantsData[currentPlantIndex];
+      setKpimachines(plantsData[currentPlantIndex].length);
+
+      let kpimonitorsnew = 0;
+      plantsData[currentPlantIndex].forEach((mon) => {
+        kpimonitorsnew += mon.monitors.length;
+      });
+      setKpimonitors(kpimonitorsnew);
   };
   const handlePageChange = (pageNumber) => {
     const totalPages = Math.ceil(plantsData[currentPlantIndex].length / itemsPerPage);
