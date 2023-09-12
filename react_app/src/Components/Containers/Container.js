@@ -16,6 +16,7 @@ function Container() {
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(0);
   const [kpimachines, setKpimachines] = useState(0);
+  const [kpidisconnected, setKpiDisconnected] = useState(0);
   const [kpimonitors, setKpimonitors] = useState(0);
   const [noData, setNoData] = useState('');
   const [apicall, setApiCall] = useState(true);
@@ -66,7 +67,16 @@ function Container() {
       setKpimachines(plantsData[currentPlantIndex].length);
 
       let kpimonitorsnew = 0;
+      let kpidisconnected = 0;
       plantsData[currentPlantIndex].forEach((mon) => {
+        mon.monitors.forEach((ele)=>{
+          if(ele.status==5){
+            kpidisconnected++;
+            setKpiDisconnected(kpidisconnected)
+          }
+        })
+       
+       
         kpimonitorsnew += mon.monitors.length;
       });
       setKpimonitors(kpimonitorsnew);
@@ -116,7 +126,16 @@ function Container() {
       setKpimachines(plantsData[currentPlantIndex].length);
 
       let kpimonitorsnew = 0;
+      let kpidisconnected = 0;
+
       plantsData[currentPlantIndex].forEach((mon) => {
+        
+        mon.monitors.forEach((ele)=>{
+          if(ele.status==5){
+            kpidisconnected++;
+            setKpiDisconnected(kpidisconnected)
+          }
+        })
         kpimonitorsnew += mon.monitors.length;
       });
       setKpimonitors(kpimonitorsnew);
@@ -168,7 +187,7 @@ function Container() {
                       <p className="mb-0 text-gray" onClick={(e)=>{handleNextPlant(currentPlantIndex)}}> Coming Next: <strong className="text-primary" style={{ cursor: "pointer" }} >{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
                 </div>
 
-                    <Header kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant} />
+                    <Header kpidisconnected={kpidisconnected} kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant} />
                    
                     <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
                     

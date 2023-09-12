@@ -22,6 +22,9 @@ function TotalPlants(prop){
         kpi3: { title: "", value: "Total Faults Identified", src:icon3 },
         kpi4: { title: "", value: "Reports Closed", src:icon4},
         kpi5: { title: "", value: "Downtime Saved (Hrs)" , src:icon5},
+        kpi6: { title: "", value: "Disconnected" },
+       
+
       };
       useEffect(() => {
         const fetchDataz = async () => {
@@ -40,10 +43,19 @@ function TotalPlants(prop){
       }, []);
       let kpimonitorsnew=0;
       let kpimachinesnew=0;
+      let kpidisconnected=0;
       prop.plantsData.forEach(element => {
+       // console.log(element.length);
         kpimachinesnew=kpimachinesnew+ element.length;
         element.forEach(ele=>{
+          ele.monitors.forEach((emoni)=>{
+            if(emoni.status==5){
+              kpidisconnected++;
+            }
             kpimonitorsnew= kpimonitorsnew+ele.monitors.length;
+           
+            })
+           // console.log( ele.monitors.length);
         })
         
       });
@@ -70,22 +82,25 @@ function TotalPlants(prop){
       let newcompletedCount='';
       let newdowntime='';
       let newnewCount='';
+      
       if(kpidataList){
         kpidataList.map(kpi=>{
-        if(kpi.data.length>0){
-           // console.log(newcompletedCount);
-       newcompletedCount=Number(newcompletedCount)+ kpi.data[0].completedCount;
-       //console.log(kpi.data[0].completedCount);
-       newdowntime=Number(newdowntime)+kpi.data[0].downtime;
-       newnewCount=Number(newnewCount)+kpi.data[0].newCount+kpi.data[0].completedCount;
-       //console.log(newcompletedCount);
-   } 
-   else{
-    newcompletedCount=Number(newcompletedCount)+ 0;
-    //console.log(kpi.data[0].completedCount);
-    newdowntime=Number(newdowntime)+0;
-    newnewCount=Number(newnewCount)+0;
-   } })
+          //console.log(kpi);
+            if(kpi.data.length>0){
+               // console.log(newcompletedCount);
+           newcompletedCount=Number(newcompletedCount)+ kpi.data[0].completedCount;
+           //console.log(kpi.data[0].completedCount);
+           newdowntime=Number(newdowntime)+kpi.data[0].downtime;
+           newnewCount=Number(newnewCount)+kpi.data[0].newCount+kpi.data[0].completedCount;
+           //console.log(newcompletedCount);
+       } 
+       else{
+        newcompletedCount=Number(newcompletedCount)+ 0;
+        //console.log(kpi.data[0].completedCount);
+        newdowntime=Number(newdowntime)+0;
+        newnewCount=Number(newnewCount)+0;
+       }
+      })
        const updatedKipobj = {
         ...kipobj,
         kpi4: {
@@ -107,6 +122,11 @@ function TotalPlants(prop){
           JSON.stringify(newnewCount)
         },
        //totaldevicesinstalled
+       kpi6: {
+        ...kipobj.kpi6,
+        title:
+        JSON.stringify(kpidisconnected)
+      },
         kpi1: {
           ...kipobj.kpi1,
           title:
@@ -116,9 +136,29 @@ function TotalPlants(prop){
       setKipobj(updatedKipobj);
       }
           else{
-            initialKipobj.kpi2.title=JSON.stringify(kpimachinesnew);
-            initialKipobj.kpi1.title=JSON.stringify(kpimonitorsnew)
-            setKipobj(initialKipobj); 
+
+            const updatedKipobj = {
+        ...kipobj,
+        
+        kpi2:{
+          ...kipobj.kpi2,
+          title:
+          JSON.stringify(kpimachinesnew)
+        },
+        kpi6:{
+          ...kipobj.kpi6,
+          title:
+          JSON.stringify(kpidisconnected)
+        },
+       
+       //totaldevicesinstalled
+        kpi1: {
+          ...kipobj.kpi1,
+          title:
+          JSON.stringify(kpimonitorsnew)
+        }
+      };
+      setKipobj(updatedKipobj); 
           }
             
           } catch (error) {
@@ -136,9 +176,14 @@ function TotalPlants(prop){
          
           { !result&& <div className="brand-logo text-center"><img src={imageUrl} alt="Brand Logo" className="img-fluid"/></div>} 
           </div> 
-      {Object.keys(kipobj).map(function (ele) {
+          <div class="col-lg-10">
+            <div class="row">
+            {Object.keys(kipobj).map(function (ele) {
         return <KPI data={kipobj[ele]} />;
       })}
+            </div>
+          </div>
+      
       
     </div>
     )
