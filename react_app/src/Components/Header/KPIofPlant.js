@@ -16,9 +16,9 @@ function KPIofPlant(prop) {
 					{prop.data.title}
 					</p>
 				</div>
-				<div class="right-content-box">
-					<img src={prop.data.src} alt="Broadcasting icon" class="img-fluid"/>
-				</div>
+				{prop.data.src?<div class="right-content-box">
+			<img src={prop.data.src} alt="Broadcasting icon" class="img-fluid"/>
+		</div>:""}
 			</div>
 		</div>
 	)

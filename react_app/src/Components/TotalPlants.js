@@ -22,6 +22,9 @@ function TotalPlants(prop){
         kpi3: { title: "", value: "Total Faults Identified", src:icon3 },
         kpi4: { title: "", value: "Reports Closed", src:icon4},
         kpi5: { title: "", value: "Downtime Saved (Hrs)" , src:icon5},
+        kpi6: { title: "", value: "Disconnected" },
+       
+
       };
       useEffect(() => {
         const fetchDataz = async () => {
@@ -40,11 +43,18 @@ function TotalPlants(prop){
       }, []);
       let kpimonitorsnew=0;
       let kpimachinesnew=0;
+      let kpidisconnected=0;
       prop.plantsData.forEach(element => {
        // console.log(element.length);
         kpimachinesnew=kpimachinesnew+ element.length;
         element.forEach(ele=>{
+          ele.monitors.forEach((emoni)=>{
+            if(emoni.status==5){
+              kpidisconnected++;
+            }
             kpimonitorsnew= kpimonitorsnew+ele.monitors.length;
+           
+            })
            // console.log( ele.monitors.length);
         })
         
@@ -112,6 +122,11 @@ function TotalPlants(prop){
           JSON.stringify(newnewCount)
         },
        //totaldevicesinstalled
+       kpi6: {
+        ...kipobj.kpi6,
+        title:
+        JSON.stringify(kpidisconnected)
+      },
         kpi1: {
           ...kipobj.kpi1,
           title:
@@ -129,6 +144,11 @@ function TotalPlants(prop){
           ...kipobj.kpi2,
           title:
           JSON.stringify(kpimachinesnew)
+        },
+        kpi6:{
+          ...kipobj.kpi6,
+          title:
+          JSON.stringify(kpidisconnected)
         },
        
        //totaldevicesinstalled
@@ -156,9 +176,14 @@ function TotalPlants(prop){
          
           { !result&& <div className="brand-logo text-center"><img src={imageUrl} alt="Brand Logo" className="img-fluid"/></div>} 
           </div> 
-      {Object.keys(kipobj).map(function (ele) {
+          <div class="col-lg-10">
+            <div class="row">
+            {Object.keys(kipobj).map(function (ele) {
         return <KPI data={kipobj[ele]} />;
       })}
+            </div>
+          </div>
+      
       
     </div>
     )

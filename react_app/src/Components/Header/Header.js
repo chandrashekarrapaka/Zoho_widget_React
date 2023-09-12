@@ -7,6 +7,8 @@ import icon2 from '../../assets/imgs/about-white-icon-2.png';
 import icon3 from '../../assets/imgs/about-white-icon-3.png';
 import icon4 from '../../assets/imgs/about-white-icon-4.png';
 import icon5 from '../../assets/imgs/about-white-icon-5.png';
+//import test from '../../assets/imgs/test.jpeg';
+
 
 
 
@@ -23,6 +25,7 @@ function Header(prop) {
     kpi3: { title: "", value: "Total Faults Identified",src:icon3 },
     kpi4: { title: "", value: "Reports Closed",src:icon4 },
     kpi5: { title: "", value: "Downtime Saved (Hrs)",src:icon5 },
+    kpi6: { title: "", value: "Disconnected"  },
   };
   
   const [kipobj, setKipobj] = useState(initialKipobj);
@@ -70,6 +73,11 @@ function Header(prop) {
             title:
             JSON.stringify(kpidata.data[0].newCount+kpidata.data[0].completedCount)
           },
+          kpi6: {
+            ...kipobj.kpi6,
+            title:
+            JSON.stringify(prop.kpidisconnected)
+          },
          //totaldevicesinstalled
           kpi1: {
             ...kipobj.kpi1,
@@ -86,6 +94,7 @@ function Header(prop) {
         initialKipobj.kpi3.title='-';
         initialKipobj.kpi4.title='-';
         initialKipobj.kpi5.title='-';
+        initialKipobj.kpi6.title= JSON.stringify(prop.kpidisconnected)?JSON.stringify(prop.kpidisconnected):0;
         setKipobj(initialKipobj); 
       }
         
