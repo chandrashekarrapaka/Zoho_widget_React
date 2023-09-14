@@ -1,6 +1,7 @@
 import React from "react";
 
 function KPI(props) {
+  //console.log(props);
   return (
     <div className="col-lg-2 col-sm-4 mb-2">
       <div className="about-brand-box" >
