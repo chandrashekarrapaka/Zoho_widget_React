@@ -67,18 +67,19 @@ function Container() {
       setKpimachines(plantsData[currentPlantIndex].length);
 
       let kpimonitorsnew = 0;
-      let kpidisconnected = 0;
+      let kpidisconnectednew=0;
       plantsData[currentPlantIndex].forEach((mon) => {
         mon.monitors.forEach((ele)=>{
           if(ele.status==5){
-            kpidisconnected++;
-            setKpiDisconnected(kpidisconnected)
+            console.log(ele.status,currentPlantIndex);
+            kpidisconnectednew++;
+            
           }
-        })
-       
-       
+        }) 
         kpimonitorsnew += mon.monitors.length;
       });
+     // console.log(currentPlantIndex);
+      setKpiDisconnected(kpidisconnectednew);
       setKpimonitors(kpimonitorsnew);
 
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
@@ -126,18 +127,19 @@ function Container() {
       setKpimachines(plantsData[currentPlantIndex].length);
 
       let kpimonitorsnew = 0;
-      let kpidisconnected = 0;
-
+      let kpidisconnectednew=0;
       plantsData[currentPlantIndex].forEach((mon) => {
-        
         mon.monitors.forEach((ele)=>{
           if(ele.status==5){
-            kpidisconnected++;
-            setKpiDisconnected(kpidisconnected)
+            console.log(ele.status,currentPlantIndex);
+            kpidisconnectednew++;
+            
           }
-        })
+        }) 
         kpimonitorsnew += mon.monitors.length;
       });
+     // console.log(currentPlantIndex);
+      setKpiDisconnected(kpidisconnectednew);
       setKpimonitors(kpimonitorsnew);
   };
   const handlePageChange = (pageNumber) => {
