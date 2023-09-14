@@ -52,9 +52,10 @@ function TotalPlants(prop){
             if(emoni.status==5){
               kpidisconnected++;
             }
-            kpimonitorsnew= kpimonitorsnew+ele.monitors.length;
+           
            
             })
+            kpimonitorsnew= kpimonitorsnew+ele.monitors.length;
            // console.log( ele.monitors.length);
         })
         
