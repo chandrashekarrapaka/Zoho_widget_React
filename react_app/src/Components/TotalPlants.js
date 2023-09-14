@@ -9,6 +9,9 @@ import icon3 from '../assets/imgs/about-icon-3.png';
 import icon4 from '../assets/imgs/about-icon-4.png';
 import icon5 from '../assets/imgs/about-icon-5.png';
 
+import icon6 from '../assets/imgs/test.png';
+
+
 
 function TotalPlants(prop){
   const [imageUrl, setImageUrl] = useState("");
@@ -22,7 +25,7 @@ function TotalPlants(prop){
         kpi3: { title: "", value: "Total Faults Identified", src:icon3 },
         kpi4: { title: "", value: "Reports Closed", src:icon4},
         kpi5: { title: "", value: "Downtime Saved (Hrs)" , src:icon5},
-        kpi6: { title: "", value: "Disconnected" },
+        kpi6: { title: "", value: "Disconnected", src:icon6},
        
 
       };
