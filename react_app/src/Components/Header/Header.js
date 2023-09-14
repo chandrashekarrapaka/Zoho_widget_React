@@ -7,7 +7,7 @@ import icon2 from '../../assets/imgs/about-white-icon-2.png';
 import icon3 from '../../assets/imgs/about-white-icon-3.png';
 import icon4 from '../../assets/imgs/about-white-icon-4.png';
 import icon5 from '../../assets/imgs/about-white-icon-5.png';
-//import test from '../../assets/imgs/test.jpeg';
+import test from '../../assets/imgs/icons8-wi-fi-off-30.png';
 
 
 
@@ -25,7 +25,7 @@ function Header(prop) {
     kpi3: { title: "", value: "Total Faults Identified",src:icon3 },
     kpi4: { title: "", value: "Reports Closed",src:icon4 },
     kpi5: { title: "", value: "Downtime Saved (Hrs)",src:icon5 },
-    kpi6: { title: "", value: "Disconnected"  },
+    kpi6: { title: "", value: "Disconnected" ,src:test },
   };
   
   const [kipobj, setKipobj] = useState(initialKipobj);
