@@ -30,7 +30,7 @@ function Header(prop) {
   
   const [kipobj, setKipobj] = useState(initialKipobj);
 
-  
+ // console.log(prop.kpidisconnected);
 
   useEffect(() => {
     const fetchPlantDetails = async () => {
@@ -94,7 +94,7 @@ function Header(prop) {
         initialKipobj.kpi3.title='-';
         initialKipobj.kpi4.title='-';
         initialKipobj.kpi5.title='-';
-        initialKipobj.kpi6.title= JSON.stringify(prop.kpidisconnected)?JSON.stringify(prop.kpidisconnected):0;
+        initialKipobj.kpi6.title= JSON.stringify(prop.kpidisconnected);
         setKipobj(initialKipobj); 
       }
         
@@ -104,7 +104,7 @@ function Header(prop) {
     };
 
     fetchPlantDetails();
-  }, [prop.currentPlant,prop.kpimachines,prop.kpimonitors ]);
+  }, [prop.currentPlant,prop.kpimachines,prop.kpimonitors,prop.kpidisconnected ]);
   
   //console.log("rresult"+result);
   return (
