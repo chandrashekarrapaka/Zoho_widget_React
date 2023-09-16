@@ -87,7 +87,7 @@ export async function Plants() {
 
 Plants()
   .then(([machines, status]) => {
-    console.log("Machines:", machines);
+    //console.log("Machines:", machines);
     console.log("API Call Status:", status);
   })
   .catch((error) => {

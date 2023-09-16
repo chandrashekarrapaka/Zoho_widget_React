@@ -31,13 +31,22 @@ function Container() {
       try {
         const response = await Plants();
        // console.log("work"+JSON.stringify(response[0][0]));
-        console.log("work");
+        //console.log(response);
 
         if (response[1]) {
-          ////console.log("work"+response);
-          if (response[0][0].length > 0) {
+          
+          let plants=[];
+          if (response[0]) {
             //kpimonitors=response.length;
-            setPlantsData(response[0]);
+           
+            response[0].forEach(element => {
+             if (element.length>0)plants.push(element); 
+            });
+            setPlantsData(plants);
+           // console.log("work"+response[1].length,plants.length);
+            if(plants.length==0){
+              setNoData('No data found');
+            }
 
           }
           else {
@@ -67,11 +76,11 @@ function Container() {
       setKpimachines(plantsData[currentPlantIndex].length);
 
       let kpimonitorsnew = 0;
-      let kpidisconnectednew=0;
+      let kpidisconnectednew = 0;
       plantsData[currentPlantIndex].forEach((mon) => {
         mon.monitors.forEach((ele)=>{
           if(ele.status==5){
-            console.log(ele.status,currentPlantIndex);
+           // console.log(ele.status,currentPlantIndex);
             kpidisconnectednew++;
             
           }
@@ -83,9 +92,9 @@ function Container() {
       setKpimonitors(kpimonitorsnew);
 
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
-      console.log("Current Plant Index:", currentPlantIndex);
-      console.log("Current Page:", currentPage);
-      console.log("Total Pages:", totalPages);
+     // console.log("Current Plant Index:", currentPlantIndex);
+      //console.log("Current Page:", currentPage);
+      //console.log("Total Pages:", totalPages);
   
       if (currentPage > totalPages ) {
         if (currentPlantIndex === plantsData.length - 1) {
@@ -131,7 +140,7 @@ function Container() {
       plantsData[currentPlantIndex].forEach((mon) => {
         mon.monitors.forEach((ele)=>{
           if(ele.status==5){
-            console.log(ele.status,currentPlantIndex);
+           // console.log(ele.status,currentPlantIndex);
             kpidisconnectednew++;
             
           }
