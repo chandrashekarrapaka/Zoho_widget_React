@@ -60,6 +60,7 @@ export async function Plants() {
           
           const plantsData = await plantsResponse.json();
           const plantsArray = [];
+          console.log(plantsData);
           
           plantsData.data.machineGroups.forEach((mg) => {
             mg.machines.forEach((machine) => {

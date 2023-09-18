@@ -7,6 +7,7 @@ import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
 import TotalPlants from "../TotalPlants";
+import AlertsBar from "./Scrollbar/AlertsBar";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,12 +31,23 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        // //console.log("work"+JSON.stringify(response[0][0]));
+       // console.log("work"+JSON.stringify(response[0][0]));
+        //console.log(response);
+
         if (response[1]) {
-          ////console.log("work"+response);
-          if (response[0][0].length > 0) {
+          
+          let plants=[];
+          if (response[0]) {
             //kpimonitors=response.length;
-            setPlantsData(response[0]);
+           
+            response[0].forEach(element => {
+             if (element.length>0)plants.push(element); 
+            });
+            setPlantsData(plants);
+           // console.log("work"+response[1].length,plants.length);
+            if(plants.length==0){
+              setNoData('No data found');
+            }
 
           }
           else {
@@ -271,7 +283,7 @@ function Container() {
             </div>
 
 
-
+          <AlertsBar  currentPlant={currentPlant} alerts={[1,2,3]}/>
           </div>
         </section>
       ) : ((apicall === true) ?
