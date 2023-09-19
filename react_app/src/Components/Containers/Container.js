@@ -7,6 +7,7 @@ import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
 import TotalPlants from "../TotalPlants";
+import AlertBar from '../Containers/ScrollBar/AlertBar'
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -279,7 +280,7 @@ function Container() {
             </div>
 
 
-
+            <AlertBar  currentPlant={currentPlant}  plantsData={plantsData}/>
           </div>
         </section>
       ) : ((apicall === true) ?
