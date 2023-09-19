@@ -283,7 +283,7 @@ function Container() {
             </div>
 
 
-          <AlertsBar  currentPlant={currentPlant} alerts={[1,2,3]}/>
+          <AlertsBar  currentPlant={currentPlant} plantsData={plantsData}/>
           </div>
         </section>
       ) : ((apicall === true) ?

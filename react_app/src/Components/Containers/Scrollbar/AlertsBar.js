@@ -6,7 +6,10 @@ const AlertsBar = ( prop) => {
 
     const [accessToken, setAccessToken] = useState("");
   const [dataDisplay, setDataDisplay] = useState();
+  const [totalAlerts,setTotalAlerts ] = useState([]);
 
+
+  const totalPlants=prop.plantsData;
   const currentPlant = prop.currentPlant;
   //console.log("AA1", currentPlant[0].plantid, accessToken);
 
@@ -37,25 +40,34 @@ const AlertsBar = ( prop) => {
         .replace(/:/g, "%3A");
 
       try {
-        const response = await fetch(
-          "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts?plantIds=" +
-          plantid +
-          "&from=" +
-          dtFrom +
-          "&to=" +
-          dtTo,
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              Authorization: "Bearer " + accessToken,
-            },
-          }
-        );
+        const fetchPromises = totalPlants.map(async (element) => {
+          const plantid = element[0].plantid;
+          const response = await fetch(
+            "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts?plantIds=" +
+              plantid +
+              "&from=" +
+              dtFrom +
+              "&to=" +
+              dtTo,
+            {
+              method: "GET",
+              headers: {
+                accept: "application/json",
+                Authorization: "Bearer " + accessToken,
+              },
+            }
+          );
 
-        const data = await response.json();
-        setDataDisplay(data);
-        //console.log("alerts", JSON.stringify(data.data.length));
+          const data = await response.json();
+          return data;
+        });
+
+        const alertsData = await Promise.all(fetchPromises);
+
+        // Combine all alerts from different plants into a single array
+        const combinedAlerts = alertsData.flatMap((data) => data.data);
+        
+        setTotalAlerts(combinedAlerts);
       } catch (error) {
         console.error(error);
       }
@@ -63,14 +75,14 @@ const AlertsBar = ( prop) => {
 
     fetchData();
 
-    const interval = setInterval(fetchData, 30000); // Fetch data every 30 seconds
+    const interval = setInterval(fetchData, 30000);
 
     return () => {
-      clearInterval(interval); // Clean up the interval on component unmount
+      clearInterval(interval);
     };
-  }, [currentPlant, accessToken]);
-  //console.log("data"+JSON.stringify(dataDisplay));
-  let lengthofDisplay = dataDisplay && dataDisplay.data.length == 0;
+  }, [currentPlant, accessToken, totalPlants]);
+  //console.log("data"+JSON.stringify(totalAlerts),totalAlerts.length);
+  let lengthofDisplay = totalAlerts && totalAlerts.length == 0;
 
 
 
@@ -128,18 +140,18 @@ const AlertsBar = ( prop) => {
         }  
     }
     return (
-      <div className="alerts-bar" style={{ background: "#FFC107" }}>
-        <marquee className="alerts-marquee" behavior="scroll" direction="left" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className="alerts-bar" style={{ background: "#ffc0c0",color:"red",fontSize:"20px" }}>
+        <marquee className="alerts-marquee"  behavior="scroll" direction="left" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
          
-        {dataDisplay && dataDisplay.data.length > 0 ? ( 
-  dataDisplay.data.map((ele) => (
+        {totalAlerts && totalAlerts.length > 0 ? ( 
+  totalAlerts.map((ele) => (
     <>
       {check24(ele.alertTimestamp) ? (
-        <> New Fault identified: Machine : </>
+        <> New Fault identified for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine : </>
       ) : (
-        <> New Anomaly Alert Generated: Machine : </>
+        <> New Anomaly Alert Generated for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine : </>
       )}
-      <span className="fw-bold"> <a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable">{ele.machineName}</a></span> |
+      <span className="fw-bold"> <a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable"  style={{ color:"red"}}>{ele.machineName}</a></span> |
     </>
   ))
 ) : (
