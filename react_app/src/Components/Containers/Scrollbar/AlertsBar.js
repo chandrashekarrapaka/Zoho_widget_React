@@ -34,7 +34,7 @@ const AlertsBar = ( prop) => {
     const fetchData = async () => {
       let now = new Date();
       let dtTo = now.toISOString().replace(/\.\d+Z$/, "Z").replace(/:/g, "%3A");
-      let dtFrom = new Date(now.getTime() - 48 * 60 * 60 * 1000)
+      let dtFrom = new Date(now.getTime() - 24 * 60 * 60 * 1000)
         .toISOString()
         .replace(/\.\d+Z$/, "Z")
         .replace(/:/g, "%3A");
@@ -57,16 +57,45 @@ const AlertsBar = ( prop) => {
               },
             }
           );
-
+          const response2 = await fetch(
+            "https://api.infinite-uptime.com/api/3.0/idap-api/service-requests?plantIds=" + plantid,
+            {
+              method: "GET",
+              headers: {
+                accept: "application/json",
+                Authorization: "Bearer " + accessToken,
+              },
+            }
+          );
+  
           const data = await response.json();
-          return data;
+          const data2 = await response2.json();
+          //console.log("data2",data2);
+         let newData=[];
+         newData.push(data);
+         newData.push(data2);
+         // console.log("data",JSON.stringify(newData));
+          return newData;
         });
 
         const alertsData = await Promise.all(fetchPromises);
-
+        //console.log("data",JSON.stringify(alertsData));
+        let dummy =[];
+        alertsData.map((ele)=>{
+          
+          //aa
+          const alert1=ele[0].data.flat();
+          //mf
+          let key = Object.keys(ele[1].data);
+         // console.log(key);
+          const alert2 = ele[1].data[key].filter((ele) => ele.status === "NEW");
+          dummy.push(alert1);
+          dummy.push(alert2);
+        })
+        //console.log("hero"+JSON.stringify(dummy));
         // Combine all alerts from different plants into a single array
-        const combinedAlerts = alertsData.flatMap((data) => data.data);
-        
+        const combinedAlerts = dummy.flat();
+       // console.log(combinedAlerts);
         setTotalAlerts(combinedAlerts);
       } catch (error) {
         console.error(error);
@@ -126,8 +155,9 @@ const AlertsBar = ( prop) => {
       
         return new Date(Date.UTC(year, month, day, hours, minutes, seconds));
       }
-    const check24=(timeStamp)=>{
-        const dateString = parseCustomDate(timeStamp);
+    const check24=(ele)=>{
+      if(ele.status){
+        const dateString = parseCustomDate(ele.createdDate);
         const date = new Date(dateString);
         const currentDate = new Date();
         const timeDifference = currentDate - date;
@@ -138,20 +168,27 @@ const AlertsBar = ( prop) => {
         } else {
           return false;
         }  
+      }
+      else{
+        return false;
+      }
+    }
+    const urlFault=(sid)=>{
+      return `https://drs.infinite-uptime.com/reports-doc/`+sid
     }
     return (
+      
       <div className="alerts-bar" style={{ background: "#ffc0c0",color:"red",fontSize:"20px" }}>
         <marquee className="alerts-marquee"  behavior="scroll" direction="left" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
          
         {totalAlerts && totalAlerts.length > 0 ? ( 
   totalAlerts.map((ele) => (
     <>
-      {check24(ele.alertTimestamp) ? (
-        <> New Fault identified for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine : </>
-      ) : (
-        <> New Anomaly Alert Generated for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine : </>
-      )}
-      <span className="fw-bold"> <a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable"  style={{ color:"red"}}>{ele.machineName}</a></span> |
+      { ele.status && check24(ele)? 
+        (<> New Fault identified for Plants {<span className="fw-bold">{ele.serviceReqMachineDetails[0]?ele.serviceReqMachineDetails[0].plantName:""}</span>} : Machine : <span className="fw-bold"> <a href={urlFault(ele.id)} target="_blank" style={{ color:"red"}}>{ele.serviceReqMachineDetails[0]?ele.serviceReqMachineDetails[0].machineName:""}</a></span> | </> )      : 
+        (ele.anomalyDetected?(<> New Anomaly Alert Generated for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine :<span className="fw-bold"> <a href="https://idap.infinite-uptime.com/#/dashboard/MonitoringTable" target="_blank" style={{ color:"red"}}>{ele.machineName}</a></span> | </>):<></>)
+    }
+      
     </>
   ))
 ) : (
