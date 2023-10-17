@@ -1,0 +1,25 @@
+*{
+  overflow: hidden;
+}
+.marquee {
+    white-space: nowrap;
+    overflow:  hidden;
+    width: fit-content;
+    animation-play-state:running;
+    /* Adjust duration and timing function as needed */
+  }
+  .marquee-paused {
+    animation-play-state: paused !important;
+  }
+  
+  @keyframes marquee {
+    from {
+      transform: translateX(10%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  /* .marquee-container:hover .marquee {
+    animation-play-state: paused !important;
+  } */
