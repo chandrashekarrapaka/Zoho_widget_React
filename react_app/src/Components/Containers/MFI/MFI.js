@@ -49,6 +49,7 @@ function MFI(prop) {
        
 
         const dataWithNewStatus = data.data[key].filter((ele) => ele.status === "NEW");
+        dataWithNewStatus.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         setDataDisplay(dataWithNewStatus);
         setNoComments(dataWithNewStatus.length === 0);
        // console.log("mfi"+dataDisplay);
