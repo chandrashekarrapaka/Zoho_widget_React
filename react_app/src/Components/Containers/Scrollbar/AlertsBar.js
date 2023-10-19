@@ -203,9 +203,12 @@ const AlertsBar = ( prop) => {
     }
     //console.log(animationDuration);
     const urlAA=(ele)=>{
-      console.log("clicked",ele);
+      console.log("clicked");
         window.open("https://idap.infinite-uptime.com/#/dashboard/MonitoringTable");
-      
+        // document.cookie = "idap-machineName-PROD=1BE304 - 02-GEARBOX; domain=.infinite-uptime.com"//but we tried to set cookies here-hard coded
+ 
+
+
     }
 
 
@@ -221,7 +224,7 @@ const AlertsBar = ( prop) => {
     <span key={index}>
       { ele.status ? 
         (<> New Fault identified for Plants {<span className="fw-bold">{ele.serviceReqMachineDetails[0]?ele.serviceReqMachineDetails[0].plantName:""}</span>} : Machine : <span className="fw-bold"> <a href={urlFault(ele.id)} target="_blank" style={{ color:"red"}}>{ele.serviceReqMachineDetails[0]?ele.serviceReqMachineDetails[0].machineName:""}</a></span> | </> )      : 
-        (ele.anomalyDetected?(<> New Anomaly Alert Generated for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine :<span className="fw-bold"> <span onClick={(e)=>{urlAA(ele.machineName)}} target="_blank" style={{ color:"red"}}>{ele.machineName}</span></span> | </>):<></>)
+        (ele.anomalyDetected?(<> New Anomaly Alert Generated for Plants {<span className="fw-bold">{ele.plantName}</span>} : Machine :<span className="fw-bold hover"> <span onClick={(e)=>{urlAA(ele.machineName)}} target="_blank" style={{ color:"red"}}>{ele.machineName}</span></span> | </>):<></>)
     }
       
     </span>

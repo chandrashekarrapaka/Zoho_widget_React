@@ -20,6 +20,9 @@
       transform: translateX(-100%);
     }
   }
+  .hover:hover {
+    cursor: pointer;
+}
   /* .marquee-container:hover .marquee {
     animation-play-state: paused !important;
   } */

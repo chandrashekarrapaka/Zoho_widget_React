@@ -8,6 +8,7 @@ import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
 import TotalPlants from "../TotalPlants";
 import AlertsBar from "./Scrollbar/AlertsBar";
+import PatternStorage from "./PatternStorage";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +44,21 @@ function Container() {
             response[0].forEach(element => {
              if (element.length>0)plants.push(element); 
             });
-            setPlantsData(plants);
+            const storedPattern = sessionStorage.getItem('plantPattern');
+
+            if (storedPattern &&storedPattern.length>1) {
+              
+                    const orderedPattern = JSON.parse(storedPattern);
+                    // Reorder fetchedPlantsData based on orderedPattern
+                    const reorderedPlantsData = orderedPattern.map((plantId) => {
+                        return plants.find((plant) => plant[0].plantid === plantId);
+                    });
+                    setPlantsData(reorderedPlantsData);
+                  }else{
+                    setPlantsData(plants);
+                  }
+                  
+            //
            // console.log("work"+response[1].length,plants.length);
             if(plants.length==0){
               setNoData('No data found');
@@ -68,6 +83,7 @@ function Container() {
 
     fetchData();
   }, [timeIn]);
+ 
 
   useEffect(() => {
     let timeout;
@@ -191,6 +207,7 @@ function Container() {
           <div className="container-fluid">
             <div className="header">
               <TotalPlants plantsData={plantsData} />
+              <PatternStorage plantsData={plantsData} cp={currentPlant} />
             </div>
 
             <div className="main-content">
