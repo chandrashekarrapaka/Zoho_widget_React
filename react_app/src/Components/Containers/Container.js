@@ -45,14 +45,17 @@ function Container() {
              if (element.length>0)plants.push(element); 
             });
             const storedPattern = sessionStorage.getItem('plantPattern');
-
-            if (storedPattern &&storedPattern.length>1) {
-              
+            const checklist=JSON.parse(storedPattern).length;
+            console.log(checklist,plants.length);
+            if (storedPattern &&storedPattern.length>1 &&checklist==plants.length) {
+               console.log("inside patterns");
                     const orderedPattern = JSON.parse(storedPattern);
                     // Reorder fetchedPlantsData based on orderedPattern
                     const reorderedPlantsData = orderedPattern.map((plantId) => {
+                     // console.log(plantId);
                         return plants.find((plant) => plant[0].plantid === plantId);
                     });
+
                     setPlantsData(reorderedPlantsData);
                   }else{
                     setPlantsData(plants);

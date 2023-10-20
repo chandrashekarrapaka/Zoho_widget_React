@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 const PatternStorage = (props) => {
     const [pattern, setPattern] = useState([]);
     const curPlId=props.cp[0].plantid;
-    console.log(props.cp[0].plantid,props.cp[0].plantName);
+    //console.log(props.cp[0].plantid,props.cp[0].plantName);
 
     useEffect(() => {
-        console.log("PatternStorage Working");
+       // console.log("PatternStorage Working");
         const newPattern = [];
         props.plantsData.forEach((item) => {
             if (item !== undefined) {
@@ -27,7 +27,7 @@ const PatternStorage = (props) => {
         sessionStorage.setItem('plantPattern', JSON.stringify(newPattern));
     }, [props.plantsData, curPlId]);
 
-    console.log(sessionStorage.getItem('plantPattern'));
+   // console.log(sessionStorage.getItem('plantPattern'));
 //sessionStorage.clear();
     // Render your component
     return <></>;
