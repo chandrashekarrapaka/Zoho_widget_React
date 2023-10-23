@@ -45,19 +45,44 @@ function Container() {
              if (element.length>0)plants.push(element); 
             });
             const storedPattern = sessionStorage.getItem('plantPattern');
-            const checklist=JSON.parse(storedPattern).length;
+            
+            if(storedPattern && storedPattern!=undefined){
+              const checklist=JSON.parse(storedPattern).length;
             console.log(checklist,plants.length);
-            if (storedPattern &&storedPattern.length>1 &&checklist==plants.length) {
+            const uniqueOrderedIds = [...new Set(JSON.parse(storedPattern))];
+            const uniquePlantIds = plants.map(plant => plant[0].plantid);
+
+            // Check if the unique plant IDs in ordered pattern match the current data
+            const patternsMatch = JSON.stringify(uniqueOrderedIds.sort()) === JSON.stringify(uniquePlantIds.sort());
+              console.log(uniqueOrderedIds,uniquePlantIds,patternsMatch);
+            if (storedPattern &&storedPattern.length>1 &&checklist===plants.length &&patternsMatch) {
                console.log("inside patterns");
                     const orderedPattern = JSON.parse(storedPattern);
+                   
                     // Reorder fetchedPlantsData based on orderedPattern
+                    if(orderedPattern!=undefined){
                     const reorderedPlantsData = orderedPattern.map((plantId) => {
-                     // console.log(plantId);
-                        return plants.find((plant) => plant[0].plantid === plantId);
-                    });
-
+                     //console.log(plantId);
+                     if(plantId!=undefined){
+                     // console.log(plants);
+                        const plant= plants.find((plant) => plant[0].plantid === plantId);
+                        return plant?plant:null;
+                     }
+                    }).filter((plant)=>plant!=null);
+                     
+                    reorderedPlantsData.map((id)=>{
+                      console.log(id[0].plantid);
+                    })
+                    
                     setPlantsData(reorderedPlantsData);
                   }else{
+                    setPlantsData(plants);
+                  }
+                  }
+                  else{
+                    setPlantsData(plants);
+                  }
+                }else{
                     setPlantsData(plants);
                   }
                   
@@ -93,8 +118,9 @@ function Container() {
 
     if (autoPagination && plantsData.length > 0&&PlantSelection==false) {
       const currentPlant = plantsData[currentPlantIndex];
+      // console.log(currentPlantIndex);
       setKpimachines(plantsData[currentPlantIndex].length);
-
+     // 
       let kpimonitorsnew = 0;
       let kpidisconnectednew = 0;
       plantsData[currentPlantIndex].forEach((mon) => {
