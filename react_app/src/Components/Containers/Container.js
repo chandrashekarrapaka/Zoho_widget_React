@@ -7,7 +7,8 @@ import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
 import TotalPlants from "../TotalPlants";
-import AlertBar from '../Containers/ScrollBar/AlertBar'
+import AlertBar from '../Containers/ScrollBar/AlertBar';
+import PatternStorage from "./PatternStorage";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +44,49 @@ function Container() {
             response[0].forEach(element => {
              if (element.length>0)plants.push(element); 
             });
-            setPlantsData(plants);
+            const storedPattern = sessionStorage.getItem('plantPattern');
+            
+            if(storedPattern && storedPattern!=undefined){
+              const checklist=JSON.parse(storedPattern).length;
+            console.log(checklist,plants.length);
+            const uniqueOrderedIds = [...new Set(JSON.parse(storedPattern))];
+            const uniquePlantIds = plants.map(plant => plant[0].plantid);
+
+            // Check if the unique plant IDs in ordered pattern match the current data
+            const patternsMatch = JSON.stringify(uniqueOrderedIds.sort()) === JSON.stringify(uniquePlantIds.sort());
+              console.log(uniqueOrderedIds,uniquePlantIds,patternsMatch);
+            if (storedPattern &&storedPattern.length>1 &&checklist===plants.length &&patternsMatch) {
+               console.log("inside patterns");
+                    const orderedPattern = JSON.parse(storedPattern);
+                   
+                    // Reorder fetchedPlantsData based on orderedPattern
+                    if(orderedPattern!=undefined){
+                    const reorderedPlantsData = orderedPattern.map((plantId) => {
+                     //console.log(plantId);
+                     if(plantId!=undefined){
+                     // console.log(plants);
+                        const plant= plants.find((plant) => plant[0].plantid === plantId);
+                        return plant?plant:null;
+                     }
+                    }).filter((plant)=>plant!=null);
+                     
+                    reorderedPlantsData.map((id)=>{
+                      console.log(id[0].plantid);
+                    })
+                    
+                    setPlantsData(reorderedPlantsData);
+                  }else{
+                    setPlantsData(plants);
+                  }
+                  }
+                  else{
+                    setPlantsData(plants);
+                  }
+                }else{
+                    setPlantsData(plants);
+                  }
+                  
+            //
            // console.log("work"+response[1].length,plants.length);
             if(plants.length==0){
               setNoData('No data found');
@@ -188,6 +231,7 @@ function Container() {
           <div className="container-fluid">
             <div className="header">
               <TotalPlants plantsData={plantsData} />
+              <PatternStorage plantsData={plantsData} cp={currentPlant}/>
             </div>
 
             <div className="main-content">
