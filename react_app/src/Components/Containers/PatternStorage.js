@@ -25,6 +25,44 @@ const PatternStorage = (props) => {
         setPattern(newPattern);
         // Store the pattern in sessionStorage
         sessionStorage.setItem('plantPattern', JSON.stringify(newPattern));
+        const loginResponse =  window.ZOHO.CREATOR.init().then(function (data) {
+            let accessTokenz = "";
+            let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
+      
+            var config = {
+              appName: "infinite-control-room",
+              reportName: "My_Profile_Data",
+              criteria: "Username == \"" + userid + "\"",
+              page: "1",
+              pageSize: "100"
+            };
+      
+            const access = window.ZOHO.CREATOR.API.getAllRecords(config).then(function (response) {
+            const idx=response.data[0].ID;
+            console.log(idx);
+            const formData={
+                "data": {
+                  "PlantPattern": JSON.stringify(newPattern)
+                }
+            }
+           const  config = {
+                appName : "infinite-control-room",
+                reportName  : "My_Profile_Data",
+                id: idx,
+                data : formData
+              };
+              const acce=window.ZOHO.CREATOR.API.updateRecord(config).then(function(response){
+               
+            console.log(response);
+
+                if(response.code == 3000 && response.message == "Data Updated Successfully"){
+                   console.log("working");
+                }
+              });
+            });
+           
+          });
+          //console.log(access);
     }, [props.plantsData, curPlId]);
 
    // console.log(sessionStorage.getItem('plantPattern'));
