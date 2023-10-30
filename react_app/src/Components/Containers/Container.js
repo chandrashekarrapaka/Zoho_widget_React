@@ -32,85 +32,76 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-       // console.log("work"+JSON.stringify(response[0][0]));
-        //console.log(response);
 
         if (response[1]) {
-          
-          let plants=[];
-          if (response[0]) {
-            //kpimonitors=response.length;
-           
-            response[0].forEach(element => {
-             if (element.length>0)plants.push(element); 
-            });
-            const storedPattern = sessionStorage.getItem('plantPattern');
-            
-            if(storedPattern && storedPattern!=undefined){
-              const checklist=JSON.parse(storedPattern).length;
-            console.log(checklist,plants.length);
-            const uniqueOrderedIds = [...new Set(JSON.parse(storedPattern))];
-            const uniquePlantIds = plants.map(plant => plant[0].plantid);
+          let plants = [];
 
-            // Check if the unique plant IDs in ordered pattern match the current data
-            const patternsMatch = JSON.stringify(uniqueOrderedIds.sort()) === JSON.stringify(uniquePlantIds.sort());
-              console.log(uniqueOrderedIds,uniquePlantIds,patternsMatch);
-            if (storedPattern &&storedPattern.length>1 &&checklist===plants.length &&patternsMatch) {
-               console.log("inside patterns");
-                    const orderedPattern = JSON.parse(storedPattern);
-                   
-                    // Reorder fetchedPlantsData based on orderedPattern
-                    if(orderedPattern!=undefined){
-                    const reorderedPlantsData = orderedPattern.map((plantId) => {
-                     //console.log(plantId);
-                     if(plantId!=undefined){
-                     // console.log(plants);
-                        const plant= plants.find((plant) => plant[0].plantid === plantId);
-                        return plant?plant:null;
-                     }
-                    }).filter((plant)=>plant!=null);
-                     
-                    reorderedPlantsData.map((id)=>{
-                      console.log(id[0].plantid);
-                    })
-                    
-                    setPlantsData(reorderedPlantsData);
-                  }else{
-                    setPlantsData(plants);
-                  }
-                  }
-                  else{
-                    setPlantsData(plants);
-                  }
-                }else{
-                    setPlantsData(plants);
-                  }
-                  
-            //
-           // console.log("work"+response[1].length,plants.length);
-            if(plants.length==0){
-              setNoData('No data found');
+          if (response[0]) {
+            response[0].forEach(element => {
+              if (element.length > 0) plants.push(element);
+            });
+
+            const storedPattern = await fetchProfile();
+
+            if (storedPattern && storedPattern !== undefined) {
+              const uniqueOrderedIds = [...new Set(JSON.parse(storedPattern))];
+              const uniquePlantIds = plants.map(plant => plant[0].plantid);
+              const patternsMatch = JSON.stringify(uniqueOrderedIds.sort()) === JSON.stringify(uniquePlantIds.sort());
+
+              if (storedPattern && storedPattern.length > 1 && patternsMatch) {
+                const orderedPattern = JSON.parse(storedPattern);
+                const reorderedPlantsData = orderedPattern.map((plantId) => {
+                  const plant = plants.find((plant) => plant[0].plantid === plantId);
+                  return plant ? plant : null;
+                }).filter((plant) => plant !== null);
+
+                setPlantsData(reorderedPlantsData);
+              } else {
+                setPlantsData(plants);
+              }
+            } else {
+              setPlantsData(plants);
             }
 
-          }
-          else {
-            //alert('No data found');
+            if (plants.length === 0) {
+              setNoData('No data found');
+            }
+          } else {
             setNoData('No data found');
           }
-        }
-        else {
+        } else {
           setApiCall(false);
-          //console.log(apicall);
         }
       } catch (error) {
-        //console.log("error" + error);
         console.error(error);
-
+        setNoData('Error occurred while fetching data.');
       }
     };
 
     fetchData();
   }, [timeIn]);
+
+  const fetchProfile = async () => {
+    try {
+        const data = await window.ZOHO.CREATOR.init();
+        let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
+        var config = {
+            appName: "infinite-control-room",
+            reportName: "My_Profile_Data",
+            criteria: "Username == \"" + userid + "\"",
+            page: "1",
+            pageSize: "100"
+        };
+        const response = await window.ZOHO.CREATOR.API.getAllRecords(config);
+        const idx = response.data[0].PlantPattern;
+        console.log(idx);
+        return idx;
+    } catch (error) {
+        console.error(error);
+        // Handle error cases
+        return null; // Or any appropriate value indicating error
+    }
+};
 
   useEffect(() => {
     let timeout;

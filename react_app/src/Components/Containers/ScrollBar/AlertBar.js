@@ -43,7 +43,7 @@ const AlertsBar = ( prop) => {
         const fetchPromises = totalPlants.map(async (element) => {
           const plantid = element[0].plantid;
           const response = await fetch(
-            "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts?plantIds=" +
+            "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts/plants?plantIds=" +
               plantid +
               "&from=" +
               dtFrom +
