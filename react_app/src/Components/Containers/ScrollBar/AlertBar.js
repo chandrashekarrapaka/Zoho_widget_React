@@ -216,7 +216,7 @@ const AlertsBar = ( prop) => {
 
     return (
       
-      <div className="alerts-bar" style={{ background: "#ffc0c0",color:"red",fontSize:"20px" }}onMouseEnter={() => setAnimationPaused(true)} onMouseLeave={() => setAnimationPaused(false)}>
+      <div className="alerts-bar" style={{ background: "#ffc0c0",color:"red" }}onMouseEnter={() => setAnimationPaused(true)} onMouseLeave={() => setAnimationPaused(false)}>
         <div className={`marquee ${animationPaused ? 'marquee-paused' : ''}`} style={{animation:`marquee ${animationDuration}s linear infinite`}} >
          
         {totalAlerts && totalAlerts.length > 0 ? ( 

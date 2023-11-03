@@ -72,19 +72,19 @@ function AA(prop) {
   // console.log("checking",lengthofDisplay,dataDisplay.data.length)
   return (
     <div className="anomaly-alert">
-      <p className="heading">Anomaly Alert</p>
+      <p className="heading fs-16">Anomaly Alert</p>
       <div className="data-box">
       <div class="data mb-2">
         {dataDisplay && dataDisplay.data.length > 0 ? (
           dataDisplay.data.map((ele) => (
             <div className="content-itemz">
-              <div className="fs-14 mb-0 text-dark">Machine Name: 
+              <div className="fs-11 mb-0 text-dark">Machine Name: 
              <span className="fw-bold"> {ele.machineName}</span>
               </div>
-              <div className="data-badge mb-0">Monitor Name: {ele.monitorName}</div>
-              <div className="anomaly-magnitude">Anomaly Magnitude: {ele.anomalyMagnitude}</div>
-              <div className="alert-timestamp">Alert Timestamp: {ele.alertTimestamp}</div>
-              <div className="anomaly-detected">Anomaly Detected: {ele.anomalyDetected}</div>
+              <div className="data-badge fs-11 mb-0">Monitor Name: {ele.monitorName}</div>
+              <div className="anomaly-magnitude fs-11">Anomaly Magnitude: {ele.anomalyMagnitude}</div>
+              <div className="alert-timestamp fs-11">Alert Timestamp: {ele.alertTimestamp}</div>
+              <div className="anomaly-detected fs-11">Anomaly Detected: {ele.anomalyDetected}</div>
             </div>
           ))
         ) :

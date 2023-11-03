@@ -93,7 +93,7 @@ function Machine(prop) {
 
             
 
-                  <div className="col-lg col-20 mb-2" >
+                  <div className="col-lg col-20 mb-1" >
                     <div className="cement-mill-box " style={{"padding":"2px"}}>
                       <p className="heading text-white mb-0 fw-bold fs-14 text-center">
                       {ele.mg}
