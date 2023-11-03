@@ -233,15 +233,15 @@ function Container() {
                 <div className="col-lg-9">
                   <div className="left-main">
                     <div className="title-section d-flex mb-2 align-items-center justify-content-between py-2 px-3 bg-white br-10">
-                      <p className="mb-0 fs-4 fw-600"> {currentPlant[0]?.plantName || ""}</p>
-                      <p className="mb-0 text-gray" onClick={(e)=>{handleNextPlant(currentPlantIndex)}}> Coming Next: <strong className="text-primary" style={{ cursor: "pointer" }} >{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
+                      <p className="mb-0 fs-18 fw-600"> {currentPlant[0]?.plantName || ""}</p>
+                      <p className="mb-0 fs-16 text-gray" onClick={(e)=>{handleNextPlant(currentPlantIndex)}}> Coming Next: <strong className="text-primary" style={{ cursor: "pointer" }} >{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
                     </div>
 
                     <Header kpidisconnected={kpidisconnected} kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant} />
                    
                     <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
                     
-                    <div className="pagination-sec" style={{paddingBottom:"20px"}}>
+                    <div className="pagination-sec" style={{paddingBottom:"10px"}}>
                       <div className="row">
                         <div class="pagination-section">
                           <div class="pagination-inner-sec">
@@ -268,16 +268,16 @@ function Container() {
                     <div className="health-score-sec">
                       <div className="row">
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
-                          <div className="health-score-box py-2 px-3">
+                          <div className="health-score-box py-2 md:px-3 px-1">
                             <div className="score-box green"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold">Normal</p>
+                            <p className="text-dark fs-14 mb-0 fw-bold">Normal</p>
                           </div>
                         </div>
 
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box yellow"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold">Caution
+                            <p className="text-dark fs-14 mb-0 fw-bold">Caution
                             </p>
                           </div>
                         </div>
@@ -285,7 +285,7 @@ function Container() {
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box red"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold">Warning
+                            <p className="text-dark fs-14 mb-0 fw-bold">Warning
                             </p>
                           </div>
                         </div>
@@ -293,7 +293,7 @@ function Container() {
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box text-bg-secondary"></div>
-                            <p className="text-dark fs-12 mb-0 fw-bold " >Disconnected
+                            <p className="text-dark fs-14 mb-0 fw-bold " >Disconnected
                             </p>
                           </div>
                         </div>

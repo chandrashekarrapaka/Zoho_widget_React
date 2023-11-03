@@ -1,6 +1,3 @@
-*{
-  overflow: hidden;
-}
 .marquee {
     white-space: nowrap;
     overflow:  hidden;

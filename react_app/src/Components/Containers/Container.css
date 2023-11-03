@@ -8,9 +8,9 @@
 body {
   background: #EEF3F9;
   font-family: 'Urbanist', sans-serif;
-height: 100vh;
+height: 100vh; 
 }
-
+ 
 /* ------- Common Classes ------- */
 
 .fs-9 {
@@ -20,9 +20,21 @@ height: 100vh;
 .fs-10 {
   font-size: 10px;
 }
-
+.fs-11 {
+  font-size:0.9vw;
+  line-height:1vw;
+}
 .fs-14 {
-  font-size: 14px;
+  font-size:0.8vw;
+  line-height: 1vw;
+}
+.fs-16{
+  font-size:1vw;
+  line-height:1.5vw;
+}
+.fs-18{
+  font-size:1.5vw;
+  line-height:1.8vw;
 }
 
 .fs-12 {
@@ -59,10 +71,6 @@ height: 100vh;
 
 /* ------------------------------ */
 
-.dashboard-sec {
-  padding: 10px 0;
-}
-
 .dashboard-sec .brand-logo {
   background: #fff;
   border-radius: 10px;
@@ -75,7 +83,7 @@ height: 100vh;
 
 .dashboard-sec .about-brand-box {
   background: var(--primary-clr);
-  padding: 5px;
+  padding: 0.5vw;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -86,15 +94,20 @@ height: 100vh;
 }
 
 .dashboard-sec .about-brand-box .right-content-box {
-  width: 48px;
-  height: 48px;
+  width: 3vw;
+  height: 3vw;
   background: #fff;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+.dashboard-sec .about-brand-box .right-content-box img {
+  height: 1.5vw;
+}
+.dashboard-sec .about-brand-box .left-content {
+  padding-right: 5px;
+}
 .dashboard-sec .main-content .boxes-section .about-brand-box {
   background-color: #fff;
   color: #fff;
@@ -111,8 +124,7 @@ height: 100vh;
   font-weight: 600;
   text-align: center;
   margin-bottom: 0;
-  border-radius: 9px 9px 0 0;
-font-size: 18px;
+  border-radius: 9px 9px 0 0; 
 }
 
 .dashboard-sec .main-content .right-main .anomaly-alert .data-box {
@@ -129,8 +141,7 @@ font-size: 18px;
 
 .dashboard-sec .main-content .right-main .anomaly-alert .data .data-badge {
   background-color: #fff;
-  color: var(--primary-clr);
-  font-size: 13px;
+  color: var(--primary-clr); 
   padding: 2px 5px;
   font-weight: 700;
 }
@@ -145,7 +156,7 @@ font-size: 18px;
   border-radius: 11px 11px 0 0;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow: hidden!important;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper {
@@ -154,12 +165,14 @@ font-size: 18px;
   width: 145px;
   gap: 3px;
   min-height: 5px;
-  margin: 0 auto;
+  margin: 0 auto 5px;
+  overflow-y: auto;
+  height: 35px;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box {
-  width: 15px;
-  height: 15px;
+  width: 0.8vw;
+  height: 1.8vh;
   border-radius: 1px;
   background: var(--secondary-clr);
 }
@@ -242,28 +255,31 @@ justify-content: center;
   background-color: #000;
   color: #fff;
 }
-
 .pagination-block .page-item {
   background-color: #fff;
-  height: 35px;
-  width: 36px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 10px;
-  font-weight: 700;
+  width: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  border-radius: 7px;
 }
 .stop-auto-pagination {
   background-color: #fff;
   border-radius: 20px;
-  padding: 7px 14px;
+  padding: 5px 14px;
   display: flex;
   font-weight: 600;
-  font-size: 14px;
   align-items: center;
+  font-size: 0.7vw;
+  line-height: 1.3vw;
 }
-
+.alerts-bar {
+  font-size: 0.7vw;
+  line-height: 1.3vw;
+}
 .right-main .data-box {
-  height: 28vh;
+  height: 34vh;
   overflow-y: scroll;
 }
 
@@ -339,12 +355,17 @@ color: #fff;
   flex: 0 0 auto;
   width: 20%;
 }
+.alerts-bar{overflow: hidden;}
+
+.dashboard-sec {
+  padding: 10px 0; 
+}
 
 /* --------- Resiponsive Style --------- */
 
 @media (max-width: 991px) {
   .dashboard-sec .brand-logo, .dashboard-sec .about-brand-box {
-      padding: 10px 18px;
+      padding: 5px 18px;
   }
 .roll-press .modal-dialog {
   width: 97%; 
@@ -357,3 +378,114 @@ color: #fff;
 
 }
 
+@media only screen and (max-width:767px) and (min-width:481px)  {
+  .col-20 {
+    width: 50%;
+  }
+  .cement-mill-sec .cement-mill-wrapper .cement-mill-box .heading {
+    font-size: 12px;
+  }
+  .cement-mill-sec .cement-mill-wrapper .cement-mill-box p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  
+  }
+
+@media (max-width:480px) {
+.col-20 { 
+  width: 100%;
+}
+}
+
+@media (max-width: 1024px) {
+  
+.dashboard-sec .about-brand-box .right-content-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+}
+.dashboard-sec .about-brand-box .right-content-box img {
+  height: 25px;
+}
+.dashboard-sec .about-brand-box {
+  height: auto;
+}
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer .i-icon img {
+  width: auto; 
+  padding-right: 10px;
+}
+ 
+.pagination-block .page-item { 
+  height: 26px;
+  width: 26px; 
+  line-height: 28px;
+  border-radius: 6px; 
+  font-size: 13px;
+  margin: 0 2px; 
+}
+.stop-auto-pagination input {
+  margin-right: 5px;
+}
+.dashboard-sec .main-content .right-main .anomaly-alert .data {
+  padding: 5px;
+  font-size: 13px;
+}
+.right-main .data-box { 
+  overflow-y: scroll!important;
+}
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box {
+  width: 10px;
+  height: 10px; 
+}
+}
+
+
+@media (min-width: 1024px) {
+
+.dashboard-sec .about-brand-box { 
+  height: auto;
+}
+.header .row>* {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+}
+
+
+@media screen and (min-width: 1024px) {
+  div#root {
+    height: 100%;
+  }
+  .App {
+    height: 100%;
+  }
+  .App > div {
+    height: 100%;
+  }
+  .dashboard-sec {
+    height: 100%;
+  }
+  .dashboard-sec > div {
+    height: 100%;
+  }
+  
+  .header .row {
+    margin-right: 0;
+    margin-left: 0; 
+  }
+   
+  .main-content > .row {
+    height: 100%;
+  }
+  .right-main {
+    height: 100%;
+  }
+  .right-main > .row {
+    height: 100%;
+  }
+  .anomaly-alert {
+    height: 100%;
+  }
+  }

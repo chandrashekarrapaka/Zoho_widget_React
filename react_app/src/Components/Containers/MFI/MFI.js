@@ -77,7 +77,7 @@ function MFI(prop) {
   //let keylength=data
   return (
     <div className="anomaly-alert">
-    <p className="heading">Machine with Faults</p>
+    <p className="heading fs-16">Machine with Faults</p>
     <div className="data-box">
       <div className="data mb-2">
         {dataDisplay && dataDisplay.length > 0 ? (
@@ -85,7 +85,7 @@ function MFI(prop) {
             if (ele.status === "NEW") {
               return (
                 ele.serviceReqMachineDetails.map((srmd) => (
-                  <div className="fs-14 mb-0 text-dark">
+                  <div className="fs-11 mb-0 text-dark">
                     <span className="fw-bold">
                       {srmd.machineName ? i++ + ". " + srmd.machineName + " " + srmd.createdDateWithPlantTimezone : ''}
                     </span>
