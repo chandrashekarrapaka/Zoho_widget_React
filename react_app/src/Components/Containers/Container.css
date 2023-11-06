@@ -21,8 +21,8 @@ height: 100vh;
   font-size: 10px;
 }
 .fs-11 {
-  font-size:0.7vw;
-  line-height: 0.9vw;
+  font-size:0.9vw;
+  line-height:1vw;
 }
 .fs-14 {
   font-size:0.8vw;
@@ -160,21 +160,22 @@ height: 100vh;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  width: 145px;
-  gap: 3px;
-  min-height: 5px;
+  width:8.2vw;
   margin: 0 auto 5px;
   overflow-y: auto;
-  height: 35px;
+  height: 2.1vw;
+  text-align: center;
+  padding: 0 !important;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box {
   width: 0.8vw;
-  height: 1.8vh;
+  aspect-ratio: 1 / 1;
   border-radius: 1px;
   background: var(--secondary-clr);
+  float: left;
+  margin: 2px;
+  padding: 0 !important;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box.orange {
@@ -214,8 +215,8 @@ align-items: center;
   gap: 7px;
 }
 .health-score-box .score-box {
-  width: 15px;
-  height: 15px;
+  width: 0.7vw;
+  aspect-ratio: 1/1;
   border-radius: 1px;
   background: var(--secondary-clr);
 }
@@ -257,15 +258,14 @@ justify-content: center;
 }
 .pagination-block .page-item {
   background-color: #fff;
-  height: 3vh;
-  width: 1.5vw;
-  text-align: center;
-  border-radius: 3px;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 0 2px;
+  width: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  border-radius: 7px;
+  margin: 5px;
   font-size: 0.7vw;
-  line-height: 1.3vw;
 }
 .stop-auto-pagination {
   background-color: #fff;
@@ -277,8 +277,13 @@ justify-content: center;
   font-size: 0.7vw;
   line-height: 1.3vw;
 }
+.stop-auto-pagination input{
+  width: 1vw;
+  height: 0.65vw;
+  vertical-align: middle;
+}
 .alerts-bar {
-  font-size: 0.7vw;
+  font-size:1vw;
   line-height: 1.3vw;
 }
 .right-main .data-box {
@@ -364,6 +369,10 @@ color: #fff;
   padding: 10px 0; 
 }
 
+.box-footer img, .i-icon img {
+  width: 0.5vw;
+} 
+
 /* --------- Resiponsive Style --------- */
 
 @media (max-width: 991px) {
@@ -418,14 +427,15 @@ color: #fff;
   width: auto; 
   padding-right: 10px;
 }
- 
+
 .pagination-block .page-item { 
   height: 26px;
   width: 26px; 
   line-height: 28px;
-  border-radius: 6px; 
+  border-radius: 6px;  
   font-size: 13px;
   margin: 0 2px; 
+  font-size: 0.7vw;
 }
 .stop-auto-pagination input {
   margin-right: 5px;
@@ -492,5 +502,3 @@ color: #fff;
     height: 100%;
   }
   }
-
-
