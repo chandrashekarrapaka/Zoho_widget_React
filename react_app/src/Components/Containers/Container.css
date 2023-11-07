@@ -287,8 +287,8 @@ justify-content: center;
   line-height: 1.3vw;
 }
 .right-main .data-box {
-  height: 34vh;
-  overflow-y: scroll;
+  height: 26vh;
+  overflow-y: scroll; 
 }
 
 .roll-press .modal-dialog { 
