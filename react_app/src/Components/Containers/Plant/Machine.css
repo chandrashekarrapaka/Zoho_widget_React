@@ -40,6 +40,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 999;
     text-align: left;
+    width: 50%;
   }
   .info-icon {
     cursor: pointer;

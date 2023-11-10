@@ -77,7 +77,7 @@ function MFI(prop) {
     <div className="anomaly-alert">
     <p className="heading fs-16">Machine with Faults</p>
     <div className="data-box">
-      <div className="data mb-2">
+      <div className="data mb-2 fs-11">
         {dataDisplay && dataDisplay.length > 0 ? (
           dataDisplay.map((ele) => {
             if (ele.status === "NEW") {
@@ -98,7 +98,7 @@ function MFI(prop) {
             }
           })
         ) : (
-          <div className="fs-14 mb-0 text-dark">No Faults observed in machines</div>
+          <div className="fs-11 mb-0 text-dark">No Faults observed in machines</div>
         )}
       </div>
     </div>
