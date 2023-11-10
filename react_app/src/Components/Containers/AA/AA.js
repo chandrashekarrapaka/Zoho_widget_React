@@ -74,7 +74,7 @@ function AA(prop) {
     <div className="anomaly-alert">
       <p className="heading fs-16">Anomaly Alert</p>
       <div className="data-box">
-      <div class="data mb-2">
+      <div class="data mb-2 fs-11">
         {dataDisplay && dataDisplay.data.length > 0 ? (
           dataDisplay.data.map((ele) => (
             <div className="content-itemz">

@@ -8,7 +8,7 @@
 body {
   background: #EEF3F9;
   font-family: 'Urbanist', sans-serif;
-height: 100vh; 
+  height: 100vh;
 }
  
 /* ------- Common Classes ------- */
@@ -80,7 +80,9 @@ height: 100vh;
   align-items: center;
   padding: 5px;
 }
-
+.dashboard-sec .brand-logo img {
+  height: 55px;
+}
 .dashboard-sec .about-brand-box {
   background: var(--primary-clr);
   padding: 0.5vw;
@@ -137,6 +139,7 @@ height: 100vh;
   background: #F2F2F2;
   border-radius: 8px;
   padding: 10px;
+  font-size: .9vw;
 }
 
 .dashboard-sec .main-content .right-main .anomaly-alert .data .data-badge {
@@ -287,8 +290,8 @@ justify-content: center;
   line-height: 1.3vw;
 }
 .right-main .data-box {
-  height: 26vh;
-  overflow-y: scroll; 
+  height: 35vh;
+  overflow-y: scroll;
 }
 
 .roll-press .modal-dialog { 
@@ -501,4 +504,12 @@ color: #fff;
   .anomaly-alert {
     height: 100%;
   }
+  }
+
+  @media screen and (min-width: 1500px) {
+
+  .dashboard-sec .brand-logo img {
+    height: 9vh;
+}
+
   }
