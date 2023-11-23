@@ -511,7 +511,7 @@ body {
 @media (min-width: 1025px) {
 
   .dashboard-sec .about-brand-box {
-    height: 7vh;
+    height: 9vh;
   }
 
   .header .row>* {
@@ -520,7 +520,7 @@ body {
   }
 
   .dashboard-sec .brand-logo {
-    height: 7vh;
+    height: 9vh;
   }
 
   .dashboard-sec .brand-logo img {
