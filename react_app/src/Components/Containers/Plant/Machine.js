@@ -150,7 +150,7 @@ function Machine(prop) {
     <tbody>
                 {apiData.monitors.map((data) => {
                   // console.log("table call"+data.healthScore);
-                  const stylemon = { "width": "auto",scope:"row" };
+                  const stylemon = { "width": "30%",scope:"row" };
                   
                   
                   if (data.status == 1 || data.status == 2) stylemon.backgroundColor = "#64DD17";

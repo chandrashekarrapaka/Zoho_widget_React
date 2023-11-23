@@ -1,5 +1,3 @@
-
-
 :root {
   --primary-clr: #01ADFF;
   --secondary-clr: #67DC1C;
@@ -10,7 +8,7 @@ body {
   font-family: 'Urbanist', sans-serif;
   height: 100vh;
 }
- 
+
 /* ------- Common Classes ------- */
 
 .fs-9 {
@@ -20,21 +18,25 @@ body {
 .fs-10 {
   font-size: 10px;
 }
+
 .fs-11 {
-  font-size:0.9vw;
-  line-height:1vw;
-}
-.fs-14 {
-  font-size:0.8vw;
+  font-size: 0.9vw;
   line-height: 1vw;
 }
-.fs-16{
-  font-size:1vw;
-  line-height:1.5vw;
+
+.fs-14 {
+  font-size: 0.8vw;
+  line-height: 1vw;
 }
-.fs-18{
-  font-size:1.5vw;
-  line-height:1.8vw;
+
+.fs-16 {
+  font-size: 1vw;
+  line-height: 1.5vw;
+}
+
+.fs-18 {
+  font-size: 1.5vw;
+  line-height: 1.8vw;
 }
 
 .fs-12 {
@@ -80,9 +82,11 @@ body {
   align-items: center;
   padding: 5px;
 }
+
 .dashboard-sec .brand-logo img {
   height: 55px;
 }
+
 .dashboard-sec .about-brand-box {
   background: var(--primary-clr);
   padding: 0.5vw;
@@ -104,12 +108,15 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .dashboard-sec .about-brand-box .right-content-box img {
   height: 1.5vw;
 }
+
 .dashboard-sec .about-brand-box .left-content {
   padding-right: 5px;
 }
+
 .dashboard-sec .main-content .boxes-section .about-brand-box {
   background-color: #fff;
   color: #fff;
@@ -126,7 +133,7 @@ body {
   font-weight: 600;
   text-align: center;
   margin-bottom: 0;
-  border-radius: 9px 9px 0 0; 
+  border-radius: 9px 9px 0 0;
 }
 
 .dashboard-sec .main-content .right-main .anomaly-alert .data-box {
@@ -144,13 +151,14 @@ body {
 
 .dashboard-sec .main-content .right-main .anomaly-alert .data .data-badge {
   background-color: #fff;
-  color: var(--primary-clr); 
+  color: var(--primary-clr);
   padding: 2px 5px;
   font-weight: 700;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box {
-  background-color: #fff;border-radius: 10px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .heading {
@@ -159,11 +167,11 @@ body {
   border-radius: 11px 11px 0 0;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden!important;
+  overflow: hidden !important;
 }
 
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper {
-  width:8.2vw;
+  width: 8.2vw;
   margin: 0 auto 5px;
   overflow-y: auto;
   height: 2.1vw;
@@ -198,10 +206,10 @@ body {
 .cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer {
   background-color: var(--secondary-clr);
   padding-left: 12px;
-  border-radius:  0 0 11px 11px;
+  border-radius: 0 0 11px 11px;
 }
 
-.cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer .i-icon img{
+.cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer .i-icon img {
   width: 24px;
   border-radius: 0 0 11px 0;
 }
@@ -209,28 +217,33 @@ body {
 .health-score-sec {
   padding: 0 3%;
 }
+
 .health-score-box {
   background-color: #fff;
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
-align-items: center;
+  align-items: center;
   gap: 7px;
 }
+
 .health-score-box .score-box {
   width: 0.7vw;
   aspect-ratio: 1/1;
   border-radius: 1px;
   background: var(--secondary-clr);
 }
+
 .health-score-box .score-box.yellow {
   background: #FCBF10;
 }
+
 .health-score-box .score-box.red {
   background: #F65F26;
 }
+
 .health-score-box .score-box.outline {
- border: 1px solid #202020;
+  border: 1px solid #202020;
   background: #FFF;
 }
 
@@ -240,13 +253,15 @@ align-items: center;
   align-items: center;
   flex-wrap: wrap;
 }
+
 .pagination-inner-sec {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-justify-content: center;
+  justify-content: center;
   gap: 25px;
 }
+
 .pagination-block {
   list-style: none;
   display: flex;
@@ -255,10 +270,12 @@ justify-content: center;
   margin-bottom: 0;
   padding-left: 0;
 }
+
 .pagination-block .page-item.active {
   background-color: #000;
   color: #fff;
 }
+
 .pagination-block .page-item {
   background-color: #fff;
   width: 2vw;
@@ -270,6 +287,7 @@ justify-content: center;
   margin: 5px;
   font-size: 0.7vw;
 }
+
 .stop-auto-pagination {
   background-color: #fff;
   border-radius: 20px;
@@ -280,38 +298,45 @@ justify-content: center;
   font-size: 0.7vw;
   line-height: 1.3vw;
 }
-.stop-auto-pagination input{
+
+.stop-auto-pagination input {
   width: 1vw;
   height: 0.65vw;
   vertical-align: middle;
 }
+
 .alerts-bar {
-  font-size:1vw;
+  font-size: 1vw;
   line-height: 1.3vw;
 }
+
 .right-main .data-box {
   height: 35vh;
   overflow-y: scroll;
 }
 
-.roll-press .modal-dialog { 
-  width: 50%; 
-  max-width: 100%!important;
+.roll-press .modal-dialog {
+  width: 50%;
+  max-width: 100% !important;
 }
+
 .roll-press .modal-footer {
   justify-content: space-between;
   border: none;
 }
+
 .roll-press .modal-header {
   justify-content: center;
   border: none;
   padding-bottom: 0;
 }
+
 .roll-press .modal-title {
   text-transform: uppercase;
   font-weight: 600;
-text-align: center;
+  text-align: center;
 }
+
 .modal-bottom-content p {
   line-height: 18px;
   font-size: 14px;
@@ -323,24 +348,29 @@ text-align: center;
   border-collapse: separate;
   border-spacing: 0 10px;
 }
+
 .custom-content-table .table>thead {
   vertical-align: middle;
   border: none;
 }
+
 .custom-content-table .table>thead tr th {
   background-color: var(--primary-clr);
   line-height: 17px;
   color: #fff;
   font-weight: 500;
 }
+
 .custom-content-table .table>thead tr th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
+
 .custom-content-table .table>thead tr th:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
 .custom-content-table .table>tbody tr td {
   background-color: transparent;
   font-weight: 600;
@@ -351,121 +381,153 @@ text-align: center;
   border-radius: 10px;
   line-height: 18px;
 }
+
 .custom-content-table .table>tbody tr th.red {
   background-color: #ff5821;
 }
+
 .click-here-btn {
   background-color: var(--primary-clr);
   color: #fff;
 }
+
 .click-here-btn:hover {
-  background-color:var(--secondary-clr);
-color: #fff;
+  background-color: var(--secondary-clr);
+  color: #fff;
 }
+
 .col-20 {
   flex: 0 0 auto;
   width: 20%;
 }
-.alerts-bar{overflow: hidden;}
 
-.dashboard-sec {
-  padding: 10px 0; 
+.alerts-bar {
+  overflow: hidden;
 }
 
-.box-footer img, .i-icon img {
+.dashboard-sec {
+  padding: 10px 0;
+}
+
+.box-footer img,
+.i-icon img {
   width: 0.5vw;
-} 
+}
 
 /* --------- Resiponsive Style --------- */
 
 @media (max-width: 991px) {
-  .dashboard-sec .brand-logo, .dashboard-sec .about-brand-box {
-      padding: 5px 18px;
+
+  .dashboard-sec .brand-logo,
+  .dashboard-sec .about-brand-box {
+    padding: 5px 18px;
   }
-.roll-press .modal-dialog {
-  width: 97%; 
-}
+
+  .roll-press .modal-dialog {
+    width: 97%;
+  }
 }
 
-@media (max-width: 576px) {.title-section {
-  flex-direction: column;
-}
+@media (max-width: 576px) {
+  .title-section {
+    flex-direction: column;
+  }
 
 }
 
-@media only screen and (max-width:767px) and (min-width:481px)  {
+@media only screen and (max-width:767px) and (min-width:481px) {
   .col-20 {
     width: 50%;
   }
+
   .cement-mill-sec .cement-mill-wrapper .cement-mill-box .heading {
     font-size: 12px;
   }
+
   .cement-mill-sec .cement-mill-wrapper .cement-mill-box p {
     font-size: 12px;
     line-height: 16px;
   }
-  
-  }
+
+}
 
 @media (max-width:480px) {
-.col-20 { 
-  width: 100%;
-}
+  .col-20 {
+    width: 100%;
+  }
 }
 
 @media (max-width: 1024px) {
-  
-.dashboard-sec .about-brand-box .right-content-box {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-}
-.dashboard-sec .about-brand-box .right-content-box img {
-  height: 25px;
-}
-.dashboard-sec .about-brand-box {
-  height: auto;
-}
-.cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer .i-icon img {
-  width: auto; 
-  padding-right: 10px;
+
+  .dashboard-sec .about-brand-box .right-content-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+  }
+
+  .dashboard-sec .about-brand-box .right-content-box img {
+    height: 25px;
+  }
+
+  .dashboard-sec .about-brand-box {
+    height: auto;
+  }
+
+  .cement-mill-sec .cement-mill-wrapper .cement-mill-box .box-footer .i-icon img {
+    width: auto;
+    padding-right: 10px;
+  }
+
+  .pagination-block .page-item {
+    height: 26px;
+    width: 26px;
+    line-height: 28px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 0 2px;
+    font-size: 0.7vw;
+  }
+
+  .stop-auto-pagination input {
+    margin-right: 5px;
+  }
+
+  .dashboard-sec .main-content .right-main .anomaly-alert .data {
+    padding: 5px;
+    font-size: 13px;
+  }
+
+  .right-main .data-box {
+    overflow-y: scroll !important;
+  }
+
+  .cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box {
+    width: 10px;
+    height: 10px;
+  }
 }
 
-.pagination-block .page-item { 
-  height: 26px;
-  width: 26px; 
-  line-height: 28px;
-  border-radius: 6px;  
-  font-size: 13px;
-  margin: 0 2px; 
-  font-size: 0.7vw;
-}
-.stop-auto-pagination input {
-  margin-right: 5px;
-}
-.dashboard-sec .main-content .right-main .anomaly-alert .data {
-  padding: 5px;
-  font-size: 13px;
-}
-.right-main .data-box { 
-  overflow-y: scroll!important;
-}
-.cement-mill-sec .cement-mill-wrapper .cement-mill-box .color-boxes .box-wrapper .box {
-  width: 10px;
-  height: 10px; 
-}
-}
 
+@media (min-width: 1025px) {
 
-@media (min-width: 1024px) {
+  .dashboard-sec .about-brand-box {
+    height: 7vh;
+  }
 
-.dashboard-sec .about-brand-box { 
-  height: auto;
-}
-.header .row>* {
-  padding-left: 5px;
-  padding-right: 5px;
-}
+  .header .row>* {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .dashboard-sec .brand-logo {
+    height: 7vh;
+  }
+
+  .dashboard-sec .brand-logo img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
 
 }
 
@@ -474,42 +536,41 @@ color: #fff;
   div#root {
     height: 100%;
   }
+
   .App {
     height: 100%;
   }
-  .App > div {
+
+  .App>div {
     height: 100%;
   }
+
   .dashboard-sec {
     height: 100%;
   }
-  .dashboard-sec > div {
+
+  .dashboard-sec>div {
     height: 100%;
   }
-  
+
   .header .row {
     margin-right: 0;
-    margin-left: 0; 
+    margin-left: 0;
   }
-   
-  .main-content > .row {
+
+  .main-content>.row {
     height: 100%;
   }
+
   .right-main {
     height: 100%;
   }
-  .right-main > .row {
+
+  .right-main>.row {
     height: 100%;
   }
+
   .anomaly-alert {
     height: 100%;
   }
-  }
-
-  @media screen and (min-width: 1500px) {
-
-  .dashboard-sec .brand-logo img {
-    height: 9vh;
 }
-
-  }
