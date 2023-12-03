@@ -9,6 +9,7 @@ import icon3 from '../assets/imgs/about-icon-3.png';
 import icon4 from '../assets/imgs/about-icon-4.png';
 import icon5 from '../assets/imgs/about-icon-5.png';
 import test from '../assets/imgs/test.png';
+import AppListDropdown from './AppListDropdown';
 
 
 function TotalPlants(prop){
@@ -23,8 +24,7 @@ function TotalPlants(prop){
         kpi3: { title: "", value: "Total Faults Identified", src:icon3 },
         kpi4: { title: "", value: "Reports Closed", src:icon4},
         kpi5: { title: "", value: "Downtime Saved (Hrs)" , src:icon5},
-        kpi6: { title: "", value: "Disconnected",src:test },
-       
+        kpi6: { title: "", value: "Disconnected",src:test }, 
 
       };
       useEffect(() => {
@@ -50,7 +50,7 @@ function TotalPlants(prop){
         kpimachinesnew=kpimachinesnew+ element.length;
         element.forEach(ele=>{
           ele.monitors.forEach((emoni)=>{
-            if(emoni.status==5){
+            if(emoni.status==5||emoni.status==undefined){
               kpidisconnected++;
             }
             })
@@ -181,7 +181,11 @@ function TotalPlants(prop){
             {Object.keys(kipobj).map(function (ele) {
         return <KPI data={kipobj[ele]} />;
       })}
+
+
+         
             </div>
+           
           </div>
       
       

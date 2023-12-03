@@ -413,6 +413,113 @@ body {
 .i-icon img {
   width: 0.5vw;
 }
+.app-list-dropdown-wrap{
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  display: inline-block;
+}
+.app-list-trigger {
+  width: 2vw;
+  height: 2vw;
+  top: 40px;
+  right: 40px;
+  background-color: #f1f6fe;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.app-list-trigger:hover{
+  transform: scale(1.1);
+}
+
+.app-list-trigger img{
+  width: 1.2vw;
+  height: 1.2vw;
+}
+
+.app-list-dropdown {
+  background-color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
+  width: 25vw;
+  outline: 0px;
+  font-family: sans-serif;
+  position: absolute;
+  right: 0;
+  top: 2.5vw;
+  display: none;
+}
+
+.app-list-items {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  list-style: none;
+  margin: 0;
+}
+
+.app-list-item {
+  -webkit-padding-start: 0;
+  padding-inline-start: 0;
+  text-align: center;
+  width: 33.3%;
+}
+
+.app-list-link {
+  text-align: center;
+  display: block;
+  color: #000;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 1vh;
+  margin: 1vh;
+  font-size: 0.65vw
+}
+
+.app-list-link img {
+  display: block;
+  margin: 0 auto 10px;
+  width: 2vw;
+  height: 2vw;
+}
+
+.app-list-link span {
+  display: block;
+}
+
+.app-list-link:hover {
+  background: rgba(0, 0, 0, 0.04)
+}
+
+.app-list-btn{
+  color: rgb(255, 255, 255);
+    background-color: rgb(25, 118, 210);
+    font-weight: 500;
+    font-size: 0.65vw;
+    line-height: 1vw;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 6px 16px;
+    display: block;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+}
+.app-list-btn:hover{
+  background: rgb(21, 101, 192);
+}
 
 /* --------- Resiponsive Style --------- */
 

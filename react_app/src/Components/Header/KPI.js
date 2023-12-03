@@ -15,6 +15,7 @@ function KPI(props) {
           </div>
          
       </div>
+     
     </div>
   );
 }

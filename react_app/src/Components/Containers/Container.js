@@ -9,6 +9,7 @@ import Header from "../Header/Header";
 import TotalPlants from "../TotalPlants";
 import AlertsBar from "./Scrollbar/AlertsBar";
 import PatternStorage from "./PatternStorage";
+import AppListDropdown from "../AppListDropdown";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,6 +25,7 @@ function Container() {
   const [apicall, setApiCall] = useState(true);
   const [autoPagination, setAutoPagination] = useState(true); 
   const [PlantSelection,setPlantSelection]=useState(false);
+  const [displayApps,setDisplayApps]=useState([]);
 
   //screen things
   ////console.log("insidecontainer.js");
@@ -32,7 +34,7 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-
+        setDisplayApps(response[2]);
         if (response[1]) {
           let plants = [];
 
@@ -114,7 +116,7 @@ function Container() {
       let kpidisconnectednew = 0;
       plantsData[currentPlantIndex].forEach((mon) => {
         mon.monitors.forEach((ele)=>{
-          if(ele.status==5){
+          if(ele.status==5||ele.status==undefined){
             //console.log(ele.status,currentPlantIndex);
             kpidisconnectednew++;
             
@@ -225,6 +227,7 @@ function Container() {
           <div className="container-fluid">
             <div className="header">
               <TotalPlants plantsData={plantsData} />
+              <AppListDropdown  />
               <PatternStorage plantsData={plantsData} cp={currentPlant} />
             </div>
 
