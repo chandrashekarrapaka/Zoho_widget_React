@@ -112,7 +112,7 @@ function Machine(prop) {
                               <img src={icon1} alt="Secure Icon" className="img-fluid" />
                             </div>
                             <p className="fs-14 mt-1 text-black fw-bold mb-0">
-                              {ele.healthScore?ele.healthScore:"NA"}%
+                              {ele.healthScore?ele.healthScore+"%":"NA"}
                             </p>
                           </div>
                           <div className="i-icon" onClick={() => handleInfoClick(ele.id)}>
