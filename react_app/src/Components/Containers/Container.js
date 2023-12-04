@@ -114,7 +114,7 @@ function Container() {
       let kpidisconnectednew = 0;
       plantsData[currentPlantIndex].forEach((mon) => {
         mon.monitors.forEach((ele)=>{
-          if(ele.status==5){
+          if(ele.status==5 && ele.status!=undefined){
            // console.log(ele.status,currentPlantIndex);
             kpidisconnectednew++;
             
