@@ -500,7 +500,9 @@ body {
 .app-list-link:hover {
   background: rgba(0, 0, 0, 0.04)
 }
-
+.title-container {
+  height: 80px; /* Adjust the height based on your design */
+}
 .app-list-btn{
   color: rgb(255, 255, 255);
     background-color: rgb(25, 118, 210);

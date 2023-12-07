@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import { Velocity } from "../../../Services/Velocity";
 
 function Machine(prop) {
@@ -24,39 +24,54 @@ function Machine(prop) {
     return () => clearInterval(interval);
   }, []);
 
-  const getChartData = () => {
-    const machines = prop.machine.length;
-    const monitors = prop.machine.reduce((acc, ele) => acc + ele.monitors.length, 0);
+  const getChartData = (machine) => {
+    const monitors = machine.monitors.length;
 
-    const healthScores = prop.machine
-      .flatMap((ele) => ele.monitors.map((monitor) => monitor.healthScore))
+    const healthScores = machine.monitors
+      .map((monitor) => monitor.healthScore)
       .filter((healthScore) => healthScore !== undefined);
-    console.log(healthScores);
+
     const healthScorePercentages = [
       healthScores.filter((score) => score < 100).length,
       healthScores.filter((score) => score < 75).length,
-      healthScores.filter((score) => score <50).length,
+      healthScores.filter((score) => score < 50).length,
       healthScores.filter((score) => score < 25).length,
     ];
 
-    const chartData = {
-      labels: ['Healthy', 'Warning', 'Critical', 'Undefined'],
+    return {
+      // labels: ['Healthy', 'Warning', 'Critical', 'Undefined'],
       datasets: [
         {
           data: healthScorePercentages,
           backgroundColor: ['#64DD17', '#FFC107', '#FF5722', '#9E9E9E'],
         },
       ],
+      options: {
+        legend: {
+          display: false,
+        },
+      },
     };
-    console.log(chartData);
-    return chartData;
   };
 
   return (
-    <div className="cement-mill-sec">
+    <div className="cement-mill-sec" >
       <div className="cement-mill-wrapper">
         <div className="row">
-          <Doughnut data={getChartData()} />
+          {prop.machine.map((machine, index) => (
+            
+            <div key={index} className="col-lg col-20 mb-1">
+              <div style={{fontWeight:"bold"}}>{machine.name}</div>
+              <Pie data={getChartData(machine)} width={200}   height={200} options={{
+                maintainAspectRatio: false,
+                responsive: false,
+                
+                
+              }} />
+              <div>{"Health Score: "+machine.healthScore}<br/>{"Status: "+machine.status}<br/>{"MG: "+machine.mg}</div>
+              {/* {console.log(machine)} */}
+            </div>
+          ))}
           {showPopup && (
             <div
               className="popup"
