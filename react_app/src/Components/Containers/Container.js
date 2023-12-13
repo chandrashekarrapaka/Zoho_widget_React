@@ -19,7 +19,8 @@ function Container() {
   const [apicall, setApiCall] = useState(true);
   const [autoPagination, setAutoPagination] = useState(true);
   const [PlantSelection, setPlantSelection] = useState(false);
-  const [footerContent, setFooterContent] = useState(<Footer/>);
+  const [footerContent, setFooterContent] = useState(true);
+  const [board,SetBoard]=useState("insta");
 
 
 
@@ -100,9 +101,15 @@ function Container() {
       return null; // Or any appropriate value indicating error
     }
   };
-  const handleButtonClick = (content) => {
-    // Function to handle button click and update Footer content
-    setFooterContent(content);
+  const handleButtonClick = (content,type) => {
+    console.log(content,type);
+    setFooterContent(!footerContent);
+    if(type=="insta"){
+      SetBoard("hs");
+    }
+    else{
+      SetBoard("insta");
+    }
   };
   useEffect(() => {
     let timeout;
@@ -220,7 +227,7 @@ function Container() {
 
 
 
-                    <Plant  currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
+                    <Plant board={board} currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
 
                     <div className="pagination-sec" style={{ paddingBottom: "10px" }}>
                       <div className="row">
@@ -247,10 +254,10 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className="btn btn-primary" onClick={() => handleButtonClick(<Footer/>)}>Instantenous</button>
-                      <button className="btn btn-primary" onClick={() => handleButtonClick(<Footerhs/>)}>HealthScore</button>
+                      <button className="btn btn-primary" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
+                      <button className="btn btn-primary" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
                     </div><br/>
-                    {footerContent}
+                    {footerContent?<Footer/>:<Footerhs/>}
 
                   </div>
                 </div>

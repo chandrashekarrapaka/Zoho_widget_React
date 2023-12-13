@@ -5,7 +5,7 @@ import { Velocity } from "../../../Services/Velocity";
 function Machine(prop) {
   const [showPopup, setShowPopup] = useState(false);
   const [apiData, setApiData] = useState([]);
-
+  const [board,setBoard]=useState(true);//insta=true
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,18 +24,55 @@ function Machine(prop) {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    console.log("chandu");
+   
+    setBoard(!board);
+  }, [prop.board]);
   const getChartData = (machine) => {
-    const monitors = machine.monitors.length;
-
+    // const monitors = machine.monitors.length;
+    //console.log(machine.monitors);
+    
     const healthScores = machine.monitors
+    .map((monitor) => monitor.status)
+    .filter((healthScore) => healthScore !== undefined);
+
+    const healthScorePercentages = [
+      healthScores.filter((score) => score == 5 ).length,
+      healthScores.filter((score) => score == 4).length,
+      healthScores.filter((score) => score == 3).length,
+      healthScores.filter((score) => score == 2 ||score == 1).length,
+    ];
+   
+
+    return {
+      // labels: ['Healthy', 'Warning', 'Critical', 'Undefined'],
+      datasets: [
+        {
+          data: healthScorePercentages,
+          backgroundColor: ['#64DD17', '#FFC107', '#FF5722', '#9E9E9E'],
+        },
+      ],
+      options: {
+        legend: {
+          display: false,
+        },
+      },
+    };
+  };
+  const getChartData2 = (machine) => {
+    // const monitors = machine.monitors.length;
+
+    //console.log(machine.monitors);
+      const healthScores = machine.monitors
       .map((monitor) => monitor.healthScore)
       .filter((healthScore) => healthScore !== undefined);
 
     const healthScorePercentages = [
-      healthScores.filter((score) => score < 100).length,
-      healthScores.filter((score) => score < 75).length,
-      healthScores.filter((score) => score < 50).length,
-      healthScores.filter((score) => score < 25).length,
+      healthScores.filter((score) => score <= 100 &&score > 80).length,
+      healthScores.filter((score) => score <=80  &&score > 50).length,
+      healthScores.filter((score) => score <=50  &&score > 0).length,
+      healthScores.filter((score) => score == 0).length,
     ];
 
     return {
@@ -54,6 +91,7 @@ function Machine(prop) {
     };
   };
 
+
   return (
     <div className="cement-mill-sec" >
       <div className="cement-mill-wrapper">
@@ -62,12 +100,18 @@ function Machine(prop) {
             
             <div key={index} className="col-lg col-20 mb-1">
               <div style={{fontWeight:"bold"}}>{machine.name}</div>
-              <Pie data={getChartData(machine)} width={200}   height={200} options={{
+              
+             {board? <Pie data={getChartData(machine)} width={200}   height={200} options={{
                 maintainAspectRatio: false,
                 responsive: false,
                 
                 
-              }} />
+              }} />:<Pie data={getChartData2(machine)} width={200}   height={200} options={{
+                maintainAspectRatio: false,
+                responsive: false,
+                
+                
+              }} />}
               <div>{"Health Score: "+machine.healthScore}<br/>{"Status: "+machine.status}<br/>{"MG: "+machine.mg}</div>
               {/* {console.log(machine)} */}
             </div>

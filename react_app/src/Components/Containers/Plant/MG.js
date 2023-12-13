@@ -10,7 +10,7 @@ function MG(prop){
    mgarray();
     return(
         
-           <Machine machine={prop.mg}/>
+           <Machine machine={prop.mg} board={prop.board}/>
         
     )
 }
