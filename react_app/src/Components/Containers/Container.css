@@ -522,6 +522,126 @@ body {
 .app-list-btn:hover{
   background: rgb(21, 101, 192);
 }
+.card-block {
+  text-align: center;
+}
+
+.card-text {
+  margin: 0;
+  padding: 0;
+}
+
+.card-title {
+  font-size: 1vw;
+  font-weight: 700;
+}
+
+.card-text li {
+  list-style: none;
+  font-weight: 600;
+  font-size: 0.8vw;
+}
+
+.card-heading {
+  text-align: center;
+  font-size: 2vw;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.status-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+  margin-bottom:20px;
+}
+
+.status-buttons button {
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  padding: 1.5vh 2vw;
+  border-radius: 3px;
+}
+
+.status-buttons button:hover {
+  opacity: 0.8;
+}
+
+.status-buttons button.grey-button {
+  background-color: #a4b2bd;
+}
+
+.status-buttons button.grey-button:hover {
+  opacity: 0.8;
+}
+
+.false-For-Bottom-Text {
+  margin: 20px 0;
+  display: inline-block;
+}
+
+.health-score-sec {
+  padding: 0 10%;
+  margin-top: 30px;
+}
+
+.health-score-box {
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+
+.health-score-box .score-box {
+  width: 15px;
+  height: 15px;
+  border-radius: 1px;
+  background: #70d426;
+}
+
+.health-score-box .score-box.yellow {
+  background: #e2ba48;
+}
+
+.health-score-box .score-box.orange {
+  background: #fc5626;
+}
+
+.health-score-box .score-box.grey {
+  background: #707378;
+}
+
+@media screen and (max-width: 480px) {
+  .status-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1023px) {
+  .mypiechart canvas {
+    width: 12vw;
+    height: 12vw;
+  }
+}
+
+  @media screen and (max-width: 1024px) {
+    .card-heading {
+      font-size: 30px;
+    }
+
+    .card-title {
+      font-size: 18px;
+    }
+
+    .card-text li {
+      font-size: 14px;
+    }
+  }
+
 
 /* --------- Resiponsive Style --------- */
 
