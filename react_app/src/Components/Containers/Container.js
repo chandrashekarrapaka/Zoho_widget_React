@@ -6,12 +6,13 @@ import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
 import Footer from './Footer';
 import Footerhs from './Footerhs';
+import { LoginCredentialsAndQueries } from "../../Services/loginCredentialsAndQueries";
 
 
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
   const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
@@ -21,9 +22,27 @@ function Container() {
   const [PlantSelection, setPlantSelection] = useState(false);
   const [footerContent, setFooterContent] = useState(true);
   const [board,SetBoard]=useState("insta");
+  const [name,setName]=useState("");
 
 
+  useEffect(() => {
+    const fetchName = async () => {
+      try {
+        const response = await LoginCredentialsAndQueries();
 
+        if (response) {
+         // console.log(response);
+          setName(response.display_value)
+         
+      }
+     } catch (error) {
+        console.error(error);
+        
+      }
+    };
+
+    fetchName();
+  }, [timeIn]);
   //screen things
   ////console.log("insidecontainer.js");
 
@@ -117,7 +136,7 @@ function Container() {
     if (autoPagination && plantsData.length > 0 && PlantSelection == false) {
       const currentPlant = plantsData[currentPlantIndex];
 
-      const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
+      const totalPages = Math.ceil(plantsData.length  / itemsPerPage);
 
       if (currentPage > totalPages) {
         if (currentPlantIndex === plantsData.length - 1) {
@@ -142,44 +161,24 @@ function Container() {
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, autoPagination]);
 
-  const handleNextPlant = () => {
-    const nextPage = currentPage + 1;
+  // const handleNextPlant = () => {
+  //   const nextPage = currentPage + 1;
+  //   // If we're at the end of the current plant, switch to the next plant
+  //   const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
+  //   if (nextPlantIndex > plantsData.length - 1) {
+  //     setCurrentPlantIndex(nextPlantIndex);
+  //     setCurrentPage(1);
+  //   } else {
+  //     setCurrentPlantIndex(nextPlantIndex);
+  //     setCurrentPage(1);
+  //   } // Reset currentPage for the new plant
 
 
-
-    // If we're at the end of the current plant, switch to the next plant
-    const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
-    if (nextPlantIndex > plantsData.length - 1) {
-      setCurrentPlantIndex(nextPlantIndex);
-      setCurrentPage(1);
-    } else {
-      setCurrentPlantIndex(nextPlantIndex);
-      setCurrentPage(1);
-    } // Reset currentPage for the new plant
-    const currentPlant = plantsData[currentPlantIndex];
-
-
-    let kpimonitorsnew = 0;
-    let kpidisconnectednew = 0;
-
-    plantsData[currentPlantIndex].forEach((mon) => {
-
-      mon.monitors.forEach((ele) => {
-        if (ele.status == 5) {
-
-          kpidisconnectednew++;
-
-        }
-      })
-      kpimonitorsnew += mon.monitors.length;
-    });
-
-
-
-  };
+  // };
 
   const handlePageChange = (pageNumber) => {
-    const totalPages = Math.ceil(plantsData[currentPlantIndex].length / itemsPerPage);
+    console.log(pageNumber);
+    const totalPages = Math.ceil(plantsData.length / itemsPerPage);
 
     if (pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -192,6 +191,7 @@ function Container() {
         }, timeIn);
       }
     }
+    console.log(pageNumber);
   };
 
   const handleCheck = () => {
@@ -200,10 +200,10 @@ function Container() {
 
 
   const currentPlant = plantsData[currentPlantIndex];
-  const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
+  const totalPages = Math.ceil(plantsData.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = currentPlant ? currentPlant.slice(indexOfFirstItem, indexOfLastItem) : [];
+  const currentItems =plantsData.slice(indexOfFirstItem, indexOfLastItem);
 
   //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
@@ -222,12 +222,12 @@ function Container() {
                 <div >
                   <div >
                       <div className="title-section d-flex mb-2 align-items-center justify-content-center py-2 px-3 bg-white br-10">
-                    <p className="mb-0 fs-18 fw-600 text-center">{currentPlant[0]?.plantName || ""}</p>
+                    <p className="mb-0 fs-18 fw-600 text-center">{name}</p>
                    </div>
 
 
 
-                    <Plant board={board} currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
+                    <Plant board={board} currentItems={currentItems} />
 
                     <div className="pagination-sec" style={{ paddingBottom: "10px" }}>
                       <div className="row">

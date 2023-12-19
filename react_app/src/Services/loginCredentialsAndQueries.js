@@ -19,7 +19,7 @@ export async function LoginCredentialsAndQueries() {
         const access=window.ZOHO.CREATOR.API.getAllRecords(config).then(function (response) {
           let userData = response;
           
-          accessTokenz=userData.data[0].Access_Token;
+          accessTokenz=userData.data[0].User_Name ;
           //console.log("userData"+JSON.stringify(userData.data[0].Access_Token));
          // console.log("check"+accessToken);
          // return accessToken;
