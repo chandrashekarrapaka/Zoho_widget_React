@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import Footer from './Footer';
 import Footerhs from './Footerhs';
 import { LoginCredentialsAndQueries } from "../../Services/loginCredentialsAndQueries";
+import AppListDropdown from "../AppListDropdown";
 
 
 
@@ -225,7 +226,7 @@ function Container() {
                     <p className="mb-0 fs-18 fw-600 text-center">{name}</p>
                    </div>
 
-
+                    <AppListDropdown/>
 
                     <Plant board={board} currentItems={currentItems} />
 
