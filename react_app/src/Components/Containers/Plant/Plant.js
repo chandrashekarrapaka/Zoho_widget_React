@@ -9,7 +9,7 @@ function Plant(prop){
 //   padding: 10px;
     return(
         < >
-           {prop.currentItems.length?<MG mg={prop.currentItems}/>:<div className="center-screen"><h1>{`Next Plant >>>  ${prop.NextPlant}`}</h1></div>} 
+           {prop.currentItems.length?<MG mg={prop.currentItems} plantDrsStatus={prop.plantDrsStatus}/>:<div className="center-screen"><h1>{`Next Plant >>>  ${prop.NextPlant}`}</h1></div>} 
         </>
     
     )

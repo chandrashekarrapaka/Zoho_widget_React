@@ -16,6 +16,7 @@ function Container() {
   const itemsPerPage = 15;
   const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
+  const [plantDrsStatus, setPlantDrsStatus] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(0);
   const [kpimachines, setKpimachines] = useState(0);
@@ -23,9 +24,9 @@ function Container() {
   const [kpimonitors, setKpimonitors] = useState(0);
   const [noData, setNoData] = useState('');
   const [apicall, setApiCall] = useState(true);
-  const [autoPagination, setAutoPagination] = useState(true); 
-  const [PlantSelection,setPlantSelection]=useState(false);
-  const [displayApps,setDisplayApps]=useState([]);
+  const [autoPagination, setAutoPagination] = useState(true);
+  const [PlantSelection, setPlantSelection] = useState(false);
+  const [displayApps, setDisplayApps] = useState([]);
 
   //screen things
   ////console.log("insidecontainer.js");
@@ -34,7 +35,8 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-        setDisplayApps(response[2]);
+        setPlantDrsStatus(response[2]);
+        setDisplayApps(response[3]);
         if (response[1]) {
           let plants = [];
 
@@ -82,55 +84,55 @@ function Container() {
 
     fetchData();
   }, [timeIn]);
- 
+
   const fetchProfile = async () => {
     try {
-        const data = await window.ZOHO.CREATOR.init();
-        let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
-        var config = {
-            appName: "infinite-control-room",
-            reportName: "My_Profile_Data",
-            criteria: "Username == \"" + userid + "\"",
-            page: "1",
-            pageSize: "100"
-        };
-        const response = await window.ZOHO.CREATOR.API.getAllRecords(config);
-        const idx = response.data[0].PlantPattern;
-        console.log(idx);
-        return idx;
+      const data = await window.ZOHO.CREATOR.init();
+      let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
+      var config = {
+        appName: "infinite-control-room",
+        reportName: "My_Profile_Data",
+        criteria: "Username == \"" + userid + "\"",
+        page: "1",
+        pageSize: "100"
+      };
+      const response = await window.ZOHO.CREATOR.API.getAllRecords(config);
+      const idx = response.data[0].PlantPattern;
+      console.log(idx);
+      return idx;
     } catch (error) {
-        console.error(error);
-        // Handle error cases
-        return null; // Or any appropriate value indicating error
+      console.error(error);
+      // Handle error cases
+      return null; // Or any appropriate value indicating error
     }
-};
+  };
   useEffect(() => {
     let timeout;
 
-    if (autoPagination && plantsData.length > 0&&PlantSelection==false) {
+    if (autoPagination && plantsData.length > 0 && PlantSelection == false) {
       const currentPlant = plantsData[currentPlantIndex];
       // console.log(currentPlantIndex);
       setKpimachines(plantsData[currentPlantIndex].length);
-     // 
+      // 
       let kpimonitorsnew = 0;
       let kpidisconnectednew = 0;
       plantsData[currentPlantIndex].forEach((mon) => {
-        mon.monitors.forEach((ele)=>{
-          if(ele.status==5||ele.status==undefined){
+        mon.monitors.forEach((ele) => {
+          if (ele.status == 5 || ele.status == undefined) {
             //console.log(ele.status,currentPlantIndex);
             kpidisconnectednew++;
-            
+
           }
-        }) 
+        })
         kpimonitorsnew += mon.monitors.length;
       });
-     // console.log(currentPlantIndex);
+      // console.log(currentPlantIndex);
       setKpiDisconnected(kpidisconnectednew);
       setKpimonitors(kpimonitorsnew);
 
       const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
 
-      if (currentPage > totalPages ) {
+      if (currentPage > totalPages) {
         if (currentPlantIndex === plantsData.length - 1) {
           timeout = setTimeout(() => {
             setCurrentPage(1);
@@ -148,46 +150,46 @@ function Container() {
         }, timeIn);
       }
     }
-    
+
 
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, autoPagination]);
 
   const handleNextPlant = () => {
     const nextPage = currentPage + 1;
-  
-    
-      
-      // If we're at the end of the current plant, switch to the next plant
-      const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
-      if(nextPlantIndex>plantsData.length-1){
+
+
+
+    // If we're at the end of the current plant, switch to the next plant
+    const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
+    if (nextPlantIndex > plantsData.length - 1) {
       setCurrentPlantIndex(nextPlantIndex);
       setCurrentPage(1);
-      }else{
-        setCurrentPlantIndex(nextPlantIndex);
-        setCurrentPage(1);
-      } // Reset currentPage for the new plant
-      const currentPlant = plantsData[currentPlantIndex];
-      setKpimachines(plantsData[currentPlantIndex].length);
+    } else {
+      setCurrentPlantIndex(nextPlantIndex);
+      setCurrentPage(1);
+    } // Reset currentPage for the new plant
+    const currentPlant = plantsData[currentPlantIndex];
+    setKpimachines(plantsData[currentPlantIndex].length);
 
-      let kpimonitorsnew = 0;
-      let kpidisconnectednew = 0;
+    let kpimonitorsnew = 0;
+    let kpidisconnectednew = 0;
 
-      plantsData[currentPlantIndex].forEach((mon) => {
-        
-        mon.monitors.forEach((ele)=>{
-          if(ele.status==5){
-           // console.log(ele.status,currentPlantIndex);
-            kpidisconnectednew++;
-            
-          }
-        })
-        kpimonitorsnew += mon.monitors.length;
-      });
-      //console.log(currentPlantIndex);
-      setKpiDisconnected(kpidisconnectednew);
-      setKpimonitors(kpimonitorsnew);
-    
+    plantsData[currentPlantIndex].forEach((mon) => {
+
+      mon.monitors.forEach((ele) => {
+        if (ele.status == 5) {
+          // console.log(ele.status,currentPlantIndex);
+          kpidisconnectednew++;
+
+        }
+      })
+      kpimonitorsnew += mon.monitors.length;
+    });
+    //console.log(currentPlantIndex);
+    setKpiDisconnected(kpidisconnectednew);
+    setKpimonitors(kpimonitorsnew);
+
   };
   //console.log(currentPlantIndex+""+kpidisconnected);
   const handlePageChange = (pageNumber) => {
@@ -209,14 +211,21 @@ function Container() {
   const handleCheck = () => {
     setAutoPagination((prevState) => !prevState);
   }
- 
- 
+
+  // async function getServiceRequests
+  // let plantWithMachines = () => prop.currentItems.map(function (ele) {
+
+  // });
+  // console.log(plantWithMachines);
+
+
+
   const currentPlant = plantsData[currentPlantIndex];
   const totalPages = Math.ceil(currentPlant?.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = currentPlant ? currentPlant.slice(indexOfFirstItem, indexOfLastItem) : [];
-  
+
   //  style={{ transform: `scale(${1 + zoomLevel / 100})` }}
   return (
     <div>
@@ -237,14 +246,14 @@ function Container() {
                   <div className="left-main">
                     <div className="title-section d-flex mb-2 align-items-center justify-content-between py-2 px-3 bg-white br-10">
                       <p className="mb-0 fs-18 fw-600"> {currentPlant[0]?.plantName || ""}</p>
-                      <p className="mb-0 fs-16 text-gray" onClick={(e)=>{handleNextPlant(currentPlantIndex)}}> Coming Next: <strong className="text-primary" style={{ cursor: "pointer" }} >{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
+                      <p className="mb-0 fs-16 text-gray" onClick={(e) => { handleNextPlant(currentPlantIndex) }}> Coming Next: <strong className="text-primary" style={{ cursor: "pointer" }} >{plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName}</strong></p>
                     </div>
 
                     <Header kpidisconnected={kpidisconnected} kpimachines={kpimachines} kpimonitors={kpimonitors} currentPlant={currentPlant} />
-                   
-                    <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} />
-                    
-                    <div className="pagination-sec" style={{paddingBottom:"10px"}}>
+
+                    <Plant currentItems={currentItems} NextPlant={plantsData[currentPlantIndex + 1] !== undefined ? plantsData[currentPlantIndex + 1][0].plantName : plantsData[0][0].plantName} plantDrsStatus={plantDrsStatus} />
+
+                    <div className="pagination-sec" style={{ paddingBottom: "10px" }}>
                       <div className="row">
                         <div class="pagination-section">
                           <div class="pagination-inner-sec">
@@ -269,40 +278,24 @@ function Container() {
                       </div>
                     </div>
                     <div className="health-score-sec">
-                      <div className="row">
+                      <div className="justify-content-center row">
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 md:px-3 px-1">
                             <div className="score-box green"></div>
-                            <p className="text-dark fs-14 mb-0 fw-bold">Normal</p>
-                          </div>
-                        </div>
-
-                        <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
-                          <div className="health-score-box py-2 px-3">
-                            <div className="score-box yellow"></div>
-                            <p className="text-dark fs-14 mb-0 fw-bold">Caution
-                            </p>
+                            <p className="text-dark fs-14 mb-0 fw-bold">No Open DRS Report</p>
                           </div>
                         </div>
 
                         <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
                           <div className="health-score-box py-2 px-3">
                             <div className="score-box red"></div>
-                            <p className="text-dark fs-14 mb-0 fw-bold">Warning
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
-                          <div className="health-score-box py-2 px-3">
-                            <div className="score-box text-bg-secondary"></div>
-                            <p className="text-dark fs-14 mb-0 fw-bold " >Disconnected
+                            <p className="text-dark fs-14 mb-0 fw-bold">Open DRS Report
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
                 <div className="col-lg-3">
@@ -321,7 +314,7 @@ function Container() {
             </div>
 
 
-          <AlertsBar  currentPlant={currentPlant} plantsData={plantsData}/>
+            <AlertsBar currentPlant={currentPlant} plantsData={plantsData} />
           </div>
         </section>
       ) : ((apicall === true) ?

@@ -3,26 +3,20 @@ function Monitor(prop) {
     // const boxzz=prop.monitor;
     //  console.log("monitors"+JSON.stringify(prop.monitor[1]));
 
+    console.log(prop.currentMachineStatus);
     return (
         <>
             {
                 Object(prop.monitor).map(function (ele) {
-                    const style = {"padding":"2%"};
-                    if (ele.status == 1 ||ele.status==2)style.backgroundColor = "#64DD17";
-                    else if (ele.status==3) style.backgroundColor = "#FFC107";
-                    else if (ele.status ==4) style.backgroundColor = "#FF5722";
-                    else {
-                        style.backgroundColor = "#9E9E9E";
-                    }
-                    
-                    return (
-                        
-                        
-                            <div className="box" style={style}></div>
-                      
-                        
-                    )
+                    const style = { "padding": "2%", backgroundColor: "#64DD17" };
 
+                    if (prop.currentMachineStatus && prop.currentMachineStatus[ele.id] && prop.currentMachineStatus[ele.id] == 'NEW') {
+                        style.backgroundColor = "#FF5722";
+                    }
+
+                    return (
+                        <div className="box" style={style}></div>
+                    );
                 })
             }
         </>
