@@ -13,7 +13,7 @@ import AppListDropdown from "../AppListDropdown";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
   const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
@@ -123,12 +123,14 @@ function Container() {
   };
   const handleButtonClick = (content,type) => {
     console.log(content,type);
-    setFooterContent(!footerContent);
+    
     if(type=="insta"){
+      setFooterContent(true);
       SetBoard("hs");
     }
     else{
       SetBoard("insta");
+      setFooterContent(false);
     }
   };
   useEffect(() => {
