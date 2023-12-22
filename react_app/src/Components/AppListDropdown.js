@@ -67,7 +67,7 @@ const AppListDropdown = () => {
           <ul className="app-list-items">
             {data.map(element => (
               <li className="app-list-item" key={element.id}>
-                <a className="app-list-link" href={element.rootUrl}>
+                <a target='_blank' className="app-list-link" href={element.rootUrl}>
                   <img alt="" src={element.logo} />
                   <span>{element.name}</span>
                 </a>
