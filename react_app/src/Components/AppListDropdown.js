@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LoginCredentialsAndQueries } from '../Services/loginCredentialsAndQueries';
 import './AppListDropdown.css';
-// import { loggedInUser } from '../Services/loggedInUser';
+ import { loggedInUser } from '../Services/loggedInUser';
 
 const AppListDropdown = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
