@@ -74,7 +74,7 @@ const AppListDropdown = () => {
               </li>
             ))}
           </ul>
-          <a className="app-list-btn" href="#">
+          <a className="app-list-btn" href="https://plantos.infinite-uptime.com/applications">
             PlantOS App Suite
           </a>
         </div>

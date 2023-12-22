@@ -227,7 +227,7 @@ function Container() {
           <div className="container-fluid">
             <div className="header">
               <TotalPlants plantsData={plantsData} />
-              {/* <AppListDropdown  /> */}
+              <AppListDropdown  />
               <PatternStorage plantsData={plantsData} cp={currentPlant} />
             </div>
 
