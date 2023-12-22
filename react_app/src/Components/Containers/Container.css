@@ -415,8 +415,8 @@ body {
 }
 .app-list-dropdown-wrap{
   position: absolute;
-  right: 40px;
-  top: 40px;
+  right: 10px;
+  top: 10px;
   display: inline-block;
 }
 .app-list-trigger {
