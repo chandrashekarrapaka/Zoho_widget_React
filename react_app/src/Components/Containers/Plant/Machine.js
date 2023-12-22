@@ -6,19 +6,15 @@ import Tablemini from "./Tablemini";
 import icon1 from '../../../assets/imgs/cement-box-icon-1.png';
 import icon2 from '../../../assets/imgs/cement-box-icon-2.png';
 
-
 function Machine(prop) {
   const [showPopup, setShowPopup] = useState(false); // State variable for pop-up visibility
   const [apiData, setApiData] = useState([]); // State variable for API data
 
-  let monitorStyle = {};
   useEffect(() => {
     // Function to fetch API data
     const fetchData = async () => {
       try {
         const response = await Velocity();
-
-        //   setApiData(response);
       } catch (error) {
         console.log(error);
       }
@@ -34,19 +30,9 @@ function Machine(prop) {
     return () => clearInterval(interval);
   }, []);
 
-  const getVelocity = async (id) => {
-
-    const response = await Velocity();
-    // console.log("velocityid"+id);
-    response.filter((ele) => ele.id == id).map((ele) => {
-      // console.log("neededid"+JSON.stringify(ele));
-      setApiData(ele);
-    });
-  }
   const handleInfoClick = async (id) => {
     try {
       const velocityData = await Velocity();
-      // console.log("velocityid" + id);
       const selectedData = velocityData.filter((ele) => ele.id === id)[0];
       setApiData(selectedData);
       setShowPopup(true);
@@ -59,11 +45,7 @@ function Machine(prop) {
     setShowPopup(false);
   };
 
-
-  console.log(prop.plantDrsStatus);
   return (
-
-
     <div className="cement-mill-sec">
       <div className="cement-mill-wrapper">
         <div className="row">
@@ -75,9 +57,9 @@ function Machine(prop) {
             let currentMachineStatus = {};
 
             if (
-              prop.plantDrsStatus[ele.plantid] && 
-              prop.plantDrsStatus[ele.plantid][ele.id] && 
-              prop.plantDrsStatus[ele.plantid][ele.id]['status'] && 
+              prop.plantDrsStatus[ele.plantid] &&
+              prop.plantDrsStatus[ele.plantid][ele.id] &&
+              prop.plantDrsStatus[ele.plantid][ele.id]['status'] &&
               prop.plantDrsStatus[ele.plantid][ele.id]['status'] == 'NEW'
             ) {
               stylez.backgroundColor = "#FF5722";
@@ -113,10 +95,9 @@ function Machine(prop) {
                   </div>
                 </div>
               </div>
-
-
             );
           })}
+
           {showPopup && (
             <div className="popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div className="modal-dialog">
@@ -140,30 +121,33 @@ function Machine(prop) {
                         </thead>
                         <tbody>
                           {apiData.monitors.map((data) => {
-                            // console.log("table call"+data.healthScore);
-                            const stylemon = { "width": "30%", scope: "row" };
+                            const stylemon = { "width": "30%", scope: "row", backgroundColor: "#64DD17", };
 
-
-                            if (data.status == 1 || data.status == 2) stylemon.backgroundColor = "#64DD17";
-                            else if (data.status == 3) stylemon.backgroundColor = "#FFC107";
-                            else if (data.status == 4) stylemon.backgroundColor = "#FF5722";
-                            else {
-                              stylemon.backgroundColor = "#9E9E9E";
+                            if (
+                              prop.plantDrsStatus[apiData.drsplantid] &&
+                              prop.plantDrsStatus[apiData.drsplantid][apiData.id] &&
+                              prop.plantDrsStatus[apiData.drsplantid][apiData.id][data.id] &&
+                              prop.plantDrsStatus[apiData.drsplantid][apiData.id][data.id] == 'NEW'
+                            ) {
+                              stylemon.backgroundColor = "#FF5722";
                             }
 
+                            // if (data.status == 1 || data.status == 2) stylemon.backgroundColor = "#64DD17";
+                            // else if (data.status == 3) stylemon.backgroundColor = "#FFC107";
+                            // else if (data.status == 4) stylemon.backgroundColor = "#FF5722";
+                            // else {
+                            //   stylemon.backgroundColor = "#9E9E9E";
+                            // }
 
                             return (
                               <Tablemini data={data} stylz={stylemon} />
                             );
                           })}
-
                         </tbody>
                       </table>
                     </div>
 
-
                     <div className="modal-bottom-content">
-
                       {/* <center>For Detailed Analysis Click Here!</a></center> */}
                       <p><strong>Observation</strong>: {apiData.observation}</p>
                       <p><strong>Diagnostic</strong>: {apiData.diagnostic}</p>
@@ -190,11 +174,9 @@ function Machine(prop) {
               </div>
             </div>
           )}
-
         </div>
       </div>
     </div>
-
   );
 }
 

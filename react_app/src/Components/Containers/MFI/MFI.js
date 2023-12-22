@@ -5,18 +5,13 @@ function MFI(prop) {
   const [accessToken, setAccessToken] = useState("");
   const [dataDisplay, setDataDisplay] = useState([]);
   const [nocomments, setNoComments] = useState(true);
-  
-
   const currentPlant = prop.currentPlant;
-
-  //console.log("MFI1", currentPlant[0].plantid, accessToken);
 
   useEffect(() => {
     const fetchDataz = async () => {
       try {
         const response = await LoginCredentialsAndQueries();
         if (response.length > 0) {
-          //console.log("responseMFI", response);
           setAccessToken(response);
         }
       } catch (error) {
@@ -44,32 +39,25 @@ function MFI(prop) {
         );
 
         const data = await response.json();
-
         let key = Object.keys(data.data);
-       
-
         const dataWithNewStatus = data.data[key].filter((ele) => ele.status === "NEW");
- // Sort the data by createdDate in descending order
-        dataWithNewStatus.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
 
+        // Sort the data by createdDate in descending order
+        dataWithNewStatus.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         setDataDisplay(dataWithNewStatus);
         setNoComments(dataWithNewStatus.length === 0);
-       // console.log("mfi"+JSON.stringify(dataWithNewStatus));
-      
-     
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-
     const interval = setInterval(fetchData, 30000); // Fetch data every 30 seconds
 
     return () => {
       clearInterval(interval); // Clean up the interval on component unmount
     };
-  }, [currentPlant, accessToken, plantid ]);
+  }, [currentPlant, accessToken, plantid]);
   let i = 1;
   //const check=(new Date().getTime()-new Date(ele.serviceReqMachineDetails[0].createdDate).getTime()/3600000)<=48;
   // if(ele.status=="NEW")i++;
@@ -77,34 +65,34 @@ function MFI(prop) {
   //let keylength=data
   return (
     <div className="anomaly-alert">
-    <p className="heading fs-16">Machine with Faults</p>
-    <div className="data-box">
-      <div className="data mb-2 fs-11">
-        {dataDisplay && dataDisplay.length > 0 ? (
-          dataDisplay.map((ele) => {
-            if (ele.status === "NEW") {
-              return (
-                ele.serviceReqMachineDetails.map((srmd) => (
-                  <div className="fs-11 mb-0 text-dark">
-                    <span className="fw-bold">
-                      {srmd.machineName ? i++ + ". " + srmd.machineName + " " + srmd.createdDateWithPlantTimezone : ''}
-                    </span>
-                    {srmd.machineServiceDetails.map((msd, index) => (
-                      <ol className="data-badge mb-0" key={index}>
-                        {String.fromCharCode(97 + index) + ". " + msd.serviceName}
-                      </ol>
-                    ))}
-                  </div>
-                ))
-              );
-            }
-          })
-        ) : (
-          <div className="fs-11 mb-0 text-dark">No Faults observed in machines</div>
-        )}
+      <p className="heading fs-16">Machine with Faults</p>
+      <div className="data-box">
+        <div className="data mb-2 fs-11">
+          {dataDisplay && dataDisplay.length > 0 ? (
+            dataDisplay.map((ele) => {
+              if (ele.status === "NEW") {
+                return (
+                  ele.serviceReqMachineDetails.map((srmd) => (
+                    <div className="fs-11 mb-0 text-dark">
+                      <span className="fw-bold">
+                        {srmd.machineName ? i++ + ". " + srmd.machineName + " " + srmd.createdDateWithPlantTimezone : ''}
+                      </span>
+                      {srmd.machineServiceDetails.map((msd, index) => (
+                        <ol className="data-badge mb-0" key={index}>
+                          {String.fromCharCode(97 + index) + ". " + msd.serviceName}
+                        </ol>
+                      ))}
+                    </div>
+                  ))
+                );
+              }
+            })
+          ) : (
+            <div className="fs-11 mb-0 text-dark">No Faults observed in machines</div>
+          )}
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 

@@ -1,9 +1,5 @@
 import React from "react";
 function Monitor(prop) {
-    // const boxzz=prop.monitor;
-    //  console.log("monitors"+JSON.stringify(prop.monitor[1]));
-
-    console.log(prop.currentMachineStatus);
     return (
         <>
             {
