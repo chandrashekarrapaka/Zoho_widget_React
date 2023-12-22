@@ -1,0 +1,7 @@
+.app-list-dropdown {
+  display: none; /* Initially hide the dropdown */
+}
+
+.app-list-dropdown.open {
+  display: block; /* Display the dropdown when the 'open' class is present */
+}

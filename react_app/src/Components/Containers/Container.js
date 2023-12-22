@@ -9,6 +9,7 @@ import Header from "../Header/Header";
 import TotalPlants from "../TotalPlants";
 import AlertBar from '../Containers/ScrollBar/AlertBar';
 import PatternStorage from "./PatternStorage";
+import AppListDropdown from "../AppListDropdown";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -222,6 +223,7 @@ function Container() {
           <div className="container-fluid">
             <div className="header">
               <TotalPlants plantsData={plantsData} />
+              <AppListDropdown/>
               <PatternStorage plantsData={plantsData} cp={currentPlant}/>
             </div>
 
