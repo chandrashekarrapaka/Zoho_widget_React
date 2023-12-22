@@ -1,34 +1,24 @@
+
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { loggedInUser } from "../../../Services/loggedInUser";
-import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAndQueries";
+import { LoginCredentialsAndQueriesA } from "../../../Services/loginCredentialsAndQueriesA";
 
 function Plant(prop) {
   const [board, setBoard] = useState(true);
-  const [userId,setUserId]=useState('');
+  const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  const [arrayOfPlants,setArrayOfPlants]=useState([]);
-  
-  const fetchDetailsForAllPlants = () => {
-    prop.currentItems.forEach((plants) => {
-      const plantid = plants[0].plantid; // Assuming plantid is available in the first item of the array
-      fetchPlantDetails(plantid);
-    });
-  };
+  const [arrayOfPlants, setArrayOfPlants] = useState([]);
 
-  useEffect(() => {
-    // Fetch details for all plants when the component mounts
-    fetchDetailsForAllPlants();
-  }, [prop.currentItems]); // Trigger the effect when prop.currentItems changes
 
   useEffect(() => {
     const fetchDataz = async () => {
       try {
-        const response2=await loggedInUser();
-        if ( response2.length > 0) {
-         // console.log("userid", response2);
+        const response2 = await loggedInUser();
+        if (response2.length > 0) {
+          // console.log("userid", response2);
           setUserId(response2);
         }
       } catch (error) {
@@ -38,6 +28,58 @@ function Plant(prop) {
 
     fetchDataz();
   }, [userId]);
+
+  useEffect(() => {
+    // Fetch details for all plants when prop.currentItems changes
+
+    setLoadingDetails(true); // Set loading state to true
+    const fetchDetailsForAllPlants = async () => {
+      try {
+        const plantIds = prop.currentItems.map(plants => plants[0].plantid);
+        let token = await LoginCredentialsAndQueriesA();
+        //console.log(plantIds);
+        const requests = plantIds.map(async plantid => {
+          const response = await fetch(
+            `https://api.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds=${plantid}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': 'Bearer ' + token,
+              'accept': "*/*",
+            },
+          }
+          );
+
+          const plantDetailsData = await response.json();
+          //console.log(plantDetails);
+
+          if (plantDetailsData.data && plantDetailsData.data.length > 0) {
+            const formattedPlantDetails = {
+              plantid: plantid,
+              details: plantDetailsData.data[0],
+            };
+
+            return formattedPlantDetails;
+          }
+
+          return null;
+        });
+
+        // Wait for all requests to complete
+        const details = await Promise.all(requests);
+        console.log(details.filter(Boolean));
+        // Filter out null values (failed requests) and update state
+        setPlantDetails(details.filter(Boolean));
+
+        setLoadingDetails(false); // Set loading state to false
+      } catch (error) {
+        console.error(error);
+        setLoadingDetails(false); // Set loading state to false in case of error
+      }
+    };
+
+    fetchDetailsForAllPlants();
+  }, [prop.currentItems]);
+
 
   useEffect(() => {
     setBoard(!board);
@@ -69,12 +111,12 @@ function Plant(prop) {
       .map((machine) => machine.healthScore)
       .filter((healthScore) => healthScore !== undefined);
 
-      const healthScorePercentages = [
-        healthScores.filter((score) => score <= 100 && score > 80).length,
-        healthScores.filter((score) => score <= 80 && score > 50).length,
-        healthScores.filter((score) => score <= 50 && score > 0).length,
-        healthScores.filter((score) => score === 0).length,
-      ];
+    const healthScorePercentages = [
+      healthScores.filter((score) => score <= 100 && score > 80).length,
+      healthScores.filter((score) => score <= 80 && score > 50).length,
+      healthScores.filter((score) => score <= 50 && score > 0).length,
+      healthScores.filter((score) => score === 0).length,
+    ];
     return {
       datasets: [
         {
@@ -102,37 +144,6 @@ function Plant(prop) {
     legend: {
       display: false,
     },
-  };
-  const fetchPlantDetails = async (plantid) => {
-    try {
-      let token = await LoginCredentialsAndQueries();
-
-      const response = await fetch(
-        `https://api.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds=${plantid}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'accept': "*/*",
-          },
-        }
-      );
-
-      const plantDetailsData = await response.json();
-
-      if (plantDetailsData.data && plantDetailsData.data.length > 0) {
-        const formattedPlantDetails = {
-          plantid: plantid,
-          details: plantDetailsData.data[0],
-        };
-
-        setPlantDetails((prevDetails) => [
-          ...prevDetails,
-          formattedPlantDetails,
-        ]);
-      }
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const redirect = (board, plantid) => {
@@ -174,13 +185,30 @@ function Plant(prop) {
                 {loadingDetails ? (
                   <p>Loading details...</p>
                 ) : (
-                  <>
-                    {"Corrective Action Pending: " + (plantDetails.find(details => details.plantid === plants[0].plantid)?.details.correctiveActionPending || "")}
-                    <br />
-                    {"Downtime Saved: " + ""}
-                    <br />
-                    {"Breakdown Avoided : " + ""}
-                  </>
+                  <div>
+                    {/* Conditional rendering based on loading state */}
+                    {loadingDetails ? (
+                      <p>Loading details...</p>
+                    ) : (
+                      <>
+                        {"Corrective Action Pending: " +
+                          (plantDetails.find(
+                            (details) => details.plantid === plants[0].plantid
+                          )?.details.tpCount ?? "NA")}
+                        <br />
+                        {"Downtime Saved: " +
+                          (plantDetails.find(
+                            (details) => details.plantid === plants[0].plantid
+                          )?.details.downtime ?? "NA")}
+                        <br />
+                        {"Breakdown Avoided : " +
+                          (plantDetails.find(
+                            (details) => details.plantid === plants[0].plantid
+                          )?.details.fnCount ?? "NA")}
+                      </>
+                    )}
+                  </div>
+
                 )}
               </div>
             </div>
