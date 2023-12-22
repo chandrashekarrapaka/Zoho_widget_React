@@ -23,7 +23,7 @@ function Header(prop) {
     },
     kpi2: { title: "", value: "Total Machines Digitized",src:icon2},
     kpi3: { title: "", value: "Total Faults Identified",src:icon3 },
-    kpi4: { title: "", value: "Reports Closed",src:icon4 },
+    kpi4: { title: "", value: "Corrective Action Taken",src:icon4 },
     kpi5: { title: "", value: "Downtime Saved (Hrs)",src:icon5 },
     kpi6: { title: "", value: "Disconnected",src:icon6  },
   };
