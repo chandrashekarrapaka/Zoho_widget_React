@@ -228,7 +228,7 @@ function Container() {
                     <p className="mb-0 fs-18 fw-600 text-center">{name}</p>
                    </div>
 
-                    <AppListDropdown/>
+                    
 
                     <Plant board={board} currentItems={currentItems} boardstatus={footerContent}/>
 
