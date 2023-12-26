@@ -28,8 +28,8 @@ const Footerhs=()=>{
           </div>
 
           <div className="col-lg-3 mb-3 col-md-6 col-sm-6">
-            <div className="health-score-box py-2 px-3">
-              <div className="score-box text-bg-secondary"></div>
+            <div className="health-score-box py-2 px-3" >
+              <div  style={{backgroundColor:"white",border:"solid 1px"}} className="score-box " ></div>
               <p className="text-dark fs-14 mb-0 fw-bold " >Health Score Not Available
               </p>
             </div>

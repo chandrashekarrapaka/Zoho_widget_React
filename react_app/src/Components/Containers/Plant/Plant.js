@@ -10,7 +10,7 @@ function Plant(prop) {
   const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  const [arrayOfPlants, setArrayOfPlants] = useState([]);
+  console.log(board);
 
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function Plant(prop) {
 
         // Wait for all requests to complete
         const details = await Promise.all(requests);
-        console.log(details.filter(Boolean));
+       // console.log(details.filter(Boolean));
         // Filter out null values (failed requests) and update state
         setPlantDetails(details.filter(Boolean));
 
@@ -82,7 +82,8 @@ function Plant(prop) {
 
 
   useEffect(() => {
-    setBoard(!board);
+    
+    setBoard(prop.boardstatus);
   }, [prop.board]);
 
   const getChartData = (plants) => {
@@ -167,7 +168,7 @@ function Plant(prop) {
               <a onClick={() => { redirect(board, plants[0].plantid) }} target="_blank" style={{ fontWeight: 'bold', cursor: 'pointer' }}>{plants[0].plantName}</a>
               {board ? (
                 <Pie
-                  data={getChartData2(plants)}
+                  data={getChartData(plants)}
                   width={200}
                   height={200}
                   options={options}
@@ -175,7 +176,7 @@ function Plant(prop) {
                 />
               ) : (
                 <Pie
-                  data={getChartData(plants)}
+                  data={getChartData2(plants)}
                   width={200}
                   height={200}
                   options={options}

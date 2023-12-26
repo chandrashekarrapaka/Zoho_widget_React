@@ -121,15 +121,15 @@ function Container() {
       return null; // Or any appropriate value indicating error
     }
   };
-  const handleButtonClick = (content,type) => {
-    console.log(content,type);
+  const handleButtonClick = (type) => {
+    console.log(type);
     
     if(type=="insta"){
       setFooterContent(true);
-      SetBoard("hs");
+      SetBoard("insta");
     }
     else{
-      SetBoard("insta");
+      SetBoard("hs");
       setFooterContent(false);
     }
   };
@@ -164,20 +164,6 @@ function Container() {
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, autoPagination]);
 
-  // const handleNextPlant = () => {
-  //   const nextPage = currentPage + 1;
-  //   // If we're at the end of the current plant, switch to the next plant
-  //   const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
-  //   if (nextPlantIndex > plantsData.length - 1) {
-  //     setCurrentPlantIndex(nextPlantIndex);
-  //     setCurrentPage(1);
-  //   } else {
-  //     setCurrentPlantIndex(nextPlantIndex);
-  //     setCurrentPage(1);
-  //   } // Reset currentPage for the new plant
-
-
-  // };
 
   const handlePageChange = (pageNumber) => {
     console.log(pageNumber);
@@ -257,8 +243,8 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className={footerContent ?'btn btn-primary' : 'btn btn' } onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
-                      <button className={footerContent ?'btn btn' : 'btn btn-primary' } onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
+                      <button className={footerContent ?'btn btn-primary' : 'btn btn' } onClick={() => handleButtonClick("insta")}>Instantenous</button>
+                      <button className={footerContent ?'btn btn' : 'btn btn-primary' } onClick={() => handleButtonClick("hs")}>HealthScore</button>
                     </div><br/>
                     {footerContent?<Footer/>:<Footerhs/>}
 
