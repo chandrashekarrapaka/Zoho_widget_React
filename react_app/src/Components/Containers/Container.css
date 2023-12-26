@@ -214,6 +214,11 @@ body {
   border-radius: 0 0 11px 0;
 }
 
+.cement-mill-wrapper canvas{
+  width: 20vh !important; 
+  height: 20vh !important;
+}
+
 .health-score-sec {
   padding: 0 3%;
 }
@@ -584,7 +589,7 @@ body {
 
 .health-score-sec {
   padding: 0 10%;
-  margin-top: 30px;
+  margin-top: -10px;
 }
 
 .health-score-box {

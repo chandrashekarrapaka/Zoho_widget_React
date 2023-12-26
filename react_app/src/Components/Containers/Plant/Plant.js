@@ -134,7 +134,7 @@ function Plant(prop) {
         color: "white",
         font: {
           weight: "bold",
-          size: 16,
+          size: "25vw",
         },
         formatter: (value) => {
           return value;
