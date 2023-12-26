@@ -24,7 +24,7 @@ function Container() {
   const [footerContent, setFooterContent] = useState(true);
   const [board,SetBoard]=useState("insta");
   const [name,setName]=useState("");
-
+  
 
   useEffect(() => {
     const fetchName = async () => {
@@ -230,7 +230,7 @@ function Container() {
 
                     <AppListDropdown/>
 
-                    <Plant board={board} currentItems={currentItems} />
+                    <Plant board={board} currentItems={currentItems} boardstatus={footerContent}/>
 
                     <div className="pagination-sec" style={{ paddingBottom: "10px" }}>
                       <div className="row">
@@ -257,8 +257,8 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className="btn btn-primary" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
-                      <button className="btn btn-primary" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
+                      <button className={footerContent ?'btn btn-primary' : 'btn btn' } onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
+                      <button className={footerContent ?'btn btn' : 'btn btn-primary' } onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
                     </div><br/>
                     {footerContent?<Footer/>:<Footerhs/>}
 

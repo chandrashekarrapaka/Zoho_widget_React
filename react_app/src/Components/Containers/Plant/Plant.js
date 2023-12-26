@@ -121,7 +121,7 @@ function Plant(prop) {
       datasets: [
         {
           data: healthScorePercentages,
-          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "#9E9E9E"],
+          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "white"],
         },
       ],
     };
@@ -131,12 +131,15 @@ function Plant(prop) {
     plugins: {
       datalabels: {
         display: true,
-        color: "white",
+        color: "black",
+        
         font: {
           weight: "bold",
           size: 16,
+          
         },
         formatter: (value) => {
+          
           return value;
         },
       },
@@ -165,7 +168,7 @@ function Plant(prop) {
               <a onClick={() => { redirect(board, plants[0].plantid) }} target="_blank" style={{ fontWeight: 'bold', cursor: 'pointer' }}>{plants[0].plantName}</a>
               {board ? (
                 <Pie
-                  data={getChartData(plants)}
+                  data={getChartData2(plants)}
                   width={200}
                   height={200}
                   options={options}
@@ -173,7 +176,7 @@ function Plant(prop) {
                 />
               ) : (
                 <Pie
-                  data={getChartData2(plants)}
+                  data={getChartData(plants)}
                   width={200}
                   height={200}
                   options={options}
