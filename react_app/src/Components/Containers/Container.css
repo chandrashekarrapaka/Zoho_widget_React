@@ -581,11 +581,13 @@ body {
   margin: 20px 0;
   display: inline-block;
 }
-
 .health-score-sec {
-  padding: 0 10%; 
+  padding: 0 10%;
+  position: fixed;
+  bottom: 3vw;
+  left: 0;
+  right: 0;
 }
-
 .health-score-box {
   background-color: #fff;
   border-radius: 5px;
@@ -618,6 +620,10 @@ body {
   width: 100%;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .button-container {
   width: 50%;
@@ -645,8 +651,8 @@ body {
 .cols-6 {
   width: 16.666%;
 }
-
-
+.active-button{background-color: #01adff; color: #fff;}
+.chart-box{margin-bottom:2vw;}
 @media screen and (max-width: 480px) {
   .status-buttons {
     flex-direction: column;
@@ -674,6 +680,7 @@ body {
     }
   }
 
+ 
 
 /* --------- Resiponsive Style --------- */
 
@@ -834,4 +841,14 @@ body {
   .anomaly-alert {
     height: 100%;
   }
+}
+
+@media (min-width: 1920px) {
+  .chart-box { 
+    margin-top: 2vw;
+    margin-bottom: 0;
+}
+.header-title-section { 
+margin-top: 2vw;
+}
 }

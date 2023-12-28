@@ -267,8 +267,8 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className="btn btn-light px-5 py-1" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
-                      <button className="btn btn-primary px-5 py-1" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
+                      <button className="btn btn-light px-5 py-1 fs-16" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
+                      <button className="btn btn-light px-5 py-1 fs-16" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
                     </div>
 
                     </div>

@@ -5,7 +5,7 @@ const Footer=()=>{
         <div className="health-score-sec">
         <div className="row">
           <div className="col-lg-3 mb-2 col-md-6 col-sm-6">
-            <div className="health-score-box py-2 md:px-3 px-1">
+            <div className="health-score-box py-2 px-3">
               <div className="score-box green"></div>
               <p className="text-dark fs-14 mb-0 fw-bold">Health Score {'>'} 80%</p>
             </div>
