@@ -24,7 +24,7 @@ function Container() {
   const [footerContent, setFooterContent] = useState(true);
   const [board,SetBoard]=useState("insta");
   const [name,setName]=useState("");
-  
+  const [orgName,setOrgName]=useState("");
 
   useEffect(() => {
     const fetchName = async () => {
@@ -54,7 +54,16 @@ function Container() {
 
         if (response[1]) {
           let plants = [];
-
+          if(response[2]){
+            const uniqueStrings = [...new Set(response[2])];
+            if (uniqueStrings.length === 1) {
+              console.log("All strings are the same:", uniqueStrings[0]);
+              setOrgName(uniqueStrings[0]+" Corporate Dashboard");
+            } else {
+              console.log("Unique strings:", uniqueStrings);
+              setOrgName("Infinite-UpTime Corporate Dashboard");
+            }
+          }
           if (response[0]) {
             response[0].forEach(element => {
               if (element.length > 0) plants.push(element);
@@ -211,7 +220,7 @@ function Container() {
                 <div >
                   <div >
                       <div className="title-section d-flex mb-2 align-items-center justify-content-center py-2 px-3 bg-white br-10">
-                    <p className="mb-0 fs-18 fw-600 text-center">{name}</p>
+                    <p className="mb-0 fs-18 fw-600 text-center">{orgName}</p>
                    </div>
 
                     

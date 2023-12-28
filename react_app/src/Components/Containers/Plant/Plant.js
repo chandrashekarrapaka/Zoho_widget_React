@@ -10,7 +10,7 @@ function Plant(prop) {
   const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  console.log(board);
+  //console.log(board);
 
 
   useEffect(() => {
@@ -197,7 +197,7 @@ function Plant(prop) {
                         {"Corrective Action Pending: " +
                           (plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.tpCount ?? "NA")}
+                          )?.details.newCount ?? "NA")}
                         <br />
                         {"Downtime Saved: " +
                           (plantDetails.find(
@@ -207,7 +207,7 @@ function Plant(prop) {
                         {"Breakdown Avoided : " +
                           (plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.fnCount ?? "NA")}
+                          )?.details.tpCount ?? "NA")}
                       </>
                     )}
                   </div>

@@ -3,6 +3,7 @@ let intervalId;
 export async function Plants() {
   let accessToken = "";
   const arrayOfPlants = [];
+  const OrgName=[];
   const arrayOfMachines = [];
   let apicallstatus = true;
 
@@ -61,7 +62,7 @@ export async function Plants() {
           const plantsData = await plantsResponse.json();
           const plantsArray = [];
          //console.log(plantsData);
-          
+          OrgName.push(plantsData.data.organizationName);
           plantsData.data.machineGroups.forEach((mg) => {
             mg.machines.forEach((machine) => {
               machine.mg = mg.name;
@@ -84,7 +85,7 @@ export async function Plants() {
     
     //intervalId = setInterval(fetchPlantsData, 30000);
 
-    return [arrayOfMachines, apicallstatus];
+    return [arrayOfMachines, apicallstatus,OrgName];
 
   } catch (error) {
     //console.error(error);
