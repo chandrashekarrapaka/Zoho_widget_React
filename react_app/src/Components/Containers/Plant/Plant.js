@@ -10,7 +10,7 @@ function Plant(prop) {
   const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  const [arrayOfPlants, setArrayOfPlants] = useState([]);
+  //console.log(board);
 
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function Plant(prop) {
 
         // Wait for all requests to complete
         const details = await Promise.all(requests);
-        console.log(details.filter(Boolean));
+       // console.log(details.filter(Boolean));
         // Filter out null values (failed requests) and update state
         setPlantDetails(details.filter(Boolean));
 
@@ -82,7 +82,8 @@ function Plant(prop) {
 
 
   useEffect(() => {
-    setBoard(!board);
+    
+    setBoard(prop.boardstatus);
   }, [prop.board]);
 
   const getChartData = (plants) => {
@@ -121,7 +122,7 @@ function Plant(prop) {
       datasets: [
         {
           data: healthScorePercentages,
-          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "#9E9E9E"],
+          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "white"],
         },
       ],
     };
@@ -131,12 +132,14 @@ function Plant(prop) {
     plugins: {
       datalabels: {
         display: true,
-        color: "white",
+        color: "black",
+        
         font: {
           weight: "bold",
           size: "25vw",
         },
         formatter: (value) => {
+          
           return value;
         },
       },

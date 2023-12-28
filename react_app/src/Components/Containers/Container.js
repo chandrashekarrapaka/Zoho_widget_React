@@ -24,7 +24,7 @@ function Container() {
   const [footerContent, setFooterContent] = useState(true);
   const [board,SetBoard]=useState("insta");
   const [name,setName]=useState("");
-
+  const [orgName,setOrgName]=useState("");
 
   useEffect(() => {
     const fetchName = async () => {
@@ -54,7 +54,16 @@ function Container() {
 
         if (response[1]) {
           let plants = [];
-
+          if(response[2]){
+            const uniqueStrings = [...new Set(response[2])];
+            if (uniqueStrings.length === 1) {
+              console.log("All strings are the same:", uniqueStrings[0]);
+              setOrgName(uniqueStrings[0]+" Corporate Dashboard");
+            } else {
+              console.log("Unique strings:", uniqueStrings);
+              setOrgName("Infinite-UpTime Corporate Dashboard");
+            }
+          }
           if (response[0]) {
             response[0].forEach(element => {
               if (element.length > 0) plants.push(element);
@@ -121,15 +130,15 @@ function Container() {
       return null; // Or any appropriate value indicating error
     }
   };
-  const handleButtonClick = (content,type) => {
-    console.log(content,type);
+  const handleButtonClick = (type) => {
+    console.log(type);
     
     if(type=="insta"){
       setFooterContent(true);
-      SetBoard("hs");
+      SetBoard("insta");
     }
     else{
-      SetBoard("insta");
+      SetBoard("hs");
       setFooterContent(false);
     }
   };
@@ -164,20 +173,6 @@ function Container() {
     return () => clearTimeout(timeout);
   }, [currentPage, currentPlantIndex, plantsData, autoPagination]);
 
-  // const handleNextPlant = () => {
-  //   const nextPage = currentPage + 1;
-  //   // If we're at the end of the current plant, switch to the next plant
-  //   const nextPlantIndex = (currentPlantIndex + 1) % plantsData.length;
-  //   if (nextPlantIndex > plantsData.length - 1) {
-  //     setCurrentPlantIndex(nextPlantIndex);
-  //     setCurrentPage(1);
-  //   } else {
-  //     setCurrentPlantIndex(nextPlantIndex);
-  //     setCurrentPage(1);
-  //   } // Reset currentPage for the new plant
-
-
-  // };
 
   const handlePageChange = (pageNumber) => {
     console.log(pageNumber);
@@ -225,7 +220,7 @@ function Container() {
                 <div >
                   <div >
                     <div className="header-title-section flex flex-col  mb-2">
-                      <div className="head-title fs-18 fw-bold text-info">Dalmia Cement Corporate Dashboard</div>
+                      <div className="head-title fs-18 fw-bold text-info">{orgName}</div>
                       <div className="title-section d-flex align-items-center justify-content-center py-2 px-3 bg-white br-10">
                         <ul className="abbr-type d-flex mb-0 fs-16 fw-600 text-center">
                           <li className="fw-bold"><span className="text-info">CAP</span> - Corrective Action Pending</li>
@@ -237,7 +232,7 @@ function Container() {
 
                     
 
-                    <Plant board={board} currentItems={currentItems} />
+                    <Plant board={board} currentItems={currentItems} boardstatus={footerContent}/>
 
                     {footerContent?<Footer/>:<Footerhs/>}
 
