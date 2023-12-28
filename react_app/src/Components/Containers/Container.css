@@ -218,11 +218,6 @@ body {
   width: 20vh !important; 
   height: 20vh !important;
 }
-
-.health-score-sec {
-  padding: 0 3%;
-}
-
 .health-score-box {
   background-color: #fff;
   border-radius: 5px;
@@ -588,8 +583,7 @@ body {
 }
 
 .health-score-sec {
-  padding: 0 10%;
-  margin-top: -10px;
+  padding: 0 10%; 
 }
 
 .health-score-box {
@@ -619,6 +613,39 @@ body {
 .health-score-box .score-box.grey {
   background: #707378;
 }
+.footer-section {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.button-container {
+  width: 50%;
+}
+.pagination-sec {
+  width: 50%;
+}
+.header-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.abbr-type{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.abbr-type li {
+  border-right: 1px solid #000;
+  padding: 0 15px;
+}
+.abbr-type li:last-child {
+  border-right: none;
+}
+.cols-6 {
+  width: 16.666%;
+}
+
 
 @media screen and (max-width: 480px) {
   .status-buttons {

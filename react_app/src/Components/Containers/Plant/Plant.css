@@ -15,3 +15,8 @@
     margin: auto ;
     font-family:Georgia, 'Times New Roman', Times, serif;
   }
+  .stat-border {
+    height: 100%;
+    width: 2px;
+    background-color: #cecece;
+}

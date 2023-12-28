@@ -161,56 +161,71 @@ function Plant(prop) {
       <div className="cement-mill-wrapper">
         <div className="row">
           {prop.currentItems.map((plants, index) => (
-            <div key={index} className="col-lg col-20 mb-1">
-              <a onClick={() => { redirect(board, plants[0].plantid) }} target="_blank" style={{ fontWeight: 'bold', cursor: 'pointer' }}>{plants[0].plantName}</a>
+            <div key={index} className="col-md-4 col-sm-6 cols-6">
+          <div className="p-2 border border-dark bg-white mb-2 rounded-3 text-center  d-flex align-items-center flex-column">
+              <a className="text-uppercase text-decoration-none fs-16" onClick={() => { redirect(board, plants[0].plantid) }} target="_blank" style={{ fontWeight: 'bold', cursor: 'pointer', minHeight: '50px', color:'#000'}}>{plants[0].plantName}</a>
+              <div className="pie-chart w-100 d-flex align-items-center justify-content-center mb-2">
               {board ? (
                 <Pie
                   data={getChartData(plants)}
-                  width={200}
-                  height={200}
+                  width={300}
+                  height={300}
                   options={options}
                   plugins={[ChartDataLabels]}
                 />
               ) : (
                 <Pie
                   data={getChartData2(plants)}
-                  width={200}
-                  height={200}
+                  width={300}
+                  height={300}
                   options={options}
                   plugins={[ChartDataLabels]}
                 />
               )}
-              <div>
+              </div>
+              
                 {/* Conditional rendering based on loading state */}
                 {loadingDetails ? (
                   <p>Loading details...</p>
                 ) : (
-                  <div>
+                  <div className="stats w-100 d-flex justify-content-evenly">
                     {/* Conditional rendering based on loading state */}
                     {loadingDetails ? (
                       <p>Loading details...</p>
                     ) : (
                       <>
-                        {"Corrective Action Pending: " +
-                          (plantDetails.find(
+                        <div className="stat-single">
+                        <span className="fs-18 fw-bold text-info">
+                        {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.tpCount ?? "NA")}
-                        <br />
-                        {"Downtime Saved: " +
-                          (plantDetails.find(
+                          )?.details.tpCount ?? "NA")}</span>
+                          <h6 className="fw-bold fs-14 mb-0">CAP</h6>
+                        </div>
+                        <div className="stat-border" style={{height: '6vh', width: '2px', backgroundColor: '#d6d6d6'}}></div>
+                        <div className="stat-single">
+                        <span className="fs-18 fw-bold text-info">
+                        {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
                           )?.details.downtime ?? "NA")}
-                        <br />
-                        {"Breakdown Avoided : " +
-                          (plantDetails.find(
+                          </span>
+                          <h6 className="fw-bold fs-14 mb-0">DS(Hrs)</h6>
+                        </div>
+                        <div className="stat-border" style={{height: '6vh', width: '2px', backgroundColor: '#d6d6d6'}}></div>
+                        <div className="stat-single">
+                        <span className="fs-18 fw-bold text-info">
+                        {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
                           )?.details.fnCount ?? "NA")}
+                          </span>
+                          <h6 className="fw-bold fs-14 mb-0">BA</h6>
+                          </div>
                       </>
                     )}
                   </div>
 
                 )}
-              </div>
+              
+            </div>
             </div>
           ))}
         </div>

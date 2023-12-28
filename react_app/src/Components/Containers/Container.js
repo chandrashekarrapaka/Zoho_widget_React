@@ -224,14 +224,24 @@ function Container() {
               <div >
                 <div >
                   <div >
-                      <div className="title-section d-flex mb-2 align-items-center justify-content-center py-2 px-3 bg-white br-10">
-                    <p className="mb-0 fs-18 fw-600 text-center">{name}</p>
+                    <div className="header-title-section flex flex-col  mb-2">
+                      <div className="head-title fs-18 fw-bold text-info">Dalmia Cement Corporate Dashboard</div>
+                      <div className="title-section d-flex align-items-center justify-content-center py-2 px-3 bg-white br-10">
+                        <ul className="abbr-type d-flex mb-0 fs-16 fw-600 text-center">
+                          <li className="fw-bold"><span className="text-info">CAP</span> - Corrective Action Pending</li>
+                          <li className="fw-bold"><span className="text-info">DS</span> - Downtime Saved </li>
+                          <li className="fw-bold"><span className="text-info">BA</span> - Breakdown Avoided</li>
+                          </ul>
+                      </div>
                    </div>
 
                     
 
                     <Plant board={board} currentItems={currentItems} />
 
+                    {footerContent?<Footer/>:<Footerhs/>}
+
+                   <div className="footer-section">
                     <div className="pagination-sec" style={{ paddingBottom: "10px" }}>
                       <div className="row">
                         <div class="pagination-section">
@@ -257,10 +267,12 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className="btn btn-primary" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
-                      <button className="btn btn-primary" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
-                    </div><br/>
-                    {footerContent?<Footer/>:<Footerhs/>}
+                      <button className="btn btn-light px-5 py-1" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
+                      <button className="btn btn-primary px-5 py-1" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
+                    </div>
+
+                    </div>
+                   
 
                   </div>
                 </div>
