@@ -221,7 +221,7 @@ function Container() {
                   <div >
                     <div className="header-title-section flex flex-col  mb-2">
                       <div className="head-title fs-18 fw-bold text-info">{orgName}</div>
-                      <div className="title-section d-flex align-items-center justify-content-center py-2 px-3 bg-white br-10">
+                      <div className="title-section d-flex align-items-center justify-content-center py-2 px-3 border border-dark bg-white br-10">
                         <ul className="abbr-type d-flex mb-0 fs-16 fw-600 text-center">
                           <li className="fw-bold"><span className="text-info">CAP</span> - Corrective Action Pending</li>
                           <li className="fw-bold"><span className="text-info">DS</span> - Downtime Saved </li>
@@ -262,8 +262,8 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className="btn btn-light px-5 py-1 fs-16" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
-                      <button className="btn btn-light px-5 py-1 fs-16" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
+                      <button className="btn btn-light px-5 py-1 fs-16 border border-dark" onClick={() => handleButtonClick(true,"insta")}>Instantenous</button>
+                      <button className="btn btn-light px-5 py-1 fs-16 border border-dark" onClick={() => handleButtonClick(false,"hs")}>HealthScore</button>
                     </div>
 
                     </div>

@@ -165,7 +165,7 @@ function Plant(prop) {
         <div className="row">
           {prop.currentItems.map((plants, index) => (
             <div key={index} className="col-md-4 col-sm-6 cols-6">
-          <div className="chart-box p-2 border border-dark bg-white rounded-3 text-center  d-flex align-items-center flex-column">
+          <div className="chart-box p-2 border border-dark rounded-3 text-center  d-flex align-items-center flex-column">
               <a className="text-uppercase text-decoration-none fs-16" onClick={() => { redirect(board, plants[0].plantid) }} target="_blank" style={{ fontWeight: 'bold', cursor: 'pointer', minHeight: '3vw', color:'#000'}}>{plants[0].plantName}</a>
               <div className="pie-chart w-100 d-flex align-items-center justify-content-center mb-2">
               {board ? (

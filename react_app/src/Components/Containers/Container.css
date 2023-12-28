@@ -4,7 +4,7 @@
 }
 
 body {
-  background: #EEF3F9;
+  background: #fff;
   font-family: 'Urbanist', sans-serif;
   height: 100vh;
 }
@@ -277,7 +277,7 @@ body {
 }
 
 .pagination-block .page-item {
-  background-color: #fff;
+  background-color:#e8eff8;
   width: 2vw;
   display: flex;
   align-items: center;
@@ -289,7 +289,7 @@ body {
 }
 
 .stop-auto-pagination {
-  background-color: #fff;
+  background-color: #e8eff8;
   border-radius: 20px;
   padding: 5px 14px;
   display: flex;
@@ -652,7 +652,7 @@ body {
   width: 16.666%;
 }
 .active-button{background-color: #01adff; color: #fff;}
-.chart-box{margin-bottom:2vw;}
+.chart-box{margin-bottom:2vw;background-color: #e8eff8;}
 @media screen and (max-width: 480px) {
   .status-buttons {
     flex-direction: column;
