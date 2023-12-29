@@ -263,7 +263,7 @@ function Container() {
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
                       <button className={footerContent ?'btn btn-light px-5 py-1 fs-16 border border-dark active-button' : 'btn btn-light px-5 py-1 fs-16 border border-dark ' } onClick={() => handleButtonClick("insta")}>Instantenous</button>
-                      <button className={footerContent ?'btn btn-light px-5 py-1 fs-16 border border-dark ' : 'btn btn-light px-5 py-1 fs-16 border border-dark active-button ' }onClick={() => handleButtonClick("hs")}>HealthScore</button>
+                      <button className={footerContent ?'btn btn-light px-5 py-1 fs-16 border border-dark ' : 'btn btn-light px-5 py-1 fs-16 border border-dark active-button ' }onClick={() => handleButtonClick("hs")}>Health Score</button>
                     </div>
 
                     </div>
