@@ -13,7 +13,7 @@ import AppListDropdown from "../AppListDropdown";
 
 function Container() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
   const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
