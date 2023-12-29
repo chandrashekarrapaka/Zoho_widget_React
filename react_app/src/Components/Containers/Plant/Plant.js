@@ -203,7 +203,7 @@ function Plant(prop) {
                         <span className="fs-18 fw-bold text-info">
                         {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.tpCount ?? "NA")}</span>
+                          )?.details.newCount ?? "NA")}</span>
                           <h6 className="fw-bold fs-14 mb-0">CAP</h6>
                         </div>
                         <div className="stat-border" style={{height: '6vh', width: '2px', backgroundColor: '#d6d6d6'}}></div>
@@ -220,7 +220,7 @@ function Plant(prop) {
                         <span className="fs-18 fw-bold text-info">
                         {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.fnCount ?? "NA")}
+                          )?.details.tpCount ?? "NA")}
                           </span>
                           <h6 className="fw-bold fs-14 mb-0">BA</h6>
                           </div>
