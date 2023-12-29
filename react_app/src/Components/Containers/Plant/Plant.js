@@ -97,11 +97,12 @@ function Plant(prop) {
       healthScores.filter((score) => score === 3).length,
       healthScores.filter((score) => score === 2 || score === 1).length,
     ];
-
+    const filteredHealthScoreCounts = Object.values(healthScorePercentages).filter(count => count !== 0);
+  
     return {
       datasets: [
         {
-          data: healthScorePercentages,
+          data: filteredHealthScoreCounts,
           backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "#9E9E9E"],
         },
       ],
@@ -118,10 +119,11 @@ function Plant(prop) {
       healthScores.filter((score) => score <= 50 && score > 0).length,
       healthScores.filter((score) => score === 0).length,
     ];
+    const filteredHealthScoreCounts = Object.values(healthScorePercentages).filter(count => count !== 0);
     return {
       datasets: [
         {
-          data: healthScorePercentages,
+          data: filteredHealthScoreCounts,
           backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "white"],
         },
       ],
