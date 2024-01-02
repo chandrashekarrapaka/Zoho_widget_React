@@ -10,7 +10,7 @@ function Plant(prop) {
   const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  //console.log(board);
+  //console.log(prop.currentItems);
 
 
   useEffect(() => {
@@ -92,18 +92,20 @@ function Plant(prop) {
       .filter((healthScore) => healthScore !== undefined);
 
     const healthScorePercentages = [
-      healthScores.filter((score) => score === 5).length,
-      healthScores.filter((score) => score === 4).length,
+      healthScores.filter((score) =>  score === 2 || score === 1).length,
       healthScores.filter((score) => score === 3).length,
-      healthScores.filter((score) => score === 2 || score === 1).length,
+      healthScores.filter((score) => score === 4).length,
+      healthScores.filter((score) => score === 5).length,
     ];
-    const filteredHealthScoreCounts = Object.values(healthScorePercentages).filter(count => count !== 0);
+    const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
   
     return {
       datasets: [
         {
           data: filteredHealthScoreCounts,
-          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "#9E9E9E"],
+          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "gray"],
+          //backgroundColor: ["9E9E9E","FF5722","FFC107","#64DD17"],
+
         },
       ],
     };
@@ -119,7 +121,8 @@ function Plant(prop) {
       healthScores.filter((score) => score <= 50 && score > 0).length,
       healthScores.filter((score) => score === 0).length,
     ];
-    const filteredHealthScoreCounts = Object.values(healthScorePercentages).filter(count => count !== 0);
+    const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
+    //console.log(filteredHealthScoreCounts);
     return {
       datasets: [
         {
