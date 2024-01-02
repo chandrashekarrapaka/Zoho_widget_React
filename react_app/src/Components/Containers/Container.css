@@ -684,6 +684,12 @@ body {
 
 /* --------- Resiponsive Style --------- */
 
+@media (max-width: 1399px){
+  .chart-box{
+    margin-bottom: 0.75vh;
+  }
+}
+
 @media (max-width: 991px) {
 
   .dashboard-sec .brand-logo,
@@ -844,8 +850,7 @@ body {
 }
 
 @media (min-width: 1920px) {
-  .chart-box { 
-    margin-top: 2vw;
+  .chart-box {
     margin-bottom: 0;
 }
 .header-title-section { 
