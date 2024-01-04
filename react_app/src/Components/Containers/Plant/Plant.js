@@ -206,7 +206,7 @@ function Plant(prop) {
                         <span className="fs-18 fw-bold text-info">
                         {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.newCount ?? "NA")}</span>
+                          )?.details.newCount ?? "0")}</span>
                           <h6 className="fw-bold fs-14 mb-0">CAP</h6>
                         </div>
                         <div className="stat-border" style={{height: '6vh', width: '2px', backgroundColor: '#d6d6d6'}}></div>
@@ -214,7 +214,7 @@ function Plant(prop) {
                         <span className="fs-18 fw-bold text-info">
                         {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.downtime ?? "NA")}
+                          )?.details.downtime ?? "0")}
                           </span>
                           <h6 className="fw-bold fs-14 mb-0">DS(Hrs)</h6>
                         </div>
@@ -223,7 +223,7 @@ function Plant(prop) {
                         <span className="fs-18 fw-bold text-info">
                         {(plantDetails.find(
                             (details) => details.plantid === plants[0].plantid
-                          )?.details.tpCount ?? "NA")}
+                          )?.details.tpCount ?? "0")}
                           </span>
                           <h6 className="fw-bold fs-14 mb-0">BA</h6>
                           </div>
