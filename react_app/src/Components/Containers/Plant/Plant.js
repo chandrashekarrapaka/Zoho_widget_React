@@ -116,9 +116,9 @@ function Plant(prop) {
       .filter((healthScore) => healthScore !== undefined);
 
     const healthScorePercentages = [
-      healthScores.filter((score) => score <= 100 && score > 80).length,
-      healthScores.filter((score) => score <= 80 && score > 50).length,
-      healthScores.filter((score) => score <= 50 && score > 0).length,
+      healthScores.filter((score) => score <= 100 && score >= 80).length,
+      healthScores.filter((score) => score < 80 && score >= 50).length,
+      healthScores.filter((score) => score < 50 && score > 0).length,
       healthScores.filter((score) => score === 0).length,
     ];
     const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
