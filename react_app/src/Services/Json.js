@@ -25,7 +25,7 @@ export async function Plants() {
         accessTokenz = userData.data[0].Access_Token;
         return accessTokenz;
       });
-      
+
       return access;
     });
 
@@ -54,19 +54,19 @@ export async function Plants() {
           if (plantsResponse.status === 401) {
             apicallstatus = false;
             // Stop further API calls
-           // clearInterval(intervalId);
+            // clearInterval(intervalId);
             //console.log("apicallstatus: " + apicallstatus);
-            return [[]],apicallstatus;
+            return [[]], apicallstatus;
           }
-          
+
           const plantsData = await plantsResponse.json();
           const plantsArray = [];
           const serviceRequestsIds = {
             plant_ids: new Array,
             machine_ids: new Array,
           };
-         // console.log(plantsData);
-          
+          // console.log(plantsData);
+
           plantsData.data.machineGroups.forEach((mg) => {
             mg.machines.forEach((machine) => {
               machine.mg = mg.name;
@@ -103,34 +103,36 @@ export async function Plants() {
                 'Authorization': 'Bearer ' + accessToken,
               }
             });
-      
+
             if (serviceRequests.status === 200) {
               const serviceRequestData = await serviceRequests.json();
-      
+
               for (const plantId in serviceRequestData.data) {
                 serviceRequestData.data[plantId].forEach(async (v, index) => {
                   if (v.serviceReqMachineDetails.length > 0) {
                     v.serviceReqMachineDetails.forEach(async (m, index) => {
-                      if (! drsRequests[plantId]) {
+                      if (!drsRequests[plantId]) {
                         drsRequests[plantId] = {};
                       }
-      
-                      if (! drsRequests[plantId][m.machineId]) {
+
+                      if (!drsRequests[plantId][m.machineId]) {
                         drsRequests[plantId][m.machineId] = {};
                       }
-      
-                      if (! drsRequests[plantId][m.machineId][m.monitorId]) {
-                        drsRequests[plantId][m.machineId][m.monitorId] = {};
+
+                      if (!drsRequests[plantId][m.machineId][m.monitorId]) {
+                        drsRequests[plantId][m.machineId][m.monitorId] = 'COMPLETED';
                       }
-      
-                      if (! drsRequests[plantId][m.machineId]['status']) {
-                        drsRequests[plantId][m.machineId]['status'] = 'COMPLETED';
-                      }
-      
-                      drsRequests[plantId][m.machineId][m.monitorId] = m.serviceStatus;
-      
-                      if (m.serviceStatus == 'NEW') {
-                        drsRequests[plantId][m.machineId]['status'] = 'NEW';
+
+                      if (drsRequests[plantId][m.machineId][m.monitorId] != 'NEW') {
+                        if (!drsRequests[plantId][m.machineId]['status']) {
+                          drsRequests[plantId][m.machineId]['status'] = 'COMPLETED';
+                        }
+
+                        drsRequests[plantId][m.machineId][m.monitorId] = m.serviceStatus;
+
+                        if (m.serviceStatus == 'NEW') {
+                          drsRequests[plantId][m.machineId]['status'] = 'NEW';
+                        }
                       }
                     });
                   }
@@ -146,7 +148,7 @@ export async function Plants() {
 
     await fetchPlantsData();
 
-    
+
     //intervalId = setInterval(fetchPlantsData, 30000);
 
     return [arrayOfMachines, apicallstatus, drsRequests];
