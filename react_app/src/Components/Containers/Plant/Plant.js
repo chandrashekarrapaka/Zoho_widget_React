@@ -110,19 +110,61 @@ function Plant(prop) {
       ],
     };
   };
-  const getChartData2 = (plants) => {
-    const healthScores = plants
-      .map((machine) => machine.healthScore)
-      .filter((healthScore) => healthScore !== undefined);
+  // const getChartData2 = (plants) => {
+  //   const healthScores = plants
+  //     .map((machine) => machine.healthScore)
+  //     .filter((healthScore) => healthScore !== undefined);
 
-    const healthScorePercentages = [
-      healthScores.filter((score) => score <= 100 && score >= 80).length,
-      healthScores.filter((score) => score < 80 && score >= 50).length,
-      healthScores.filter((score) => score < 50 && score > 0).length,
-      healthScores.filter((score) => score === 0).length,
-    ];
-    const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
-    //console.log(filteredHealthScoreCounts);
+  //   const healthScorePercentages = [
+  //     healthScores.filter((score) => score <= 100 && score >= 80).length,
+  //     healthScores.filter((score) => score < 80 && score >= 50).length,
+  //     healthScores.filter((score) => score < 50 && score > 0).length,
+  //     healthScores.filter((score) => score === 0).length,
+  //   ];
+  //   const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
+  //   //console.log(filteredHealthScoreCounts);
+  //   return {
+  //     datasets: [
+  //       {
+  //         data: filteredHealthScoreCounts,
+  //         backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "white"],
+  //       },
+  //     ],
+  //   };
+  // };
+
+
+  const getChartData2 = (plants) => {
+    const healthScorePercentages = plants.map((machine) => {
+      
+      const monitorHealthScores = machine.monitors.map((monitor) => monitor.healthScore);
+      console.log(monitorHealthScores);
+     
+      const allZeros = monitorHealthScores.every((score) => score === 0);
+      console.log(allZeros);
+      
+      let machineHealthScore;
+      if (allZeros) {
+        
+        machineHealthScore = 0;
+      } else {
+        
+        machineHealthScore = Math.min(...monitorHealthScores.filter(score => score !== undefined && score !== null && score!==0));
+        console.log(machineHealthScore);
+      }
+  
+      return machineHealthScore;
+    });
+  
+    console.log("Final Health Score Percentages:", healthScorePercentages);
+    const healthScorePercentagesfilter= [
+      healthScorePercentages.filter((score) => score <= 100 && score >= 80).length,
+      healthScorePercentages.filter((score) => score < 80 && score >= 50).length,
+      healthScorePercentages.filter((score) => score < 50 && score > 0).length,
+      healthScorePercentages.filter((score) => score === 0).length,
+        ];
+        const filteredHealthScoreCounts = healthScorePercentagesfilter.map((count) => (count === 0 ? "" : count));
+  
     return {
       datasets: [
         {
@@ -132,6 +174,13 @@ function Plant(prop) {
       ],
     };
   };
+  
+  
+  
+  
+  
+
+  
 
   const options = {
     plugins: {
