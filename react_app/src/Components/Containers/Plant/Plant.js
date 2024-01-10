@@ -30,14 +30,14 @@ function Plant(prop) {
   }, [userId]);
 
   useEffect(() => {
-    // Fetch details for all plants when prop.currentItems changes
+    
 
-    setLoadingDetails(true); // Set loading state to true
+    setLoadingDetails(true); 
     const fetchDetailsForAllPlants = async () => {
       try {
         const plantIds = prop.currentItems.map(plants => plants[0].plantid);
         let token = await LoginCredentialsAndQueriesA();
-        //console.log(plantIds);
+       
         const requests = plantIds.map(async plantid => {
           const response = await fetch(
             `https://api.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds=${plantid}`, {
@@ -50,7 +50,7 @@ function Plant(prop) {
           );
 
           const plantDetailsData = await response.json();
-          //console.log(plantDetails);
+          
 
           if (plantDetailsData.data && plantDetailsData.data.length > 0) {
             const formattedPlantDetails = {
@@ -64,16 +64,15 @@ function Plant(prop) {
           return null;
         });
 
-        // Wait for all requests to complete
+       
         const details = await Promise.all(requests);
-       // console.log(details.filter(Boolean));
-        // Filter out null values (failed requests) and update state
+       
         setPlantDetails(details.filter(Boolean));
 
-        setLoadingDetails(false); // Set loading state to false
+        setLoadingDetails(false); 
       } catch (error) {
         console.error(error);
-        setLoadingDetails(false); // Set loading state to false in case of error
+        setLoadingDetails(false); 
       }
     };
 
