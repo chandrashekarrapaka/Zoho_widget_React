@@ -6,11 +6,11 @@ import { loggedInUser } from "../../../Services/loggedInUser";
 import { LoginCredentialsAndQueriesA } from "../../../Services/loginCredentialsAndQueriesA";
 
 function Plant(prop) {
-  const [board, setBoard] = useState(true);
+  const [board, setBoard] = useState(prop.board);
   const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  //console.log(prop.currentItems);
+  console.log(board);
 
 
   useEffect(() => {
@@ -83,7 +83,7 @@ function Plant(prop) {
 
   useEffect(() => {
     
-    setBoard(prop.boardstatus);
+    setBoard(prop.board);
   }, [prop.board]);
 
   const getChartData = (plants) => {
@@ -110,38 +110,16 @@ function Plant(prop) {
       ],
     };
   };
-  // const getChartData2 = (plants) => {
-  //   const healthScores = plants
-  //     .map((machine) => machine.healthScore)
-  //     .filter((healthScore) => healthScore !== undefined);
-
-  //   const healthScorePercentages = [
-  //     healthScores.filter((score) => score <= 100 && score >= 80).length,
-  //     healthScores.filter((score) => score < 80 && score >= 50).length,
-  //     healthScores.filter((score) => score < 50 && score > 0).length,
-  //     healthScores.filter((score) => score === 0).length,
-  //   ];
-  //   const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
-  //   //console.log(filteredHealthScoreCounts);
-  //   return {
-  //     datasets: [
-  //       {
-  //         data: filteredHealthScoreCounts,
-  //         backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "white"],
-  //       },
-  //     ],
-  //   };
-  // };
 
 
   const getChartData2 = (plants) => {
     const healthScorePercentages = plants.map((machine) => {
       
       const monitorHealthScores = machine.monitors.map((monitor) => monitor.healthScore);
-      console.log(monitorHealthScores);
+      //console.log(monitorHealthScores);
      
       const allZeros = monitorHealthScores.every((score) => score === 0);
-      console.log(allZeros);
+      //console.log(allZeros);
       
       let machineHealthScore;
       if (allZeros) {
@@ -150,13 +128,13 @@ function Plant(prop) {
       } else {
         
         machineHealthScore = Math.min(...monitorHealthScores.filter(score => score !== undefined && score !== null && score!==0));
-        console.log(machineHealthScore);
+       // console.log(machineHealthScore);
       }
   
       return machineHealthScore;
     });
   
-    console.log("Final Health Score Percentages:", healthScorePercentages);
+   // console.log("Final Health Score Percentages:", healthScorePercentages);
     const healthScorePercentagesfilter= [
       healthScorePercentages.filter((score) => score <= 100 && score >= 80).length,
       healthScorePercentages.filter((score) => score < 80 && score >= 50).length,
@@ -174,12 +152,6 @@ function Plant(prop) {
       ],
     };
   };
-  
-  
-  
-  
-  
-
   
 
   const options = {
@@ -206,12 +178,49 @@ function Plant(prop) {
   const redirect = (board, plantid) => {
     console.log(board, plantid);
 
-    if (board) {
+    if (board=="insta") {
       window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_Instantaneous_Status?PlantId=${plantid}&user=${userId}`, '_blank');
-    } else {
+    } else if (board=="hs") {
+      window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_HealthScore?PlantId=${plantid}&user=${userId}`, '_blank');
+    }
+    else if (board=="drs") {
       window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_HealthScore?PlantId=${plantid}&user=${userId}`, '_blank');
     }
   };
+const boardDisplay=(plants)=>{
+ 
+  if(board=="insta"){
+    return(<Pie
+     data={getChartData(plants)}
+     width={300}
+     height={300}
+     options={options}
+     plugins={[ChartDataLabels]}
+   />)
+       
+    
+ 
+     }
+     else if(board=="hs"){
+      return( <Pie
+       data={getChartData2(plants)}
+       width={300}
+       height={300}
+       options={options}
+       plugins={[ChartDataLabels]}
+     />)
+     }
+     else if(board=="drs"){
+      return( <Pie
+       data={getChartData2(plants)}
+       width={300}
+       height={300}
+       options={options}
+       plugins={[ChartDataLabels]}
+     />)
+     }
+     
+  }
 
   return (
     <div className="cement-mill-sec">
@@ -222,23 +231,8 @@ function Plant(prop) {
           <div className="chart-box p-2 border border-dark rounded-3 text-center  d-flex align-items-center flex-column">
               <a className="text-uppercase text-decoration-none fs-16" onClick={() => { redirect(board, plants[0].plantid) }} target="_blank" style={{ fontWeight: 'bold', cursor: 'pointer', minHeight: '3vw', color:'#000'}}>{plants[0].plantName}</a>
               <div className="pie-chart w-100 d-flex align-items-center justify-content-center mb-2">
-              {board ? (
-                <Pie
-                  data={getChartData(plants)}
-                  width={300}
-                  height={300}
-                  options={options}
-                  plugins={[ChartDataLabels]}
-                />
-              ) : (
-                <Pie
-                  data={getChartData2(plants)}
-                  width={300}
-                  height={300}
-                  options={options}
-                  plugins={[ChartDataLabels]}
-                />
-              )}
+              {boardDisplay(plants)}
+              
               </div>
               
                 {/* Conditional rendering based on loading state */}

@@ -5,6 +5,7 @@ import Plant from "./Plant/Plant";
 import { Plants } from "../../Services/Json";
 import Header from "../Header/Header";
 import Footer from './Footer';
+import Footerdrs from './Footerdrs';
 import Footerhs from './Footerhs';
 import { LoginCredentialsAndQueries } from "../../Services/loginCredentialsAndQueries";
 import AppListDropdown from "../AppListDropdown";
@@ -21,10 +22,16 @@ function Container() {
   const [apicall, setApiCall] = useState(true);
   const [autoPagination, setAutoPagination] = useState(true);
   const [PlantSelection, setPlantSelection] = useState(false);
-  const [footerContent, setFooterContent] = useState(true);
+  const [footerContent, setFooterContent] = useState(<Footer/>);
   const [board,SetBoard]=useState("insta");
   const [name,setName]=useState("");
   const [orgName,setOrgName]=useState("");
+  const [classNameI,setClassNameI]=useState("btn btn-light px-5 py-1 fs-16 border border-dark active-button");
+  const [classNameH,setClassNameH]=useState("btn btn-light px-5 py-1 fs-16 border border-dark ");
+  const [classNameD,setClassNameD]=useState("btn btn-light px-5 py-1 fs-16 border border-dark ");
+
+
+
 
   useEffect(() => {
     const fetchName = async () => {
@@ -134,13 +141,31 @@ function Container() {
     console.log(type);
     
     if(type=="insta"){
-      setFooterContent(true);
+      setFooterContent(<Footer/>);
       SetBoard("insta");
+      setClassNameI("btn btn-light px-5 py-1 fs-16 border border-dark active-button");
+      setClassNameH("btn btn-light px-5 py-1 fs-16 border border-dark ");
+      setClassNameD("btn btn-light px-5 py-1 fs-16 border border-dark ");
+
+
     }
-    else{
+    else if(type=="hs"){
       SetBoard("hs");
-      setFooterContent(false);
+      setFooterContent(<Footerhs/>);
+      setClassNameI("btn btn-light px-5 py-1 fs-16 border border-dark ");
+      setClassNameH("btn btn-light px-5 py-1 fs-16 border border-dark active-button");
+      setClassNameD("btn btn-light px-5 py-1 fs-16 border border-dark ");
+      
     }
+    else if(type=="drs"){
+      SetBoard("drs");
+      setFooterContent(<Footerdrs/>);
+      setClassNameI("btn btn-light px-5 py-1 fs-16 border border-dark ");
+      setClassNameH("btn btn-light px-5 py-1 fs-16 border border-dark ");
+      setClassNameD("btn btn-light px-5 py-1 fs-16 border border-dark active-button ");
+      
+    }
+
   };
   useEffect(() => {
     let timeout;
@@ -195,7 +220,14 @@ function Container() {
   const handleCheck = () => {
     setAutoPagination((prevState) => !prevState);
   }
-
+//   const footerFunction=()=>{
+// if(footerContent=="insta"){
+//   return <Footer/>;
+// }
+// else if(footerContent=="hs"){
+//   return <Footer/>;
+// }
+//   }
 
   const currentPlant = plantsData[currentPlantIndex];
   const totalPages = Math.ceil(plantsData.length / itemsPerPage);
@@ -232,9 +264,9 @@ function Container() {
 
                     
 
-                    <Plant board={board} currentItems={currentItems} boardstatus={footerContent}/>
-
-                    {footerContent?<Footer/>:<Footerhs/>}
+                    <Plant board={board} currentItems={currentItems} />
+                    {/* {footerFunction()} */}
+                    {footerContent}
 
                    <div className="footer-section">
                     <div className="pagination-sec" style={{ paddingBottom: "10px" }}>
@@ -262,8 +294,10 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className={footerContent ?'btn btn-light px-5 py-1 fs-16 border border-dark active-button' : 'btn btn-light px-5 py-1 fs-16 border border-dark ' } onClick={() => handleButtonClick("insta")}>Instantenous</button>
-                      <button className={footerContent ?'btn btn-light px-5 py-1 fs-16 border border-dark ' : 'btn btn-light px-5 py-1 fs-16 border border-dark active-button ' }onClick={() => handleButtonClick("hs")}>Health Score</button>
+                      <button className={classNameI} onClick={() => handleButtonClick("insta")}>Instantenous</button>
+                      <button className={classNameH }onClick={() => handleButtonClick("hs")}>Health Score</button>
+                      <button className={classNameD }onClick={() => handleButtonClick("drs")}>DRS Report</button>
+                    
                     </div>
 
                     </div>
