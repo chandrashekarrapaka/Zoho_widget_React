@@ -17,6 +17,7 @@ function Container() {
   const itemsPerPage = 12;
   const [timeIn, setTimeIn] = useState(30000);
   const [plantsData, setPlantsData] = useState([]);
+  const [plantDrsStatus, setPlantDrsStatus] = useState([]);
   const [currentPlantIndex, setCurrentPlantIndex] = useState(0);
   const [noData, setNoData] = useState('');
   const [apicall, setApiCall] = useState(true);
@@ -58,7 +59,9 @@ function Container() {
     const fetchData = async () => {
       try {
         const response = await Plants();
-
+        if(response[3]){
+          setPlantDrsStatus(response[3]);
+        }
         if (response[1]) {
           let plants = [];
           if(response[2]){
@@ -264,7 +267,7 @@ function Container() {
 
                     
 
-                    <Plant board={board} currentItems={currentItems} />
+                    <Plant board={board} currentItems={currentItems}  plantDrsStatus={plantDrsStatus}/>
                     {/* {footerFunction()} */}
                     {footerContent}
 
