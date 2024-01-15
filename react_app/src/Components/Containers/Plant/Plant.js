@@ -10,7 +10,9 @@ function Plant(prop) {
   const [userId, setUserId] = useState('');
   const [plantDetails, setPlantDetails] = useState([]);
   const [loadingDetails, setLoadingDetails] = useState([]);
-  console.log(board);
+  const [drsData,setDrsData]=useState();
+
+ // console.log(board);
 
 
   useEffect(() => {
@@ -151,6 +153,52 @@ function Plant(prop) {
       ],
     };
   };
+  const getChartData3 = (plants) => {
+    
+   // console.log(plants[0].plantid);
+    const statusArray = plants.map(() => "yes");
+   // console.log(statusArray);
+  
+    
+    Object.entries(prop.plantDrsStatus).forEach(([plantId, plant]) => {
+      let i=0;
+      if(plantId==plants[0].plantid){
+        
+        const currentPlantIndex = plants.findIndex((plant) => plant.plantid === plantId);
+       // console.log(plantId,plant,currentPlantIndex);
+
+    
+    
+      Object.values(plant).forEach((machine) => {
+        if (machine.status === "NEW") {
+          statusArray[i] = "NO";
+          i++;
+        }
+      });
+    
+      }
+    // 
+  });
+  
+    const healthScoreCounts = {
+      1: statusArray.filter((status) => status === "yes").length,
+      2: statusArray.filter((status) => status === "NO").length,
+    };
+  
+    const filteredHealthScoreCounts = Object.values(healthScoreCounts).map((count) => (count === 0 ? "" : count));
+  //console.log(healthScoreCounts,filteredHealthScoreCounts)
+    return {
+      datasets: [
+        {
+          data: filteredHealthScoreCounts,
+          backgroundColor: ["#64DD17", "#FF5722"],
+        },
+      ],
+    };
+  };
+  
+  
+  
   
 
   const options = {
@@ -175,7 +223,7 @@ function Plant(prop) {
   };
 
   const redirect = (board, plantid) => {
-    console.log(board, plantid);
+   // console.log(board, plantid);
 
     if (board=="insta") {
       window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_Instantaneous_Status?PlantId=${plantid}&user=${userId}`, '_blank');
@@ -183,7 +231,7 @@ function Plant(prop) {
       window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_HealthScore?PlantId=${plantid}&user=${userId}`, '_blank');
     }
     else if (board=="drs") {
-      window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_HealthScore?PlantId=${plantid}&user=${userId}`, '_blank');
+      window.open(`https://crv.infinite-uptime.com/#Page:CRV_Dashboard_by_DRS_Report_Status?PlantId=${plantid}&user=${userId}`, '_blank');
     }
   };
 const boardDisplay=(plants)=>{
@@ -211,7 +259,7 @@ const boardDisplay=(plants)=>{
      }
      else if(board=="drs"){
       return( <Pie
-       data={getChartData2(plants)}
+       data={getChartData3(plants)}
        width={300}
        height={300}
        options={options}
