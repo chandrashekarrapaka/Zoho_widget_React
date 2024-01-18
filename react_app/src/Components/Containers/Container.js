@@ -79,6 +79,7 @@ function Container() {
             const storedPattern = await fetchProfile();
 
             if (storedPattern && storedPattern !== undefined) {
+              console.log("sdata");
               const uniqueOrderedIds = [...new Set(JSON.parse(storedPattern))];
               const uniquePlantIds = plants.map(plant => plant[0].plantid);
               const patternsMatch = JSON.stringify(uniqueOrderedIds.sort()) === JSON.stringify(uniquePlantIds.sort());
@@ -90,11 +91,41 @@ function Container() {
                   return plant ? plant : null;
                 }).filter((plant) => plant !== null);
 
-                setPlantsData(reorderedPlantsData);
+               // console.log("pattern",reorderedPlantsData.length);
+
+                if (reorderedPlantsData.length === 0) {
+                  setNoData('No data found');
+                } else {
+                  console.log("checking");
+                  // Sort the plantsData based on plantName
+                  const sortedPlantsData = [...reorderedPlantsData].sort((a, b) =>
+                    a[0].plantName.localeCompare(b[0].plantName, undefined, {
+                      numeric: true,
+                      sensitivity: "base",
+                    })
+                  );
+                  setPlantsData(sortedPlantsData);
+                }
+               
+              //  setPlantsData(sortedPlantsData);
               } else {
-                setPlantsData(plants);
+                if(plants.length>0){
+                  console.log("sorting");
+                  const sortedPlantsData = [...plants].sort((a, b) =>
+                    a[0].plantName.localeCompare(b[0].plantName, undefined, {
+                      numeric: true,
+                      sensitivity: "base",
+                    })
+                  );
+                  setPlantsData(sortedPlantsData);
+                }
+                else{
+                  // setPlantsData(plants);
+                }
+               
               }
             } else {
+              console.log("usdata");
               setPlantsData(plants);
             }
 
