@@ -3,6 +3,7 @@ let intervalId;
 export async function Plants() {
   let accessToken = "";
   const arrayOfPlants = [];
+  const drsRequests = {};
   const OrgName=[];
   const arrayOfMachines = [];
   let apicallstatus = true;
@@ -63,17 +64,82 @@ export async function Plants() {
           const plantsArray = [];
          //console.log(plantsData);
           OrgName.push(plantsData.data.organizationName);
+          const serviceRequestsIds = {
+            plant_ids: new Array,
+            machine_ids: new Array,
+          };
           plantsData.data.machineGroups.forEach((mg) => {
             mg.machines.forEach((machine) => {
               machine.mg = mg.name;
               machine.plantName = plantsData.data.name;
               machine.plantid = plantsData.data.id;
               plantsArray.push(machine);
+              if (!(
+                typeof serviceRequestsIds.plant_ids != typeof undefined &&
+                serviceRequestsIds.plant_ids.length > 0 &&
+                serviceRequestsIds.plant_ids.includes(plantsData.data.id)
+              )) {
+                serviceRequestsIds.plant_ids.push(plantsData.data.id);
+              }
+
+              if (!(
+                typeof serviceRequestsIds.machine_ids != typeof undefined &&
+                serviceRequestsIds.machine_ids.length > 0 &&
+                serviceRequestsIds.machine_ids.includes(machine.id)
+              )) {
+                serviceRequestsIds.machine_ids.push(machine.id);
+              }
             });
           });
 
           arrayOfMachines.push(plantsArray);
           arrayOfPlants.push(plantsData.data);
+          
+          if (serviceRequestsIds.plant_ids.length > 0 && serviceRequestsIds.machine_ids.length > 0) {
+            const serviceRequests = await fetch(`https://api.infinite-uptime.com/api/3.0/idap-api/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
+              method: 'GET',
+              headers: {
+                'accept': 'application/json',
+                'Authorization': 'Bearer ' + accessToken,
+              }
+            });
+
+            if (serviceRequests.status === 200) {
+              const serviceRequestData = await serviceRequests.json();
+
+              for (const plantId in serviceRequestData.data) {
+                serviceRequestData.data[plantId].forEach(async (v, index) => {
+                  if (v.serviceReqMachineDetails.length > 0) {
+                    v.serviceReqMachineDetails.forEach(async (m, index) => {
+                      if (!drsRequests[plantId]) {
+                        drsRequests[plantId] = {};
+                      }
+
+                      if (!drsRequests[plantId][m.machineId]) {
+                        drsRequests[plantId][m.machineId] = {};
+                      }
+
+                      if (!drsRequests[plantId][m.machineId][m.monitorId]) {
+                        drsRequests[plantId][m.machineId][m.monitorId] = 'COMPLETED';
+                      }
+
+                      if (drsRequests[plantId][m.machineId][m.monitorId] != 'NEW') {
+                        if (!drsRequests[plantId][m.machineId]['status']) {
+                          drsRequests[plantId][m.machineId]['status'] = 'COMPLETED';
+                        }
+
+                        drsRequests[plantId][m.machineId][m.monitorId] = m.serviceStatus;
+
+                        if (m.serviceStatus == 'NEW') {
+                          drsRequests[plantId][m.machineId]['status'] = 'NEW';
+                        }
+                      }
+                    });
+                  }
+                });
+              }
+            }
+          }
         }));
       } catch (error) {
         throw error;
@@ -85,7 +151,7 @@ export async function Plants() {
     
     //intervalId = setInterval(fetchPlantsData, 30000);
 
-    return [arrayOfMachines, apicallstatus,OrgName];
+    return [arrayOfMachines, apicallstatus,OrgName,drsRequests];
 
   } catch (error) {
     //console.error(error);
@@ -95,7 +161,7 @@ export async function Plants() {
 
 
 Plants()
-  .then(([machines, status]) => {
+  .then(([machines, status,drsRequests]) => {
     //console.log("Machines:", machines);
     //console.log("API Call Status:", status);
   })
