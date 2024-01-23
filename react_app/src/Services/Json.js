@@ -56,12 +56,17 @@ export async function Plants() {
           const plantsData = await plantsResponse.json();
           const plantsArray = [];
           
-          plantsData.data.machineGroups.forEach((mg) => {
-            mg.machines.forEach((machine) => {
+          
+          plantsData.data.areas.forEach((area) => {
+            area.machineGroups.forEach((mg) => {
+              mg.machines.forEach((machine)=>{
               machine.mg = mg.name;
               machine.plantName = plantsData.data.name;
               machine.plantid = plantsData.data.id;
               plantsArray.push(machine);
+
+              })
+              
             });
           });
 
