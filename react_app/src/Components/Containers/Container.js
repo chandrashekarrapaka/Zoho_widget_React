@@ -326,7 +326,7 @@ function Container() {
         </section>
       ) : ((apicall === true) ?
 
-        (<div style={{ textAlign: "center" }}><h1>{`loading....${noData}`}</h1></div>)
+        (<div style={{ textAlign: "center" }}><h1>{`CRV app is undergoing maintenance and will be operational shortly. We apologize for any inconvenience caused.`}</h1></div>)
         : (<div className="login-again">
           <p>{`Invalid Token, Please Login here`}</p>
           <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
