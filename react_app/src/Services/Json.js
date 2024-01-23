@@ -62,7 +62,7 @@ export async function Plants() {
           
           const plantsData = await plantsResponse.json();
           const plantsArray = [];
-         //console.log(plantsData);
+         console.log(plantsData);
           OrgName.push(plantsData.data.organizationName);
           const serviceRequestsIds = {
             plant_ids: new Array,
@@ -150,6 +150,7 @@ export async function Plants() {
 
     
     //intervalId = setInterval(fetchPlantsData, 30000);
+    console.log( [arrayOfMachines, apicallstatus,OrgName,drsRequests]);
 
     return [arrayOfMachines, apicallstatus,OrgName,drsRequests];
 

@@ -143,7 +143,7 @@ function Container() {
         }
       } catch (error) {
         console.error(error);
-        setNoData('Error occurred while fetching data.');
+        setNoData('CRV app is undergoing maintenance and will be operational shortly. We apologize for any inconvenience caused.');
       }
     };
 
@@ -349,7 +349,7 @@ function Container() {
         </section>
       ) : ((apicall === true) ?
 
-        (<div style={{ textAlign: "center" }}><h1>{`loading....${noData}`}</h1></div>)
+        (<div style={{ textAlign: "center" }}><h1>{`${noData}`}</h1></div>)//loading-add
         : (<div className="login-again">
           <p>{`Invalid Token, Please Login here`}</p>
           <a href="https://crv.infinite-uptime.com/#Profile" target="_blank">Please click here</a>
