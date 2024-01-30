@@ -23,13 +23,13 @@ function Container() {
   const [apicall, setApiCall] = useState(true);
   const [autoPagination, setAutoPagination] = useState(true);
   const [PlantSelection, setPlantSelection] = useState(false);
-  const [footerContent, setFooterContent] = useState(<Footer/>);
-  const [board,SetBoard]=useState("insta");
+  const [footerContent, setFooterContent] = useState(<Footerdrs/>);
+  const [board,SetBoard]=useState("drs");
   const [name,setName]=useState("");
   const [orgName,setOrgName]=useState("");
-  const [classNameI,setClassNameI]=useState("btn btn-light px-5 py-1 fs-16 border border-dark active-button");
+  const [classNameI,setClassNameI]=useState("btn btn-light px-5 py-1 fs-16 border border-dark");
   const [classNameH,setClassNameH]=useState("btn btn-light px-5 py-1 fs-16 border border-dark ");
-  const [classNameD,setClassNameD]=useState("btn btn-light px-5 py-1 fs-16 border border-dark ");
+  const [classNameD,setClassNameD]=useState("btn btn-light px-5 py-1 fs-16 border border-dark  active-button ");
 
 
 
@@ -328,9 +328,11 @@ function Container() {
                       </div>
                     </div>
                     <div className="button-container d-flex justify-content-center gap-3">
-                      <button className={classNameI} onClick={() => handleButtonClick("insta")}>Instantenous</button>
-                      <button className={classNameH }onClick={() => handleButtonClick("hs")}>Health Score</button>
                       <button className={classNameD }onClick={() => handleButtonClick("drs")}>DRS Report</button>
+
+                      <button className={classNameH }onClick={() => handleButtonClick("hs")}>Health Score</button>
+                      <button className={classNameI} onClick={() => handleButtonClick("insta")}>Instantenous</button>
+
                     
                     </div>
 
