@@ -55,11 +55,14 @@ export async function Velocity() {
             });
             plantsData = await plantsResponse.json();
             
-            plantsData.machineGroups.map((mg) => {
+            plantsData.areas.map(area=>{
+        area.machineGroups.map((mg) => {
                 
-                mg.machines.map((machine) => {
-                    arrayOfMachines.push(machine);
-                })
+        mg.machines.map((machine) => {
+        arrayOfMachines.push(machine);
+     })
+
+    })
 
             })
 
