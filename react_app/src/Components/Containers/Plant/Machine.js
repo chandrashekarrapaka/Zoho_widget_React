@@ -77,6 +77,7 @@ function Machine(prop) {
           if (minimumValue == 1 || minimumValue == 2) stylez.backgroundColor = "#64DD17";
           else if (minimumValue == 3) stylez.backgroundColor = "#FFC107";
           else if (minimumValue == 4) stylez.backgroundColor = "#FF5722";
+          else if (minimumValue == 6) stylez.backgroundColor = "#800080";
           // else if (minimumValue == 5 && (grayshade%5)==0){
           //  console.log("grayshade"+grayshade);
           //   stylez.backgroundColor = "#9E9E9E";
@@ -149,16 +150,17 @@ function Machine(prop) {
     </thead>
     <tbody>
                 {apiData.monitors.map((data) => {
-                  // console.log("table call"+data.healthScore);
+                   console.log("table call"+data.status);
                   const stylemon = { "width": "30%",scope:"row" };
                   
                   
                   if (data.status == 1 || data.status == 2) stylemon.backgroundColor = "#64DD17";
                   else if (data.status == 3) stylemon.backgroundColor = "#FFC107";
                   else if (data.status == 4) stylemon.backgroundColor = "#FF5722";
-                  else {
+                  else if(data.status==5) {
                     stylemon.backgroundColor = "#9E9E9E";
                   }
+                  else if(data.status==6) stylemon.backgroundColor="#800080";
                
 
                   return (

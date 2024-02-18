@@ -11,10 +11,11 @@ function Monitor(prop) {
                     if (ele.status == 1 ||ele.status==2)style.backgroundColor = "#64DD17";
                     else if (ele.status==3) style.backgroundColor = "#FFC107";
                     else if (ele.status ==4) style.backgroundColor = "#FF5722";
-                    else {
-                        style.backgroundColor = "#9E9E9E";
+                    else if (ele.status ==5) style.backgroundColor = "#9E9E9E"; 
+                    else if (ele.status ==6) style.backgroundColor = "#800080";
+                    else{
+                        style.backgroundColor="black";
                     }
-                    
                     return (
                         
                         
