@@ -14,7 +14,7 @@ export async function Plants() {
       let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
 
       var config = {
-        appName: "infinite-control-room",
+        appName: "thk-control-room",
         reportName: "My_Profile_Data",
         criteria: "Username == \"" + userid + "\"",
         page: "1",
@@ -44,7 +44,7 @@ export async function Plants() {
       ////console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
-          const plantsResponse = await fetch(`https://api.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
+          const plantsResponse = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',
@@ -70,8 +70,8 @@ export async function Plants() {
           };
          
 
-          plantsData.data.areas.forEach((area) => {
-            area.machineGroups.forEach((mg) => {
+          
+            plantsData.data.machineGroups.forEach((mg) => {
               mg.machines.forEach((machine)=>{
               machine.mg = mg.name;
               machine.plantName = plantsData.data.name;
@@ -94,13 +94,13 @@ export async function Plants() {
               }
             });
           });
-        });
+        
 
           arrayOfMachines.push(plantsArray);
           arrayOfPlants.push(plantsData.data);
           
           if (serviceRequestsIds.plant_ids.length > 0 && serviceRequestsIds.machine_ids.length > 0) {
-            const serviceRequests = await fetch(`https://api.infinite-uptime.com/api/3.0/idap-api/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
+            const serviceRequests = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
               method: 'GET',
               headers: {
                 'accept': 'application/json',

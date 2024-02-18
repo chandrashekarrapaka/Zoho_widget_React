@@ -10,7 +10,7 @@ export async function LoginCredentialsAndQueries() {
           //console.log("userid"+userid)
         
          var config = {
-          appName: "infinite-control-room",
+          appName: "thk-control-room",
           reportName: "My_Profile_Data",
           criteria: "Username ==\""+userid+"\"",
           page: "1",

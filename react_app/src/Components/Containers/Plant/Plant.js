@@ -42,7 +42,7 @@ function Plant(prop) {
        
         const requests = plantIds.map(async plantid => {
           const response = await fetch(
-            `https://api.infinite-uptime.com/api/3.0/idap-api/service-requests/analytics?plantIds=${plantid}`, {
+            `https://prodjapan-api-idap.infinite-uptime.com/3.0/service-requests/analytics?plantIds=${plantid}`, {
             method: 'GET',
             headers: {
               'Authorization': 'Bearer ' + token,
