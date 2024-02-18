@@ -97,6 +97,7 @@ function Plant(prop) {
       healthScores.filter((score) => score === 3).length,
       healthScores.filter((score) => score === 4).length,
       healthScores.filter((score) => score === 5).length,
+      healthScores.filter((score) => score === 6).length,
     ];
     const filteredHealthScoreCounts = healthScorePercentages.map((count) => (count === 0 ? "" : count));
   
@@ -104,7 +105,7 @@ function Plant(prop) {
       datasets: [
         {
           data: filteredHealthScoreCounts,
-          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "gray"],
+          backgroundColor: ["#64DD17", "#FFC107", "#FF5722", "gray","#800080"],
           //backgroundColor: ["9E9E9E","FF5722","FFC107","#64DD17"],
 
         },
