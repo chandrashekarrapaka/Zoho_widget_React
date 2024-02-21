@@ -6,7 +6,7 @@
       var Machines = queryParams.Machine;
 
       config = {
-        appName: "infinite-control-room",
+        appName: "thk-control-room",
         reportName: "All_Machines",
         criteria: "ID =" + Machines,
         page: "1",
@@ -29,7 +29,7 @@
       });
 
       config2 = {
-        appName: "infinite-control-room",
+        appName: "thk-control-room",
         reportName: "Total_Device_Installed_Report",
         criteria: "Machine =" + Machines,
         page: "1",

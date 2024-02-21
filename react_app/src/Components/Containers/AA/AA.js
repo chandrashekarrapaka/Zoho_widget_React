@@ -36,7 +36,7 @@ function AA(prop) {
 
       try {
         const response = await fetch(
-          "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts/plants?plantIds=" +
+          "https://prodjapan-api-idap.infinite-uptime.com/3.0/anomaly-alerts/plants?plantIds=" +
           plantid +
           "&from=" +
           dtFrom +
@@ -67,15 +67,18 @@ function AA(prop) {
       clearInterval(interval); // Clean up the interval on component unmount
     };
   }, [currentPlant, accessToken]);
-  //console.log("data"+JSON.stringify(dataDisplay));
-  let lengthofDisplay = dataDisplay && dataDisplay.data.length == 0;
+  console.log("data"+JSON.stringify(dataDisplay));
+  let lengthofDisplay;
+  if(dataDisplay!=undefined){
+   lengthofDisplay = dataDisplay && dataDisplay.length == 0;
+  }
   // console.log("checking",lengthofDisplay,dataDisplay.data.length)
   return (
     <div className="anomaly-alert">
       <p className="heading fs-16">Anomaly Alert</p>
       <div className="data-box">
       <div class="data mb-2 fs-11">
-        {dataDisplay && dataDisplay.data.length > 0 ? (
+        {dataDisplay && dataDisplay.length > 0 ? (
           dataDisplay.data.map((ele) => (
             <div className="content-itemz">
               <div className="fs-11 mb-0 text-dark">Machine Name: 
