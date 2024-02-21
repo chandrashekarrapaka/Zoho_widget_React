@@ -3,7 +3,7 @@ import { LoginCredentialsAndQueries } from "../../../Services/loginCredentialsAn
 
 function AA(prop) {
   const [accessToken, setAccessToken] = useState("");
-  const [dataDisplay, setDataDisplay] = useState();
+  const [dataDisplay, setDataDisplay] = useState([]);
 
   const currentPlant = prop.currentPlant;
   //console.log("AA1", currentPlant[0].plantid, accessToken);
@@ -36,7 +36,7 @@ function AA(prop) {
 
       try {
         const response = await fetch(
-          "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts/plants?plantIds=" +
+          "https://prodjapan-api-idap.infinite-uptime.com/3.0/anomaly-alerts?plantIds=" +
           plantid +
           "&from=" +
           dtFrom +
@@ -68,14 +68,20 @@ function AA(prop) {
     };
   }, [currentPlant, accessToken]);
   //console.log("data"+JSON.stringify(dataDisplay));
-  let lengthofDisplay = dataDisplay && dataDisplay.data.length == 0;
+  let lengthofDisplay;
+  let dataAvailble=false;
+  if(dataDisplay.length!=0){
+     lengthofDisplay = dataDisplay && dataDisplay.data.length == 0;
+     dataAvailble=true;
+  }
+  
   // console.log("checking",lengthofDisplay,dataDisplay.data.length)
   return (
     <div className="anomaly-alert">
       <p className="heading fs-16">Anomaly Alert</p>
       <div className="data-box">
       <div class="data mb-2 fs-11">
-        {dataDisplay && dataDisplay.data.length > 0 ? (
+        {dataDisplay.length>0  ? (
           dataDisplay.data.map((ele) => (
             <div className="content-itemz">
               <div className="fs-11 mb-0 text-dark">Machine Name: 

@@ -10,7 +10,7 @@ export async function LoginCredentialsAndQueries() {
           //console.log("userid"+userid)
         
          var config = {
-          appName: "infinite-control-room",
+          appName: "thk-control-room",
           reportName: "My_Profile_Data",
           criteria: "Username ==\""+userid+"\"",
           page: "1",
@@ -20,8 +20,8 @@ export async function LoginCredentialsAndQueries() {
           let userData = response;
           
           accessTokenz=userData.data[0].Access_Token;
-          //console.log("userData"+JSON.stringify(userData.data[0].Access_Token));
-         // console.log("check"+accessToken);
+         // console.log("userData"+JSON.stringify(userData.data[0].Access_Token));
+         //console.log("check"+accessTokenz);
          // return accessToken;
         return accessTokenz;
         });

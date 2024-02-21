@@ -9,7 +9,7 @@ export async function Image() {
           let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
         
          var config = {
-          appName: "infinite-control-room",
+          appName: "thk-control-room",
           reportName: "My_Profile_Data",
           criteria: "Username == \"" + userid + "\"",
           page: "1",

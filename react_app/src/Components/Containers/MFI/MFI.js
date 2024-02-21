@@ -33,7 +33,7 @@ function MFI(prop) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://api.infinite-uptime.com/api/3.0/idap-api/service-requests?plantIds=" + plantid,
+          "https://prodjapan-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=" + plantid,
           {
             method: "GET",
             headers: {

@@ -30,7 +30,7 @@ const PatternStorage = (props) => {
             let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
       
             var config = {
-              appName: "infinite-control-room",
+              appName: "thk-control-room",
               reportName: "My_Profile_Data",
               criteria: "Username == \"" + userid + "\"",
               page: "1",
@@ -46,7 +46,7 @@ const PatternStorage = (props) => {
                 }
             }
            const  config = {
-                appName : "infinite-control-room",
+                appName : "thk-control-room",
                 reportName  : "My_Profile_Data",
                 id: idx,
                 data : formData
