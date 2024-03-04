@@ -43,7 +43,7 @@ export async function Plants() {
       ////console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
-          const plantsResponse = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
+          const plantsResponse = await fetch(`https://uat-new-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',
@@ -65,18 +65,18 @@ export async function Plants() {
             plant_ids: new Array,
             machine_ids: new Array,
           };
-          // console.log(plantsData);
+           console.log(plantsData);
           
               
 
          
-            plantsData.data.machineGroups.forEach((mg) => {
+          plantsData.data.areas.forEach((area) => {
+            area.machineGroups.forEach((mg) => {
               mg.machines.forEach((machine)=>{
               machine.mg = mg.name;
               machine.plantName = plantsData.data.name;
               machine.plantid = plantsData.data.id;
               plantsArray.push(machine);
-
               if (!(
                 typeof serviceRequestsIds.plant_ids != typeof undefined &&
                 serviceRequestsIds.plant_ids.length > 0 &&
@@ -94,13 +94,38 @@ export async function Plants() {
               }
             });
           });
+        }); plantsData.data.areas.forEach((area) => {
+          area.machineGroups.forEach((mg) => {
+            mg.machines.forEach((machine)=>{
+            machine.mg = mg.name;
+            machine.plantName = plantsData.data.name;
+            machine.plantid = plantsData.data.id;
+            plantsArray.push(machine);
+            if (!(
+              typeof serviceRequestsIds.plant_ids != typeof undefined &&
+              serviceRequestsIds.plant_ids.length > 0 &&
+              serviceRequestsIds.plant_ids.includes(plantsData.data.id)
+            )) {
+              serviceRequestsIds.plant_ids.push(plantsData.data.id);
+            }
+
+            if (!(
+              typeof serviceRequestsIds.machine_ids != typeof undefined &&
+              serviceRequestsIds.machine_ids.length > 0 &&
+              serviceRequestsIds.machine_ids.includes(machine.id)
+            )) {
+              serviceRequestsIds.machine_ids.push(machine.id);
+            }
+          });
+        });
+      });
         
 
           arrayOfMachines.push(plantsArray);
           arrayOfPlants.push(plantsData.data);
 
           if (serviceRequestsIds.plant_ids.length > 0 && serviceRequestsIds.machine_ids.length > 0) {
-            const serviceRequests = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
+            const serviceRequests = await fetch(`https://uat-new-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
               method: 'GET',
               headers: {
                 'accept': 'application/json',

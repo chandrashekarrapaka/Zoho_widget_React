@@ -36,7 +36,7 @@ function AA(prop) {
 
       try {
         const response = await fetch(
-          "https://prodjapan-api-idap.infinite-uptime.com/3.0/anomaly-alerts/plants?plantIds=" +
+          "https://uat-new-api-idap.infinite-uptime.com/3.0/anomaly-alerts/plants?plantIds=" +
           plantid +
           "&from=" +
           dtFrom +
