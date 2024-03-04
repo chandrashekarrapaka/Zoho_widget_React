@@ -11,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 //    // var queryParams = window.ZOHO.CREATOR.UTIL.getQueryParams();
 //    const email="rapaka.chandrashekar@gmail.com";//Stage == \"Open\"
 //      var config = {
-//       appName: "infinite-control-room",
+//       appName: "uat-of-control-room",
 //       reportName: "All_Users",
 //       criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
 //       page: "1",

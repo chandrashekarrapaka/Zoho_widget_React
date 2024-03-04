@@ -48,7 +48,7 @@ const AlertsBar = ( prop) => {
           const plantid = element[0].plantid;
           //console.log("id"+plantid);
           const response = await fetch(
-            "https://api.infinite-uptime.com/api/3.0/idap-api/anomaly-alerts/plants?plantIds=" +
+            "https://uat-new-api-idap.infinite-uptime.com/3.0/anomaly-alerts/plants?plantIds=" +
               plantid +
               "&from=" +
               dtFrom +
@@ -69,7 +69,7 @@ const AlertsBar = ( prop) => {
             if (data && data.data.length > 0) {
 
             const response2 = await fetch(
-              "https://api.infinite-uptime.com/api/3.0/idap-api/service-requests?plantIds=" + plantid,
+              "https://uat-new-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=" + plantid,
               {
                 method: "GET",
                 headers: {

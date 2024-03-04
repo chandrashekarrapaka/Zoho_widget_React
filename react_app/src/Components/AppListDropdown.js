@@ -32,7 +32,7 @@ const AppListDropdown = () => {
       try {
 
         const plantsResponse = await fetch(
-          `https://api.infinite-uptime.com/api/3.0/idap-api/application-user/subscribed-apps?emailId=${userId}`,
+          `https://uat-new-api-idap.infinite-uptime.com/3.0/application-user/subscribed-apps?emailId=${userId}`,
           {
             method: 'GET',
             headers: {

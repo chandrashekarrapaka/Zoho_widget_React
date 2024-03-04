@@ -14,7 +14,7 @@ export async function Velocity() {
             //console.log("userid"+userid)
           
            var config = {
-            appName: "infinite-control-room",
+            appName: "uat-of-control-room",
             reportName: "My_Profile_Data",
             criteria: "Username ==\""+userid+"\"",
             page: "1",

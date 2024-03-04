@@ -8,7 +8,7 @@ export async function Velocity() {
         
         
          var config = {
-          appName: "infinite-control-room",
+          appName: "uat-of-control-room",
           reportName: "All_Users",
           criteria: "Username ==\"rapaka.chandrashekar@gmail.com\"",
           page: "1",

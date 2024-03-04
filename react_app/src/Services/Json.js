@@ -10,7 +10,7 @@ export async function Plants() {
       let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
 
       var config = {
-        appName: "infinite-control-room",
+        appName: "uat-of-control-room",
         reportName: "My_Profile_Data",
         criteria: "Username == \"" + userid + "\"",
         page: "1",
@@ -39,7 +39,7 @@ export async function Plants() {
     const fetchPlantsData = async () => {
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
-          const plantsResponse = await fetch(`https://api.infinite-uptime.com/api/3.0/idap-api/plants/${orgid}/machine-group-stats`, {
+          const plantsResponse = await fetch(`https://uat-new-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',
