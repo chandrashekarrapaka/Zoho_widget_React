@@ -42,7 +42,7 @@ export async function Plants() {
       ////console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
-          const plantsResponse = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
+          const plantsResponse = await fetch(`https://uat-new-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',
@@ -62,7 +62,8 @@ export async function Plants() {
           const plantsArray = [];
          // console.log(plantsData);
           
-            plantsData.data.machineGroups.forEach((mg) => {
+         plantsData.data.areas.forEach((area) => {
+          area.machineGroups.forEach((mg) => {
               mg.machines.forEach((machine)=>{
               machine.mg = mg.name;
               machine.plantName = plantsData.data.name;
@@ -72,6 +73,8 @@ export async function Plants() {
               })
               
             });
+          });
+            
          
 
           arrayOfMachines.push(plantsArray);

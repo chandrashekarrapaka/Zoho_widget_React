@@ -38,7 +38,7 @@ function Header(prop) {
         let plantid = prop.currentPlant[0].plantid;
         let token=await LoginCredentialsAndQueries();
         
-         const kpidatafinal= await fetch('https://prodjapan-api-idap.infinite-uptime.com/3.0/service-requests/analytics?plantIds='+plantid,{
+         const kpidatafinal= await fetch('https://uat-new-api-idap.infinite-uptime.com/3.0/service-requests/analytics?plantIds='+plantid,{
             method: 'GET',
             headers:{
               'Authorization':'Bearer '+ token,
