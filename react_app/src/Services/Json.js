@@ -44,14 +44,14 @@ export async function Plants() {
       ////console.log("functioncalled"+new Date().getMinutes);
       try {
         await Promise.all(orgidAll.map(async (orgid) => {
-          const plantsResponse = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
+          const plantsResponse = await fetch(`https://uat-new-api-idap.infinite-uptime.com/3.0/plants/${orgid}/machine-group-stats`, {
             method: 'GET',
             headers: {
               'accept': 'application/json',
               'Authorization': 'Bearer ' + accessToken,
             },
           });
-
+          
           if (plantsResponse.status === 401) {
             apicallstatus = false;
             // Stop further API calls
@@ -61,8 +61,10 @@ export async function Plants() {
           }
           
           const plantsData = await plantsResponse.json();
+          console.log(plantsData);
           const plantsArray = [];
-         console.log(plantsData);
+         
+
           OrgName.push(plantsData.data.organizationName);
           const serviceRequestsIds = {
             plant_ids: new Array,
@@ -100,7 +102,7 @@ export async function Plants() {
           arrayOfPlants.push(plantsData.data);
           
           if (serviceRequestsIds.plant_ids.length > 0 && serviceRequestsIds.machine_ids.length > 0) {
-            const serviceRequests = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
+            const serviceRequests = await fetch(`https://uat-new-api-idap.infinite-uptime.com/3.0/service-requests?plantIds=${serviceRequestsIds.plant_ids.join('&plantIds=')}&machineIds=${serviceRequestsIds.machine_ids.join('&machineIds=')}`, {
               method: 'GET',
               headers: {
                 'accept': 'application/json',
@@ -154,6 +156,9 @@ export async function Plants() {
 
     
     //intervalId = setInterval(fetchPlantsData, 30000);
+    console.log("plantsData");
+
+     // console.log(plantsData);
     console.log( [arrayOfMachines, apicallstatus,OrgName,drsRequests]);
 
     return [arrayOfMachines, apicallstatus,OrgName,drsRequests];

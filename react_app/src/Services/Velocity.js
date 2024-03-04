@@ -40,7 +40,7 @@ export async function Velocity() {
         let plantsData;
         let plantsResponse
         plantsResponse = await Promise.all(orgidAll.map(async (orgid) => {
-            plantsResponse = await fetch(`https://prodjapan-api-idap.infinite-uptime.com/2.0/md/monitoring/bymonitors?plantId=${orgid}`, {
+            plantsResponse = await fetch(`https://uat-new-api-idap.infinite-uptime.com/2.0/md/monitoring/bymonitors?plantId=${orgid}`, {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json',
