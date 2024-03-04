@@ -90,7 +90,7 @@ function Container() {
       const data = await window.ZOHO.CREATOR.init();
       let userid = window.ZOHO.CREATOR.UTIL.getQueryParams().user;
       var config = {
-        appName: "thk-control-room",
+        appName: "uat-of-control-room",
         reportName: "My_Profile_Data",
         criteria: "Username == \"" + userid + "\"",
         page: "1",
