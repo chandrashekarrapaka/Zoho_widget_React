@@ -73,7 +73,8 @@ export async function Plants() {
          
 
           
-            plantsData.data.machineGroups.forEach((mg) => {
+          plantsData.data.areas.forEach((area) => {
+            area.machineGroups.forEach((mg) => {
               mg.machines.forEach((machine)=>{
               machine.mg = mg.name;
               machine.plantName = plantsData.data.name;
@@ -96,6 +97,8 @@ export async function Plants() {
               }
             });
           });
+        });
+
         
 
           arrayOfMachines.push(plantsArray);
