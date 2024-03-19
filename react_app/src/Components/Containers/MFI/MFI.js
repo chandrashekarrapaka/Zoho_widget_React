@@ -40,9 +40,12 @@ function MFI(prop) {
 
         const data = await response.json();
         let key = Object.keys(data.data);
-        const dataWithNewStatus = data.data[key].filter((ele) => ele.status === "NEW");
-
-        // Sort the data by createdDate in descending order
+        // const dataWithNewStatus = data.data[key].filter((ele) => {
+        //   const timeDifference = new Date().getTime() - new Date(ele.createdDate).getTime();
+        //   const hoursDifference = timeDifference / (1000 * 60 * 60);
+        //   return ele.status === "NEW" && hoursDifference <= 1480;
+        // });
+         const dataWithNewStatus = data.data[key].filter((ele) => ele.status === "NEW");
         dataWithNewStatus.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         setDataDisplay(dataWithNewStatus);
         setNoComments(dataWithNewStatus.length === 0);
@@ -71,6 +74,7 @@ function MFI(prop) {
           {dataDisplay && dataDisplay.length > 0 ? (
             dataDisplay.map((ele) => {
               if (ele.status === "NEW") {
+                console.log(ele);
                 return (
                   ele.serviceReqMachineDetails.map((srmd) => (
                     <div className="fs-11 mb-0 text-dark">

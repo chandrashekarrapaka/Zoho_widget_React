@@ -94,31 +94,8 @@ export async function Plants() {
               }
             });
           });
-        }); plantsData.data.areas.forEach((area) => {
-          area.machineGroups.forEach((mg) => {
-            mg.machines.forEach((machine)=>{
-            machine.mg = mg.name;
-            machine.plantName = plantsData.data.name;
-            machine.plantid = plantsData.data.id;
-            plantsArray.push(machine);
-            if (!(
-              typeof serviceRequestsIds.plant_ids != typeof undefined &&
-              serviceRequestsIds.plant_ids.length > 0 &&
-              serviceRequestsIds.plant_ids.includes(plantsData.data.id)
-            )) {
-              serviceRequestsIds.plant_ids.push(plantsData.data.id);
-            }
-
-            if (!(
-              typeof serviceRequestsIds.machine_ids != typeof undefined &&
-              serviceRequestsIds.machine_ids.length > 0 &&
-              serviceRequestsIds.machine_ids.includes(machine.id)
-            )) {
-              serviceRequestsIds.machine_ids.push(machine.id);
-            }
-          });
-        });
-      });
+        }); 
+        
         
 
           arrayOfMachines.push(plantsArray);
